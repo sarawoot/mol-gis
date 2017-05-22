@@ -1,0 +1,227 @@
+[
+  {
+    "id": "2",
+    "text": "ขอบเขตการปกครอง",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "2"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "3",
+    "text": "ขอบเขตประเทศไทย",
+    "parent": "2",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/RISK_DROUGHT/BD_THAILAND_/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "4",
+    "text": "ขอบเขตจังหวัด",
+    "parent": "2",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/basemap/ProvinceBasemap2/MapServer",
+      "id": "4"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "5",
+    "text": "ขอบเขตจังหวัด อำเภอ ตำบล",
+    "parent": "2",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/zone_mol/THAI_PROVINCE_DISTRICT_TAMBON/MapServer",
+      "id": "5"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "6",
+    "text": "ข้อมูลหน่วยงานภายนอกกระทรวงแรงงาน",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "6"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "7",
+    "text": "กรมส่งเสริมเกษตร",
+    "parent": "6",
+    "data": {
+      "category": "folder",
+      "id": "7"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "8",
+    "text": "วิสาหกิจชุมชนและเครือข่าย",
+    "parent": "7",
+    "data": {
+      "category": "folder",
+      "id": "8"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "9",
+    "text": "วิสาหกิจชุมชนปี 2556",
+    "parent": "8",
+    "data": {
+      "layer": true,
+      "category": "sharding-json",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/DOAE/DOAE_SMCE_NOWYEAR/MapServer/0/query?f=json&where=1%3D1&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=3857",
+      "id": "9",
+      "field": "_VIEW_TRT_DOAE_SMCE_NOWYEAR_GIS.SUM_MEMBER",
+      "legend": [
+        {
+          "text": "ต่ำกว่า 20 แห่ง",
+          "color": "#B2FF66",
+          "max": 20
+        },
+        {
+          "text": "21 แห่ง - 50 แห่ง",
+          "color": "#80FF00",
+          "min": 21,
+          "max": 50
+        },
+        {
+          "text": "51 แห่ง - 100 แห่ง",
+          "color": "#4C9900",
+          "min": 51,
+          "max": 100
+        },
+        {
+          "text": "101 แห่ง - 190 แห่ง",
+          "color": "#336600",
+          "min": 101,
+          "max": 190
+        },
+        {
+          "text": "191 แห่งขึ้นไป ",
+          "color": "#193300",
+          "min": 191
+        }
+      ]
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "10",
+    "text": "วิสาหกิจชุมชนปี 2555",
+    "parent": "8",
+    "data": {
+      "layer": true,
+      "category": "sharding-json",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/DOAE/DOAE_SMCE_YEAR1/MapServer/0/query?f=json&where=1%3D1&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=3857",
+      "id": "10",
+      "field": "_VIEW_TRT_DOAE_SMCE_YEAR1_GIS.SUM_MEMBER",
+      "legend": [
+        {
+          "text": "ต่ำกว่า 20 แห่ง",
+          "color": "#B2FF66",
+          "max": 20
+        },
+        {
+          "text": "21 แห่ง - 50 แห่ง",
+          "color": "#80FF00",
+          "min": 21,
+          "max": 50
+        },
+        {
+          "text": "51 แห่ง - 100 แห่ง",
+          "color": "#4C9900",
+          "min": 51,
+          "max": 100
+        },
+        {
+          "text": "101 แห่ง - 190 แห่ง",
+          "color": "#336600",
+          "min": 101,
+          "max": 190
+        },
+        {
+          "text": "191 แห่งขึ้นไป ",
+          "color": "#193300",
+          "min": 191
+        }
+      ]
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "11",
+    "text": "วิสาหกิจชุมชนปี 2554",
+    "parent": "8",
+    "data": {
+      "layer": true,
+      "category": "sharding-json",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/DOAE/DOAE_SMCE_YEAR2/MapServer/0/query?f=json&where=1%3D1&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=3857",
+      "id": "11",
+      "field": "_VIEW_TRT_DOAE_SMCE_YEAR2_GIS.SUM_MEMBER",
+      "legend": [
+        {
+          "text": "ต่ำกว่า 20 แห่ง",
+          "color": "#B2FF66",
+          "max": 20
+        },
+        {
+          "text": "21 แห่ง - 50 แห่ง",
+          "color": "#80FF00",
+          "min": 21,
+          "max": 50
+        },
+        {
+          "text": "51 แห่ง - 100 แห่ง",
+          "color": "#4C9900",
+          "min": 51,
+          "max": 100
+        },
+        {
+          "text": "101 แห่ง - 190 แห่ง",
+          "color": "#336600",
+          "min": 101,
+          "max": 190
+        },
+        {
+          "text": "191 แห่งขึ้นไป ",
+          "color": "#193300",
+          "min": 191
+        }
+      ]
+    },
+    "state": {
+      "selected": false
+    }
+  }    
+]
