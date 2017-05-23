@@ -36,7 +36,9 @@
 
            <?php require 'templates/layer_panel.php'; ?>
            <?php require 'templates/buffer_panel.php'; ?>
+           <?php require 'templates/what_if_panel.php'; ?>
            <?php require 'templates/result_panel.php'; ?>
+           
 
         </div>
       </div>
@@ -64,6 +66,7 @@
   <script src="assets/javascripts/measure.js"></script>
   <script src="assets/javascripts/layer_switcher.js"></script>
   <script src="assets/javascripts/buffer.js"></script>
+  <script src="assets/javascripts/what_if.js"></script>
   <script src="assets/javascripts/map_tool.js"></script>
 </body>
 </html>

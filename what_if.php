@@ -144,86 +144,8 @@
   
   <script>
 
-    var getInitData = function () {
-      $("#occupation").empty();
-      $.ajax({
-        url: 'controllers/what_if/branch_occupation.php',
-        type: 'GET',
-        dataType: 'JSON', 
-        success: function (res) {
-          $("#branchOccupation").empty();
-          $("#branchOccupation").append("<option>กรุณาเลือก</option>");
-          _.each(res, function (row) {
-            $("#branchOccupation").append($("<option>",{
-              text: row.name,
-              value: row.code
-            }));
-          });          
-        }
-      });
-
-      $.ajax({
-        url: 'controllers/what_if/year.php',
-        type: 'GET',
-        dataType: 'JSON', 
-        success: function (res) {
-          $("#year").empty();
-          $("#year").append("<option>กรุณาเลือก</option>");
-          _.each(res, function (row) {
-            $("#year").append($("<option>",{
-              text: row.name,
-              value: row.code
-            }));
-          });
-        }
-      });
-    }
-
-    var map = new ol.Map({
-      target: "map",
-      view: new ol.View({
-        center: [11302896.246585583, 1477374.8826958865],
-        zoom: 6,
-      }),
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM({
-            url: "https://mts1.googleapis.com/vt?lyrs=m@230022547&src=apiv3&hl=th-TH&x={x}&y={y}&z={z}&style=59,37%7Csmartmaps"
-          }),
-          opacity: 1,
-          visible: true
-        })
-      ]
-    });
-
-
     $(function(){
       getInitData();
-      $("#category").change(function () {
-        getInitData();
-      });
-      $("#branchOccupation").change(function () {
-        var category = $("#category").val();
-        $.ajax({
-          url: 'controllers/what_if/occupation.php',
-          dataType: 'JSON',
-          type: 'GET',
-          data: {
-            category: $("#category").val(),
-            branch: this.value
-          },
-          success: function (res) {
-            $("#occupation").empty();
-            $("#occupation").append("<option>กรุณาเลือก</option>");
-            _.each(res, function (row) {
-              $("#occupation").append($("<option>",{
-                text: row.name,
-                value: row.code
-              }));
-            });
-          }
-        })
-      })
     });
 
     window.addEventListener("resize", function () {

@@ -36,6 +36,7 @@ var clearMap = function (){
   popup.hide();
   $("#panelBuffer").hide();
   $("#panelResult").hide();
+  $("#panelWhatIf").hide();
   if (!$("#collapseLayer").is(":visible")) {
     $("#headingLayer a").click();
   }

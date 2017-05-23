@@ -28,10 +28,16 @@ var mapTool = (function () {
         }
 
         if (this.value == 'buffer') {
+          clearMap();
           mapMode = 'buffer';
           $("#bufferDistance").val('');
           $("#collapseResult div").empty();
         }
+
+        if (this.value == 'what-if') {
+          whatIf.setup();
+        }
+
       }
 
     });
