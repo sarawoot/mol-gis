@@ -195,6 +195,6 @@ map.on('singleclick', function(evt) {
   }
   var coordinate = evt.coordinate;
   if (mapMode == 'buffer') {
-    mapTool.buffer(coordinate);
+    buffer.setup(coordinate);
   }
 });

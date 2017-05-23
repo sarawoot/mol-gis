@@ -213,7 +213,14 @@
             branch: this.value
           },
           success: function (res) {
-            debugger
+            $("#occupation").empty();
+            $("#occupation").append("<option>กรุณาเลือก</option>");
+            _.each(res, function (row) {
+              $("#occupation").append($("<option>",{
+                text: row.name,
+                value: row.code
+              }));
+            });
           }
         })
       })
