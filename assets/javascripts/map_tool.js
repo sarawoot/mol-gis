@@ -35,6 +35,7 @@ var mapTool = (function () {
         }
 
         if (this.value == 'what-if') {
+          clearMap();
           whatIf.setup();
         }
 

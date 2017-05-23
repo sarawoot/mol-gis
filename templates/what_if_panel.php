@@ -9,7 +9,7 @@
               </h4>
             </div>
             <div id="collapseWhatIf" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWhatIf">
-              <div class="panel-body" style="height:450px;overflow:auto;">
+              <div class="panel-body" style="height:500px;overflow:auto;">
                        
                 <p>เรื่อง การคาดการณ์ผู้สมัครพัฒนาฝีมือแรงงาน</p>
 

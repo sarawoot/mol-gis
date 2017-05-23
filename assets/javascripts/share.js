@@ -33,6 +33,7 @@ var removeOtherInteraction = function () {
 var clearMap = function (){
   features.clear();  
   map.getOverlays().clear();
+  map.addOverlay(popup);
   popup.hide();
   $("#panelBuffer").hide();
   $("#panelResult").hide();

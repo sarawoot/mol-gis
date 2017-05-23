@@ -66,9 +66,6 @@ var mousePosition = new ol.control.MousePosition({
 
 map.addControl(mousePosition);
 
-var popup = new ol.Overlay.Popup();
-map.addOverlay(popup);
-
 $.each(baseLayers, function(i, item){
   layer = item.layer
   layer.set("mapType", "baseLayer");
@@ -183,6 +180,10 @@ var featureOverlay = new ol.layer.Vector({
   }
 });
 featureOverlay.setMap(map);
+
+var popup = new ol.Overlay.Popup();
+map.addOverlay(popup);
+
 
 map.on('singleclick', function(evt) {
   var feature = map.forEachFeatureAtPixel(evt.pixel,

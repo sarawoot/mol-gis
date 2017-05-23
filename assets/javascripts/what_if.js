@@ -1,8 +1,6 @@
 var whatIf = (function () {
   
   var setup = function () {
-    clearMap();
-    
     $("#whatIfOccupation").empty();
     $.ajax({
       url: 'controllers/what_if/branch_occupation.php',
