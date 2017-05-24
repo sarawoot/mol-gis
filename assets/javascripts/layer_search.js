@@ -19,7 +19,7 @@
 
     $('#layerSearchSelectForm').on('change', function() {
         // alert(this.value);
-        $('#layerSearchForm').load("templates/filter/1.php");
+        $('#layerSearchForm').load("templates/filter/"+this.value+".php");
     });
 
 
