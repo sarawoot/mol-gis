@@ -123,5 +123,3 @@ var searchdata = {
     }
   },
 };
-data = searchdata.getData();
-searchdata.addLayer(data);
