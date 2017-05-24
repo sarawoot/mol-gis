@@ -1,14 +1,14 @@
-var searchdata = (function() {
-  var init = function() {
-    data = getData();
-    addLayer(data);
-  }
+var searchdata = {
+  init : function() {
+    data = this.getData();
+    this.addLayer(data);
+  },
 
-  var setup = function(coordinate) {
-  }
+  setup : function(coordinate) {
+  },
 
-  var addLayer = function(res) {
-    sld_body = generate_xml(res);
+  addLayer : function(res) {
+    sld_body = this.generate_xml(res);
     var layer;
     layer = new ol.layer.Tile({
       source : new ol.source.TileWMS({
@@ -20,16 +20,16 @@ var searchdata = (function() {
           TILED : true
         },
         serverType : 'geoserver',
-        tileLoadFunction : tileLoadFunction
+        tileLoadFunction : this.tileLoadFunction
 
       })
     });
 
     // layer.set("id", 'prov_code');
     map.addLayer(layer);
-  }
+  },
 
-  var getData = function(data) {
+  getData : function(data) {
     var json = [];
     $.ajax({
       url : "controllers/search.php",
@@ -44,9 +44,9 @@ var searchdata = (function() {
       }
     });
     return json;
-  }
+  },
 
-  var generate_xml = function(res) {
+  generate_xml : function(res) {
     var colors = [ "#B2FF66", "#80FF00", "#336600", "#193300", "#193300" ];
 
     var sld_body = '';
@@ -81,11 +81,11 @@ var searchdata = (function() {
                   + '</Label><Font><CssParameter name="font-family">Tahoma</CssParameter><CssParameter name="font-size">13.0</CssParameter><CssParameter name="font-style">normal</CssParameter><CssParameter name="font-weight">bold</CssParameter></Font><LabelPlacement><PointPlacement><AnchorPoint><AnchorPointX>0.5</AnchorPointX><AnchorPointY>0.5</AnchorPointY></AnchorPoint><Displacement><DisplacementX>0.0</DisplacementX><DisplacementY>0.0</DisplacementY></Displacement></PointPlacement></LabelPlacement><Fill><CssParameter name="fill">#3D3D3D</CssParameter></Fill><Halo><CssParameter name="fill">#FFFFFF</CssParameter></Halo></TextSymbolizer></Rule>';
             });
     sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
-    
-    return sld_body;
-  }
 
-  var tileLoadFunction = function(image, src) {
+    return sld_body;
+  },
+
+  tileLoadFunction : function(image, src) {
     var img = image.getImage();
     if (typeof window.btoa === 'function') {
       var xhr = new XMLHttpRequest();
@@ -121,11 +121,7 @@ var searchdata = (function() {
     } else {
       img.src = src;
     }
-  }
-
-  return {
-    init : init,
-    setup : setup
-  }
-})();
-
+  },
+};
+data = searchdata.getData();
+searchdata.addLayer(data);
