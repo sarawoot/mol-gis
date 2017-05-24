@@ -77,7 +77,8 @@
   <script src="assets/javascripts/map.js"></script>
   <script src="assets/javascripts/measure.js"></script>
   <script src="assets/javascripts/layer_switcher.js"></script>
-  
+   <script src="assets/javascripts/search.js"></script>
+   <script src="assets/javascripts/config.js"></script>
   <script src="assets/javascripts/layer_search.js"></script>
   <script src="assets/javascripts/buffer.js"></script>
   <script src="assets/javascripts/map_tool.js"></script>
