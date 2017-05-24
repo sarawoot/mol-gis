@@ -33,10 +33,23 @@
   $sql .= "ORDER BY GP.PROVINCE_CODE ";
 
 
-  
+  $result = oci_parse($conn, $sql);
+  $r = oci_execute($result);
+  if (!$r) {
+    echo "[]";
+    exit();
+  }
 
+  $res = array();
+  while (($row = oci_fetch_array($result, OCI_BOTH)) != false) {
+    $res[] =  array(
+      "province_code" => iconv('tis-620', 'utf-8', $row["PROVINCE_CODE"]),
+      "province_name" => iconv('tis-620', 'utf-8', $row["PROVINCE_NAME"]),
+      "num" => iconv('tis-620', 'utf-8', $row["ValTrain"])
+    );
+  }
+  echo json_encode($res);
+  oci_free_statement($result);
 
-
-  // oci_free_statement($result);
   oci_close($conn);                        
 ?>
