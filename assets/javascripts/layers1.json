@@ -1,0 +1,68 @@
+[
+	{
+		"id": "1",
+		"text": "คนพิการมีงานทำ",
+		"filterform": "templates/filter/1.php"
+
+	},
+	{
+		"id": "2",
+		"text": "ผู้ผ่านการฝึกอบรม",
+		"filterform": "templates/filter/2.php"
+	},
+	{
+		"id": "3",
+		"text": "ผู้ผ่านการทดสอบ",
+		"filterform": "templates/filter/3.php"
+	},
+	{
+		"id": "4",
+		"text": "ตำแหน่งงานว่าง",
+		"filterform": "templates/filter/4.php"
+	},
+	{
+		"id": "5",
+		"text": "ผู้ประกันตน ม.33",
+		"filterform": "templates/filter/5.php"
+	},
+	{
+		"id": "6",
+		"text": "ผู้ประกันตน ม.40",
+		"filterform": "templates/filter/6.php"
+	},
+	{
+		"id": "7",
+		"text": "ผู้สูงอายุ",
+		"filterform": "templates/filter/7.php"
+	},
+	{
+		"id": "8",
+		"text": "สถิติผู้พิการ (รายปี)",
+		"filterform": "templates/filter/8.php"
+	},
+	{
+		"id": "9",
+		"text": "สถิติผู้สูงอายุ (รายปี)",
+		"filterform": "templates/filter/9.php"
+	},
+	{
+		"id": "10",
+		"text": "สถิติการสำรวจประชากร (รายเดือน)",
+		"filterform": "templates/filter/10.php"
+	},
+	{
+		"id": "11",
+		"text": "สถิติการสำรวจประชากร (รายไตรมาส)",
+		"filterform": "templates/filter/11.php"
+	},
+	{
+		"id": "12",
+		"text": "สถิตแรงงานนอกระบบ",
+		"filterform": "templates/filter/12.php"
+	},
+	{
+		"id": "13",
+		"text": "สถิตแรงงานต่างด้าว",
+		"filterform": "templates/filter/13.php"
+	}
+]
