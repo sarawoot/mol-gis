@@ -19,6 +19,7 @@ var searchdata = {
           SLD_BODY : sld_body,
           TILED : true
         },
+        
         serverType : 'geoserver',
         tileLoadFunction : this.tileLoadFunction
 
@@ -123,3 +124,5 @@ var searchdata = {
     }
   },
 };
+
+searchdata.init();
