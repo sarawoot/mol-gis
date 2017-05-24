@@ -19,14 +19,14 @@
 
     $('#layerSearchSelectForm').on('change', function() {
         // alert(this.value);
-        $('#layerSearchForm').load("templates/filter/"+this.value+".php");
+        $('#layerSearchForm').load("templates/filter/" + this.value + ".php");
     });
 
 
     var getData = function() {
         var json = [];
         $.ajax({
-            url: "assets/javascripts/layers.json",
+            url: "assets/javascripts/layers1.json",
             dataType: "json",
             type: "get",
             async: false,
