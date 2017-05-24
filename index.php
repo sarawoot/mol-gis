@@ -60,6 +60,7 @@
   <script src="vendor/assets/javascripts/jquery/jquery.min.js"></script>  
   <script src="vendor/assets/javascripts/jstree/dist/jstree.js"></script>
   <script src="vendor/assets/javascripts/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  <script src="assets/javascripts/config.js"></script>
   <script src="assets/javascripts/share.js"></script>
   <script src="assets/javascripts/menu.js"></script>
   <script src="assets/javascripts/map.js"></script>

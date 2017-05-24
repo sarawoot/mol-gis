@@ -1,4 +1,37 @@
 var whatIf = (function () {
+
+  var init = function () {
+    $("#whatIfconfirm").click(function () {
+      var branch = $("#whatIfBranchOccupation").val();
+      var occupation = $("#whatIfOccupation").val();
+      var year = $("#whatIfYear").val();
+      var num = Number($("#whatIfPredictNum").val());
+      var category = $("#whatIfCategory").val();
+
+      if ( branch == null || branch == '' ||
+           occupation == null || occupation == '' ||
+           year == null || year == '' ||
+           num <= 0 || isNaN(num) ) {
+        alert('กรุณาเลือกข้อมูลได้ถูกต้อง');
+        return false;
+      }
+      $.ajax({
+        url: 'controllers/what_if/train_province.php',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {
+          branch: branch,
+          occupation: occupation,
+          year: year,
+          num: num,
+          category: category
+        },
+        success: function (res) {
+          
+        }
+      })
+    })
+  }
   
   var setup = function () {
     $("#whatIfOccupation").empty();
@@ -8,7 +41,7 @@ var whatIf = (function () {
       dataType: 'JSON', 
       success: function (res) {
         $("#whatIfBranchOccupation").empty();
-        $("#whatIfBranchOccupation").append("<option>กรุณาเลือก</option>");
+        $("#whatIfBranchOccupation").append("<option value=''>กรุณาเลือก</option>");
         _.each(res, function (row) {
           $("#whatIfBranchOccupation").append($("<option>",{
             text: row.name,
@@ -23,10 +56,10 @@ var whatIf = (function () {
       type: 'GET',
       dataType: 'JSON', 
       success: function (res) {
-        $("#wharIfYear").empty();
-        $("#wharIfYear").append("<option>กรุณาเลือก</option>");
+        $("#whatIfYear").empty();
+        $("#whatIfYear").append("<option value=''>กรุณาเลือก</option>");
         _.each(res, function (row) {
-          $("#wharIfYear").append($("<option>",{
+          $("#whatIfYear").append($("<option>",{
             text: row.name,
             value: row.code
           }));
@@ -59,7 +92,7 @@ var whatIf = (function () {
       },
       success: function (res) {
         $("#whatIfOccupation").empty();
-        $("#whatIfOccupation").append("<option>กรุณาเลือก</option>");
+        $("#whatIfOccupation").append("<option value=''>กรุณาเลือก</option>");
         _.each(res, function (row) {
           $("#whatIfOccupation").append($("<option>",{
             text: row.name,
@@ -71,6 +104,9 @@ var whatIf = (function () {
   })
 
   return {
-    setup: setup
+    setup: setup,
+    init: init
   }
 })();
+
+whatIf.init();

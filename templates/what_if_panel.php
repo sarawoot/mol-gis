@@ -42,7 +42,7 @@
                   </div>          
 
                   <div class="form-group">
-                    <button type="button" class="btn btn-primary">ยืนยัน</button>
+                    <button type="button" class="btn btn-primary" id="whatIfconfirm">ยืนยัน</button>
                     <button type="button" class="btn btn-danger">ล้างข้อมูล</button>
                   </div>
                 </form>
