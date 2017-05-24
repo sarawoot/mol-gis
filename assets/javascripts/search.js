@@ -12,9 +12,9 @@ var searchdata = (function() {
     var layer;
     layer = new ol.layer.Tile({
       source : new ol.source.TileWMS({
-        url : molConfig.geoserverUrl + "/oae/wms",
+        url : config.geoserverUrl + "/mol/wms",
         params : {
-          LAYERS : 'oae:provinces',
+          LAYERS : 'mol:provinces',
           STYLES : '',
           SLD_BODY : sld_body,
           TILED : true
@@ -51,7 +51,7 @@ var searchdata = (function() {
 
     var sld_body = '';
     var title = 'Provinces';
-    var layer_name = 'oae:provinces';
+    var layer_name = 'mol:provinces';
     var id_name = 'prov_code';
     sld_body = '<?xml version="1.0" encoding="UTF-8"?><StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
     sld_body += '<NamedLayer><Name>' + layer_name + '</Name><UserStyle><Title>'
@@ -128,5 +128,4 @@ var searchdata = (function() {
     setup : setup
   }
 })();
-
 
