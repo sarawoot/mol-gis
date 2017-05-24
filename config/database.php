@@ -1,10 +1,19 @@
 <?php
-  function connectionOracleDB() {
+  function connectionOracleDB(){
     putenv("NLS_LANG=AMERICAN_AMERICA.TH8TISASCII");
-    $conn = oci_connect('DB_MOL', 'DBMOL', '192.168.0.167/molorcl');
-    if (!$conn) {
+    $conn = oci_connect('ST_MOL', 'STMOL', '192.168.0.167/molorcl');
+    if (! $conn){
       echo "Oracle error occurred.\n";
-      exit;
+      exit();
+    }
+    return $conn;
+  }
+  function connectionDB(){
+    $conn_string = "host=192.168.0.202 port=5432 dbname=oae user=postgres password=P@ssw0rd";
+    $conn = pg_connect($conn_string);
+    if (! $conn){
+      echo "Postgresql error occurred.\n";
+      exit();
     }
     return $conn;
   }
