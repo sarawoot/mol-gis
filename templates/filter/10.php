@@ -16,7 +16,7 @@
   <div class="form-group col-md-12">
 	<label for="monthFilter" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="monthFilter">
 				<option value="1">มกราคม</option>
 				<option value="2">กุมภาพันธ์</option>
 				<option value="3">มีนาคม</option>
@@ -38,10 +38,10 @@
 	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนผู้อยู่ในวัยทำงาน อายุ 15 ปี ขึ้นไป</label>
 	<div class="col-md-8">
 			<select class="form-control " id="howFilter">
-				<option value="00">น้อยกว่า 20</option>
-				<option value="20">20-50</option>
-				<option value="51">51-100</option>
-				<option value="101">101-150</option>
+				<option value="00-20">น้อยกว่า 20</option>
+				<option value="20-50">20-50</option>
+				<option value="51-100">51-100</option>
+				<option value="101-150">101-150</option>
 			</select>
 	</div>
 	</div>

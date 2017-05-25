@@ -37,7 +37,7 @@
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >สัญชาติ</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control" id="yearFilter">
 				<option value="1">พม่า</option>
 				<option value="2">ลาว</option>
 				<option value="3">เวียดนาม</option>
@@ -68,6 +68,6 @@
 	<input type="button" id="clearLayer" class="btn btn-danger" value="ล้างข้อมูล"/>
 	</div>
 </div>
-<input id="formSearch" type="hidden" value="12">
+<input id="formSearch" type="hidden" value="13">
 <input type="hidden" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">
