@@ -1,9 +1,9 @@
 <!-- สถิติการสำรวจประชากร (รายไตรมาส)  -->
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
+	<label for="yearsFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="yearsFilter">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label">ไตรมาส</label>
+	<label for="quarterFilter" class="col-md-2 col-md-offset-2 control-label">ไตรมาส</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="quarterFilter">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -46,3 +46,5 @@
 	</div>
 </div>
 <input id="formSearch" type="hidden" value="11">
+<input type="hidden" name="province" id="province" value="">
+<input type="hidden" name="amphur" id="amphur" value="">

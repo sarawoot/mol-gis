@@ -1,4 +1,4 @@
-<!-- สถิติการสำรวจประชากร (รายเดือน) -->
+<!-- สถิตแรงงานต่างด้าว -->
 <div class="row">
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
@@ -35,7 +35,22 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนผู้อยู่ในวัยทำงาน อายุ 15 ปี ขึ้นไป</label>
+	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >สัญชาติ</label>
+	<div class="col-md-8">
+			<select class="form-control " id="yearFilter">
+				<option value="1">พม่า</option>
+				<option value="2">ลาว</option>
+				<option value="3">เวียดนาม</option>
+				<option value="4">มาเลเซีย</option>
+				<option value="5">อินโดนีเซีย</option>
+				<option value="6">ไทย</option>
+			</select>
+	</div>
+	</div>
+</div>
+<div class="row">
+  <div class="form-group col-md-12">
+	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนแรงงานนอกระบบ</label>
 	<div class="col-md-8">
 			<select class="form-control " id="howFilter">
 				<option value="00">น้อยกว่า 20</option>
@@ -50,9 +65,9 @@
 <div class="row">
   <div class="col-md-12 text-center">
 	<input type="button" id="searchLayer" onclick="searchLayer()" class="btn btn-primary" value="ค้นหา"/>
-	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
+	<input type="button" id="clearLayer" class="btn btn-danger" value="ล้างข้อมูล"/>
 	</div>
 </div>
-<input id="formSearch" type="hidden" value="10">
+<input id="formSearch" type="hidden" value="12">
 <input type="hidden" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">

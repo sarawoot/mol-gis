@@ -47,6 +47,18 @@
   <div class="mini-submenu mini-submenu-left pull-left">
     <i class="fa fa-list-alt"></i>
   </div>
+  <div class="row main-row">
+    <div class="col-sm-5 col-md-4 sidebar sidebar-left pull-left">
+      <div class="panel-group sidebar-body">
+        <div class="panel-group" id="leftMenuSearch" role="tablist" aria-multiselectable="true">
+           <?php require 'templates/layer_search.php'; ?>
+        </div>
+      </div>
+    </div>
+    <div class="mini-submenu submenu mini-submenu-left pull-left">
+    <i class="fa fa-search"></i>
+    </div>
+  </div>
   <div id="map"></div>
   <?php require 'templates/map_tools.php'; ?>
 
@@ -69,5 +81,7 @@
   <script src="assets/javascripts/buffer.js"></script>
   <script src="assets/javascripts/what_if.js"></script>
   <script src="assets/javascripts/map_tool.js"></script>
+  <script src="assets/javascripts/layer_search.js"></script>
+  <script src="assets/javascripts/search.js"></script>
 </body>
 </html>
