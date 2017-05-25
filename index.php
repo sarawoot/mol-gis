@@ -69,5 +69,7 @@
   <script src="assets/javascripts/buffer.js"></script>
   <script src="assets/javascripts/what_if.js"></script>
   <script src="assets/javascripts/map_tool.js"></script>
+  <script src="assets/javascripts/config.js"></script>
+<script src="assets/javascripts/search.js"></script>
 </body>
 </html>

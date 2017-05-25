@@ -2,6 +2,7 @@
 header('');
 require ("../config/database.php");
 require ("../helpers/share_func.php");
+require ("../helpers/search.php");
 $conn = connectionOracleDB();
 
 $sql = "";
@@ -10,28 +11,10 @@ $num_max = 0;
 $level = 5;
 $intervals = array();
 $result = array();
-$colors = array(
-    '#B2FF66',
-    '#80FF00',
-    '#336600',
-    '#193300',
-    '#193300'
-)
-;
-$sql = " SELECT  sum(WEIGHT_AMT)cnt ,CWT_CODE,CWT_DESC FROM VIEW_GIS_STAT_NSO_DISABILITY WHERE 1=1 ";
 
-if (isset($_GET["YEAR_TH"])){
-  $sql .= " AND YEAR_TH = '" . ( int ) $_GET["YEAR_TH"] . "'";
-}
-if (isset($_GET["DISABILITY_GROUP_CODE"])){
-  $sql .= " AND DISABILITY_GROUP_CODE = '" . replace_str($_GET["DISABILITY_GROUP_CODE"]) . "'";
-}
+$sql = genSql();
 
-if (isset($_GET["DISABILITY_TYPE_CODE"])){
-  $sql .= " AND DISABILITY_TYPE_CODE = '" . replace_str($_GET["DISABILITY_TYPE_CODE"]) . "'";
-}
 
-$sql .= " GROUP BY CWT_CODE,CWT_DESC";
 if ($sql != ""){
   $result = oci_parse($conn, $sql);
   oci_execute($result);

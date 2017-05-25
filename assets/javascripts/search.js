@@ -2,15 +2,57 @@ var searchdata = {
   init : function() {
     data = this.getData();
     this.addLayer(data);
+    this.setup();
   },
 
-  setup : function(coordinate) {
+  setup : function() {
+    map.on('dblclick', function(evt) {
+      var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+      var getUrlInfo = function(layerInfo) {
+        var view = map.getView();
+        var viewResolution = view.getResolution();
+        var source = layerInfo.getSource();
+        var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution,
+            view.getProjection(), {
+              'INFO_FORMAT' : 'application/json',
+              'FEATURE_COUNT' : 1
+            });
+        return url;
+      };
+      var url = getUrlInfo(provinceLayer);
+      var dataEntries = url.split("&");
+      var params = "";
+      for (var i = 0; i < dataEntries.length; i++) {
+        if (i === 0) {
+          url = dataEntries[i];
+        } else if (!/SLD_BODY/.test(dataEntries[i])) {
+          params = params + "&" + dataEntries[i];
+        }
+      }
+      $.ajax({
+        url : url,
+        dataType : 'json',
+        type : 'POST',
+        data : params,
+        async : false,
+        success : function(res) {
+          if (res.features.length > 0) {
+            var prov_code = res.features[0].properties.prov_code;
+            $('#province').val(prov_code);
+            centermap = true
+            searchdata.init();
+            CenterMap(lonlat[0], lonlat[1], centermap)
+          }
+        }
+      });
+
+    });
   },
 
   addLayer : function(res) {
     sld_body = this.generate_xml(res);
-    var layer;
-    layer = new ol.layer.Tile({
+
+    provinceLayer = new ol.layer.Tile({
       source : new ol.source.TileWMS({
         url : config.geoserverUrl + "/mol/wms",
         params : {
@@ -19,6 +61,7 @@ var searchdata = {
           SLD_BODY : sld_body,
           TILED : true
         },
+
         serverType : 'geoserver',
         tileLoadFunction : this.tileLoadFunction
 
@@ -26,7 +69,7 @@ var searchdata = {
     });
 
     // layer.set("id", 'prov_code');
-    map.addLayer(layer);
+    map.addLayer(provinceLayer);
   },
 
   getData : function(data) {
@@ -123,3 +166,25 @@ var searchdata = {
     }
   },
 };
+
+var provinceLayer = new ol.layer.Tile({
+  source : new ol.source.TileWMS({
+    url : config.geoserverUrl + "/oae/wms",
+    params : {
+      LAYERS : 'oae:provinces',
+      STYLES : undefined,
+      TILED : true
+    },
+    serverType : 'geoserver',
+    tileLoadFunction : searchdata.tileLoadFunction
+  })
+});
+
+function CenterMap(long, lat, amphur) {
+  map.getView().setCenter(
+      ol.proj.transform([ long, lat ], 'EPSG:4326', 'EPSG:3857'));
+  map.getView().setZoom((amphur ? 7 : 11));
+
+}
+
+searchdata.init();
