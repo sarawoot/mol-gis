@@ -1,4 +1,4 @@
-<!-- ผู้ผ่านการฝึกอบรม -->
+<!-- ตำแหน่งงานว่าง -->
 <div class="row">
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="addressFilter" class="col-md-3 col-md-offset-1 control-label" >ที่อยู่ตามทะเบียนบ้าน/ที่อยู่ตามสถานที่ติดต่อ</label>
+	<label for="posFilter" class="col-md-3 col-md-offset-1 control-label" >ตำแหน่ง</label>
 	<div class="col-md-8">
-			<select class="form-control " id="addressFilter">
+			<select class="form-control " id="posFilter">
 				<option value="01">1</option>
 				<option value="02">2</option>
 				<option value="03">3</option>
@@ -27,22 +27,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="courseFilter" class="col-md-3 col-md-offset-1 control-label" >หลักสูตร</label>
+	<label for="posEmtyFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนตำแหน่งว่าง</label>
 	<div class="col-md-8">
-			<select class="form-control " id="courseFilter">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนตแหน่งว่าง</label>
-	<div class="col-md-8">
-			<select class="form-control " id="howFilter">
+			<select class="form-control " id="posEmtyFilter">
 				<option value="00">น้อยกว่า 20</option>
 				<option value="20">20-50</option>
 				<option value="51">51-100</option>

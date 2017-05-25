@@ -1,4 +1,4 @@
-<!-- ผู้ผ่านการฝึกอบรม -->
+<!-- ผู้ประกันตน ม.40 -->
 <div class="row">
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
@@ -14,33 +14,7 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="addressFilter" class="col-md-3 col-md-offset-1 control-label" >ที่อยู่ตามทะเบียนบ้าน/ที่อยู่ตามสถานที่ติดต่อ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="addressFilter">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="courseFilter" class="col-md-3 col-md-offset-1 control-label" >หลักสูตร</label>
-	<div class="col-md-8">
-			<select class="form-control " id="courseFilter">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนตแหน่งว่าง</label>
+	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวน</label>
 	<div class="col-md-8">
 			<select class="form-control " id="howFilter">
 				<option value="00">น้อยกว่า 20</option>

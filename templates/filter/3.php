@@ -1,4 +1,4 @@
-<!-- ผู้ผ่านการฝึกอบรม -->
+<!-- ตำแหน่งงานว่าง -->
 <div class="row">
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>

@@ -33,3 +33,5 @@
 	</div>
 </div>
 <input id="formSearch" type="hidden" value="9">
+<input type="hidden" name="province" id="province" value="">
+<input type="hidden" name="amphur" id="amphur" value="">

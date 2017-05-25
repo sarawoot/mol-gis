@@ -18,10 +18,10 @@
 	<div class="col-md-8">
 			<select class="form-control " id="typeFilter">
 				<option value="01">ความพิการทางการมองเห็น</option>
-				<option value="01">ความพิการทางการได้ยินและสื่อความหมาย</option>
-				<option value="01">ความพิการทางการเคลื่อนไหวหรือทางร่างกาย</option>
-				<option value="01">ความพิการทางจิตใจหรือพฤติกรรม</option>
-				<option value="01">ความพิการทางสติปัญญา</option>
+				<option value="02">ความพิการทางการได้ยินและสื่อความหมาย</option>
+				<option value="03">ความพิการทางการเคลื่อนไหวหรือทางร่างกาย</option>
+				<option value="04">ความพิการทางจิตใจหรือพฤติกรรม</option>
+				<option value="05">ความพิการทางสติปัญญา</option>
 			</select>
 	</div>
 	</div>
@@ -59,3 +59,6 @@
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
+<input id="formSearch" type="hidden" value="8">
+<input type="hidden" name="province" id="province" value="">
+<input type="hidden" name="amphur" id="amphur" value="">
