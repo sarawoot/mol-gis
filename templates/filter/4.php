@@ -41,10 +41,10 @@
 <br />
 <div class="row">
   <div class="col-md-12 text-center">
-	<input type="button" id="searchLayer" onclick="searchLayer()" class="btn btn-primary" value="ค้นหา"/>
+	<input type="button" id="searchLayer" onclick="ClickSearchLayer()" class="btn btn-primary" value="ค้นหา"/>
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch" type="hidden" value="8"/>
+<input id="formSearch" type="hidden" value="4"/>
 <input type="hidden" name="province" id="province" value=""/>
 <input type="hidden" name="amphur" id="amphur" value=""/>

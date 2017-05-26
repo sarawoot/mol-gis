@@ -45,7 +45,36 @@
     };
 })().init();
 
-function searchLayer() {
+function ClickSearchLayer() {
+    var formData = $('#searchForm').serialize()
+    console.log(formData);
+    // var monthValue = getDataDropdown("monthFilter");
+    // var yearValue = getDataDropdown("yearFilter");
+    // var addressValue = getDataDropdown("addressFilter");
+    // var courseValue = getDataDropdown("courseFilter");
+    // var eduValue = getDataDropdown("eduFilter");
+    // var howValue = getDataDropdown("howFilter");
+    // var province = $('#formSearch').val();
+    // var amphur = $('#formSearch').val();
+    // var typeValue = getDataDropdown("typeFilter");
+    // var posEmtyValue = getDataDropdown("posEmtyFilter");
+    // var posValue = getDataDropdown("posFilter");
+    // var defValue = getDataDropdown("defFilter");
+    // var monthValue = getDataDropdown("monthFilter");
+    // var quarterValue = getDataDropdown("quarterFilter");
+
+
     var data = searchdata.getData();
     searchdata.addLayer(data);
 };
+
+
+// function getDataDropdown(input) {
+//     var monthValue = "";
+//     var monthFilter = document.getElementById(input);
+//     if (monthFilter) {
+//         console.log(input + "::" + monthFilter.options[monthFilter.selectedIndex].value);
+//         return monthFilter.options[monthFilter.selectedIndex].value;
+//     }
+
+// }

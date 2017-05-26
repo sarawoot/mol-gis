@@ -3,7 +3,7 @@
   <div class="form-group col-md-12">
 	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="yearFilter" name="yearFilter">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -16,7 +16,7 @@
   <div class="form-group col-md-12">
 	<label for="typeFilter" class="col-md-3 col-md-offset-1 control-label" >ประเภทของความพิการ</label>
 	<div class="col-md-8">
-			<select class="form-control " id="typeFilter">
+			<select class="form-control " id="typeFilter" name="typeFilter">
 				<option value="01">ความพิการทางการมองเห็น</option>
 				<option value="02">ความพิการทางการได้ยินและสื่อความหมาย</option>
 				<option value="03">ความพิการทางการเคลื่อนไหวหรือทางร่างกาย</option>
@@ -30,7 +30,7 @@
   <div class="form-group col-md-12">
 	<label for="eduFilter" class="col-md-3 col-md-offset-1 control-label" >วุฒิการศึกษา</label>
 	<div class="col-md-8">
-			<select class="form-control " id="eduFilter">
+			<select class="form-control " id="eduFilter" name="eduFilter">
 				<option value="01">ประถม</option>
 				<option value="02">มัธยม</option>
 				<option value="03">อุดมศึกษา</option>
@@ -55,10 +55,10 @@
 <br />
 <div class="row">
   <div class="col-md-12 text-center">
-	<input type="button" id="searchLayer" onclick="searchLayer()" class="btn btn-primary" value="ค้นหา"/>
+	<input type="button" id="searchLayer" onclick="ClickSearchLayer()" class="btn btn-primary" value="ค้นหา"/>
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch" type="hidden" value="8">
+<input id="formSearch" type="hidden" value="1">
 <input type="hidden" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">
