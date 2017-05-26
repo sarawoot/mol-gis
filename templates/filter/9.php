@@ -33,6 +33,6 @@
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch" type="hidden" value="9">
+<input id="formSearch" name="formSearch" type="hidden" value="9">
 <input type="hidden" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">
