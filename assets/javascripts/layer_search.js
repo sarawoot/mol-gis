@@ -47,6 +47,7 @@
 
 function ClickSearchLayer() {
     var formData = $('#searchForm').serialize()
+    console.log(formData);
     mapMode = 'search';
     console.log(mapMode);
     // var monthValue = getDataDropdown("monthFilter");
