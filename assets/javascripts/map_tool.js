@@ -38,6 +38,12 @@ var mapTool = (function () {
           clearMap();
           whatIf.setup();
         }
+        if (this.value == 'search') {
+           clearMap();
+           mapMode = 'search';
+           searchtool.showPanel();
+           searchtool.init();
+        }
 
       }
 

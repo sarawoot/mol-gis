@@ -1,7 +1,8 @@
-(function() {
+var searchtool = (function() {
     var init = function() {
         var dataTmp = getData();
         var data = [];
+          
         $('#layerSearchSelectForm').append($('<option>', {
             value: '-1',
             text: 'กรุณาเลือก'
@@ -21,7 +22,9 @@
         // alert(this.value);
         $('#layerSearchForm').load("templates/filter/" + this.value + ".php");
     });
-
+  var showPanel = function() {
+        $("#panelSearch").show();
+  }
 
     var getData = function() {
         var json = [];
@@ -41,14 +44,16 @@
     };
 
     return {
-        init: init
+        init: init,
+        showPanel : showPanel
     };
-})().init();
+})();
+searchtool.init();
 
 function ClickSearchLayer() {
     var formData = $('#searchForm').serialize()
     console.log(formData);
-    mapMode = 'search';
+
     console.log(mapMode);
     // var monthValue = getDataDropdown("monthFilter");
     // var yearValue = getDataDropdown("yearFilter");

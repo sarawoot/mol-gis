@@ -38,7 +38,7 @@
            <?php require 'templates/buffer_panel.php'; ?>
            <?php require 'templates/what_if_panel.php'; ?>
            <?php require 'templates/result_panel.php'; ?>
-           
+           <?php require 'templates/layer_search.php'; ?>
 
         </div>
       </div>
@@ -47,18 +47,7 @@
   <div class="mini-submenu mini-submenu-left pull-left">
     <i class="fa fa-list-alt"></i>
   </div>
-  <div class="row main-row">
-    <div class="col-sm-5 col-md-4 sidebar sidebar-left pull-left">
-      <div class="panel-group sidebar-body">
-        <div class="panel-group" id="leftMenuSearch" role="tablist" aria-multiselectable="true">
-           <?php require 'templates/layer_search.php'; ?>
-        </div>
-      </div>
-    </div>
-    <div class="mini-submenu submenu mini-submenu-left pull-left">
-    <i class="fa fa-search"></i>
-    </div>
-  </div>
+
   <div id="map"></div>
   <?php require 'templates/map_tools.php'; ?>
 
