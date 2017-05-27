@@ -3,50 +3,54 @@ var searchdata = {
     data = this.getData();
     this.addLayer(data);
     this.setup();
+    mapMode = 'search';
   },
 
   setup : function() {
-    map.on('dblclick', function(evt) {
-      var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-      var getUrlInfo = function(layerInfo) {
-        var view = map.getView();
-        var viewResolution = view.getResolution();
-        var source = layerInfo.getSource();
-        var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution,
-            view.getProjection(), {
-              'INFO_FORMAT' : 'application/json',
-              'FEATURE_COUNT' : 1
-            });
-        return url;
-      };
-      var url = getUrlInfo(provinceLayer);
-      var dataEntries = url.split("&");
-      var params = "";
-      for (var i = 0; i < dataEntries.length; i++) {
-        if (i === 0) {
-          url = dataEntries[i];
-        } else if (!/SLD_BODY/.test(dataEntries[i])) {
-          params = params + "&" + dataEntries[i];
-        }
-      }
-      $.ajax({
-        url : url,
-        dataType : 'json',
-        type : 'POST',
-        data : params,
-        async : false,
-        success : function(res) {
-          if (res.features.length > 0) {
-            var prov_code = res.features[0].properties.prov_code;
-            $('#province').val(prov_code);
-            centermap = true
-            searchdata.init();
-            CenterMap(lonlat[0], lonlat[1], centermap)
+    if (mapMode == 'search') {
+      map.on('dblclick', function(evt) {
+        var lonlat = ol.proj
+            .transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+        var getUrlInfo = function(layerInfo) {
+          var view = map.getView();
+          var viewResolution = view.getResolution();
+          var source = layerInfo.getSource();
+          var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution,
+              view.getProjection(), {
+                'INFO_FORMAT' : 'application/json',
+                'FEATURE_COUNT' : 1
+              });
+          return url;
+        };
+        var url = getUrlInfo(provinceLayer);
+        var dataEntries = url.split("&");
+        var params = "";
+        for (var i = 0; i < dataEntries.length; i++) {
+          if (i === 0) {
+            url = dataEntries[i];
+          } else if (!/SLD_BODY/.test(dataEntries[i])) {
+            params = params + "&" + dataEntries[i];
           }
         }
-      });
+        $.ajax({
+          url : url,
+          dataType : 'json',
+          type : 'POST',
+          data : params,
+          async : false,
+          success : function(res) {
+            if (res.features.length > 0) {
+              var prov_code = res.features[0].properties.prov_code;
+              $('#province').val(prov_code);
+              centermap = true
+              searchdata.init();
+              CenterMap(lonlat[0], lonlat[1], centermap)
+            }
+          }
+        });
 
-    });
+      });
+    }
   },
 
   addLayer : function(res) {
@@ -72,10 +76,10 @@ var searchdata = {
     map.addLayer(provinceLayer);
   },
 
-  getData : function(data) {
+  getData : function(param) {
     var json = [];
     $.ajax({
-      url : "controllers/search.php",
+      url : "controllers/search.php?" + param,
       dataType : "json",
       type : "get",
       async : false,
@@ -90,7 +94,7 @@ var searchdata = {
   },
 
   generate_xml : function(res) {
-    var colors = [ "#B2FF66", "#80FF00", "#336600", "#193300", "#193300" ];
+    var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
 
     var sld_body = '';
     var title = 'Provinces';
@@ -115,7 +119,7 @@ var searchdata = {
                         if (item.cnt >= interval[0] && item.cnt <= interval[1]) {
                           sld_body += '<CssParameter name="fill">'
                               + colors[idx] + '</CssParameter>';
-                          sld_body += '<CssParameter name="fill-opacity">1.0</CssParameter>';
+                          sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
 
                         }
                       })
@@ -186,5 +190,62 @@ function CenterMap(long, lat, amphur) {
   map.getView().setZoom((amphur ? 7 : 11));
 
 }
+map.on('singleclick', function(evt) {
+  if (mapMode == 'search') {
+    var coordinate = evt.coordinate;
+    var xy = String(coordinate).split(',');
+    content.innerHTML = '';
+    var getUrlInfo = function(layerInfo) {
+      var view = map.getView();
+      var viewResolution = view.getResolution();
+      var source = layerInfo.getSource();
+      var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution,
+          view.getProjection(), {
+            'INFO_FORMAT' : 'application/json',
+            'FEATURE_COUNT' : 1
+          });
+      return url;
+    };
+    var url = getUrlInfo(provinceLayer);
+    var dataEntries = url.split("&");
+    var params = "";
+    for (var i = 0; i < dataEntries.length; i++) {
+      if (i === 0) {
+        url = dataEntries[i];
+      } else if (!/SLD_BODY/.test(dataEntries[i])) {
+        params = params + "&" + dataEntries[i];
+      }
+    }
+    $.ajax({
+      url : url,
+      dataType : 'json',
+      type : 'POST',
+      data : params,
+      async : false,
+      success : function(res) {
+        var prov_code = '';
+        var ap_idn = '';
+        var tb_idn = '';
+        if (res.features.length > 0) {
+          prov_code = res.features[0].properties.prov_code;
+          var param = 'prov_code=' + prov_code + '&ap_idn=' + ap_idn
+              + '&tb_idn=' + tb_idn + '&' + $('#searchForm').serialize();
+
+          $.ajax({
+            url : 'controllers/popupdetail.php',
+            type : 'GET',
+            data : param,
+            success : function(res) {
+              popup.show([ xy[0], xy[1] ], res)
+            }
+          });
+
+        }
+      }
+
+    });
+  }
+
+});
 
 searchdata.init();
