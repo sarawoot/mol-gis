@@ -1,13 +1,13 @@
-var searchtool = (function() {
-    var init = function() {
+var searchtool = (function () {
+    var init = function () {
         var dataTmp = getData();
         var data = [];
-          
+
         $('#layerSearchSelectForm').append($('<option>', {
             value: '-1',
             text: 'กรุณาเลือก'
         }));
-        $.each(dataTmp, function(i, item) {
+        $.each(dataTmp, function (i, item) {
 
             $('#layerSearchSelectForm').append($('<option>', {
                 value: item.id,
@@ -18,25 +18,34 @@ var searchtool = (function() {
     };
 
 
-    $('#layerSearchSelectForm').on('change', function() {
+    $('#layerSearchSelectForm').on('change', function () {
         // alert(this.value);
         $('#layerSearchForm').load("templates/filter/" + this.value + ".php");
     });
-  var showPanel = function() {
+    var showPanel = function () {
         $("#panelSearch").show();
-  }
+        setTimeout(function () {
+            if (!$("#collapseLayerSearch").is(":visible")) {
+                $("#searchLayer a").click();
+                $("#headingLayer a").click();
+            }
+        }, 500);
 
-    var getData = function() {
+    }
+    var closePanel = function () {
+        $('#panelSearch').css('display', 'none');
+    }
+    var getData = function () {
         var json = [];
         $.ajax({
             url: "assets/javascripts/layers1.json",
             dataType: "json",
             type: "get",
             async: false,
-            success: function(data) {
+            success: function (data) {
                 json = data;
             },
-            error: function(xhr, status, e) {
+            error: function (xhr, status, e) {
                 console.log('erroe  ' + e);
             }
         });
@@ -45,7 +54,8 @@ var searchtool = (function() {
 
     return {
         init: init,
-        showPanel : showPanel
+        showPanel: showPanel,
+        closePanel: closePanel
     };
 })();
 searchtool.init();
