@@ -1,9 +1,9 @@
-<!-- คนพิการมีงานทำ -->
+<!-- ผู้สูงอายุ -->
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
+	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter" name="yearFilter">
+			<select class="form-control " id="YEARS">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="typeFilter" class="col-md-3 col-md-offset-1 control-label" >ประเภทของความพิการ</label>
+	<label for="typeFilter" class="col-md-3 col-md-offset-1 control-label" >ประเภทความพิการ</label>
 	<div class="col-md-8">
-			<select class="form-control " id="typeFilter" name="typeFilter">
+			<select class="form-control " id="typeFilter">
 				<option value="01">ความพิการทางการมองเห็น</option>
 				<option value="02">ความพิการทางการได้ยินและสื่อความหมาย</option>
 				<option value="03">ความพิการทางการเคลื่อนไหวหรือทางร่างกาย</option>
@@ -28,20 +28,7 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="eduFilter" class="col-md-3 col-md-offset-1 control-label" >วุฒิการศึกษา</label>
-	<div class="col-md-8">
-			<select class="form-control " id="eduFilter" name="eduFilter">
-				<option value="01">ประถม</option>
-				<option value="02">มัธยม</option>
-				<option value="03">อุดมศึกษา</option>
-				<option value="04">สูงกว่า อุดมศึกษา</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนคนพิการมีงานทำ</label>
+	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวน</label>
 	<div class="col-md-8">
 			<select class="form-control " id="howFilter">
 				<option value="00">น้อยกว่า 20</option>
@@ -59,6 +46,6 @@
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch"   name="formSearch" type="hidden" value="1">
-<input type="hidden" name="province" id="province" value="">
-<input type="hidden" name="amphur" id="amphur" value="">
+<input id="formSearch" name="formSearch"  type="hidden" value="7"/>
+<input type="hidden" name="province" id="province" value=""/>
+<input type="hidden" name="amphur" id="amphur" value=""/>
