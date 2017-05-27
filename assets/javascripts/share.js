@@ -38,6 +38,7 @@ var clearMap = function (){
   $("#panelBuffer").hide();
   $("#panelResult").hide();
   $("#panelWhatIf").hide();
+  $('#panelSearch').hide();
   if (!$("#collapseLayer").is(":visible")) {
     $("#headingLayer a").click();
   }
