@@ -72,6 +72,12 @@ var searchdata = {
       dataType : "json",
       type : "get",
       async : false,
+      beforeSend : function() {
+        $('#loads').show();
+      },
+      complete : function() {
+        $('#loads').hide();
+      },
       success : function(data) {
         json = data;
       },
@@ -235,4 +241,11 @@ map.on('singleclick', function(evt) {
 
 });
 
+function hideResultPanel(obj) {
+  setTimeout(function() {
+
+    $("#panelResult").hide();
+
+  }, 500);
+}
 // searchdata.init();

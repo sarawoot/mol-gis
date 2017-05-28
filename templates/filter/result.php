@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/static.php");
+require ("../../helpers/share_func.php");
 require_once ("../../config/database.php");
 $conn = connectionOracleDBUTF();
 $intervals = explode(',', $_GET['intervals']);
@@ -19,52 +20,122 @@ switch($_GET['formSearch']){
     $name = 'คนพิการมีงานทำ';
     break;
   case 2 :
-    $title = 'VIEW_GIS_DSD_PASS_TRAINING';
-    $name = 'ผู้ผ่านการฝึกอบรม';
-    break;
   case 3 :
-    $title = 'VIEW_GIS_DSD_PASS_TESTING';
-    $name = 'ผู้ผ่านการทดสอบ';
-    break;
   case 4 :
-    $title = 'VIEW_GIS_DOE_JOB_VACANCY';
-    $name = 'ตำแหน่งงานว่าง';
-    break;
   case 5 :
-    $title = 'VIEW_GIS_SSO_INSURED_M33';
-    $name = 'ผู้ประกันตน ม.33';
-    break;
   case 6 :
-    $title = 'VIEW_GIS_SSO_INSURED_M40';
-    $name = 'ผู้ประกันตน ม.40';
+  case 9 :
+  case 10 :
+  case 11 :
+  case 12 :
+  case 13 :
+    $title = '';
+    if (isset($_GET["YEARS"])){
+      if (! empty($_GET["YEARS"])){
+        $title .= "ประจำปีงบประมาณ " . $_GET['YEARS'] . '&nbsp;';
+      }
+    }
+    if (isset($_GET["YEAR_TH"])){
+      if (! empty($_GET["YEARS"])){
+        $title .= "ประจำปีงบประมาณ " . $_GET['YEAR_TH'] . '&nbsp;';
+      }
+    }
+    if (isset($_GET["MONTH_CODE"])){
+      if (! empty($_GET["MONTH_CODE"])){
+        $title .= "ประจำเดือน" . $month_conf[$_GET['MONTH_CODE']] . '&nbsp;';
+      }
+    }
+    switch($_GET['formSearch']){
+      case 2 :
+        $name = 'ผู้ผ่านการฝึกอบรม';
+        break;
+      case 3 :
+        $name = 'ผู้ผ่านการทดสอบ';
+        break;
+      case 4 :
+        $name = 'ตำแหน่งงานว่าง';
+        break;
+      case 5 :
+        $name = 'ผู้ประกันตน ม.33';
+        break;
+      case 6 :
+        $name = 'ผู้ประกันตน ม.40';
+        break;
+      case 9 :
+        $name = 'สถิติผู้สูงอายุ (รายปี)';
+        break;
+      case 10 :
+        $name = 'สถิติการสำรวจประชากร (รายเดือน)';
+        break;
+      case 11 :
+        $name = 'สถิติการสำรวจประชากร (รายไตรมาส)';
+        if (isset($_GET["QUARTER"])){
+          if (! empty($_GET["QUARTER"])){
+            $title .= "ไตรมาสที่ " . $_GET['QUARTER'] . '&nbsp;';
+          }
+        }
+        break;
+      case 12 :
+        $name = 'สถิตแรงงานนอกระบบ';
+        break;
+      case 13 :
+        $name = 'สถิตแรงงานต่างด้าว';
+        if (isset($_GET["FOREIGN_TYPE_CODE"])){
+          if (! empty($_GET["FOREIGN_TYPE_CODE"])){
+            $sql = 'SELECT FOREIGN_TYPE_CODE,FOREIGN_TYPE_NAME FROM DB_MOL.LKU_DOE_FOREIGN_TYPE  WHERE FOREIGN_TYPE_CODE =  ' . $_GET["FOREIGN_TYPE_CODE"];
+            $result = oci_parse($conn, $sql);
+            oci_execute($result);
+            $row = oci_fetch_array($result, OCI_BOTH);
+            $FOREIGN_TYPE_NAME = $row["FOREIGN_TYPE_NAME"];
+            $title .= "ประเภทการได้รับอนุญาตคือ" . $FOREIGN_TYPE_NAME . '&nbsp;';
+            oci_free_statement($result);
+          }
+        }
+        
+        break;
+    }
     break;
   case 7 :
-    $title = 'VIEW_GIS_STAT_NSO_DISABILITY';
+    $title = '';
     $name = 'ผู้สูงอายุ';
     break;
   case 8 :
-    $title = 'VIEW_GIS_STAT_NSO_DISABILITY';
+    $title = '';
+    if (isset($_GET["YEARS"])){
+      if (! empty($_GET["YEARS"])){
+        $title .= "ประจำปีงบประมาณ " . $_GET['YEARS'] . '&nbsp;';
+      }
+    }
+    if (isset($_GET["DISABILITY_GROUP_CODE"])){
+      if (! empty($_GET["DISABILITY_GROUP_CODE"])){
+        $sql = "SELECT  DISABILITY_GROUP_NAME FROM LKU_NSO_DISABILITY_TYPE WHERE DISABILITY_GROUP_CODE ='" . replace_str($_GET["DISABILITY_GROUP_CODE"]) . "' AND ROWNUM < 2";
+        $result = oci_parse($conn, $sql);
+        oci_execute($result);
+        $row = oci_fetch_array($result, OCI_BOTH);
+        $DISABILITY_GROUP_NAME = $row["DISABILITY_GROUP_NAME"];
+        
+        $title .= "ประเภทลักษณะความบกพร่องคือ" . $DISABILITY_GROUP_NAME . '&nbsp;';
+        oci_free_statement($result_min);
+        
+        if (isset($_GET["DISABILITY_TYPE_CODE"])){
+          if (! empty($_GET["DISABILITY_TYPE_CODE"])){
+            $sql = "SELECT  DISABILITY_TYPE_CODE,DISABILITY_TYPE_NAME 
+                    FROM LKU_NSO_DISABILITY_TYPE WHERE 
+                    DISABILITY_GROUP_CODE ='" . replace_str($_GET["DISABILITY_GROUP_CODE"]) . "' 
+                    AND DISABILITY_TYPE_CODE = '" . (( int ) $_GET["DISABILITY_TYPE_CODE"]) . "' AND ROWNUM < 2";
+            $result = oci_parse($conn, $sql);
+            // echo $sql;
+            oci_execute($result);
+            $row = oci_fetch_array($result, OCI_BOTH);
+            $DISABILITY_TYPE_NAME = $row["DISABILITY_TYPE_NAME"];
+            $title .= "ลักษณะความบกพร่องคือ" . $DISABILITY_TYPE_NAME . '&nbsp;';
+            oci_free_statement($result);
+          }
+        }
+      }
+    }
+    
     $name = 'สถิติผู้พิการ (รายปี)';
-    break;
-  case 9 :
-    $title = 'VIEW_GIS_STAT_NSO_ELDER';
-    $name = 'สถิติผู้สูงอายุ (รายปี)';
-    break;
-  case 10 :
-    $title = 'VIEW_GIS_STAT_NSO_MONTHLY';
-    $name = 'สถิติการสำรวจประชากร (รายเดือน)';
-    break;
-  case 11 :
-    $title = 'VIEW_GIS_STAT_NSO_QUARTER';
-    $name = 'สถิติการสำรวจประชากร (รายไตรมาส)';
-    break;
-  case 12 :
-    $title = 'VIEW_GIS_STAT_NSO_INFORMAL_WK';
-    $name = 'สถิตแรงงานนอกระบบ';
-    break;
-  case 13 :
-    $title = 'VIEW_GIS_DOE_FOREIGN_WORKER';
-    $name = 'สถิตแรงงานต่างด้าว';
     break;
   
   default :
@@ -72,6 +143,9 @@ switch($_GET['formSearch']){
     $name = 'สถิตแรงงานต่างด้าว';
     break;
 }
+
+oci_close($conn);
+
 ?>
 <div id="iframeSD_show" style="display: block; padding: 12px;">
 	<div id="DivSD_Explain">
@@ -97,7 +171,7 @@ switch($_GET['formSearch']){
       				</td>
 					<td></td>
 				</tr>
-				<tr>
+				<tr style="height: 5px;">
 					<td></td>
 					<td></td>
 					<td></td>
@@ -107,7 +181,7 @@ switch($_GET['formSearch']){
 		</table>
 		<br>
 		<center>
-			<font>กราฟแสดงข้อมูล<?php echo $name?>แยกตามจังหวัด</font>
+			<font>กราฟแสดงข้อมูล<?php echo $name?> แยกตามจังหวัด</font>
 		</center>
 	</div>
 </div>
