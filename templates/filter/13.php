@@ -1,9 +1,9 @@
-<!-- สถิตแรงงานต่างด้าว -->
+<!-- สถิตแรงงานต่างด้าว VIEW_GIS_DOE_FOREIGN_WORKER -->
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
+	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="YEARS" name="YEARS">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="monthFilter" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
+	<label for="MONTH_CODE" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="MONTH_CODE" name="MONTH_CODE">
 				<option value="1">มกราคม</option>
 				<option value="2">กุมภาพันธ์</option>
 				<option value="3">มีนาคม</option>
@@ -35,32 +35,21 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >สัญชาติ</label>
+	<label for="FOREIGN_TYPE_CODE" class="col-md-2 col-md-offset-2 control-label" >ประเภทการได้รับอนุญาต</label>
 	<div class="col-md-8">
-			<select class="form-control" id="yearFilter">
-				<option value="1">พม่า</option>
-				<option value="2">ลาว</option>
-				<option value="3">เวียดนาม</option>
-				<option value="4">มาเลเซีย</option>
-				<option value="5">อินโดนีเซีย</option>
-				<option value="6">ไทย</option>
+			<select class="form-control" id="FOREIGN_TYPE_CODE"  name="FOREIGN_TYPE_CODE">
+				<option value="02">นำเข้า MOU</option>
+				<option value="08">พิสูจน์สัญชาติ</option>
+				<option value="10">ตลอดชีพ</option>
+				<option value="22">ส่งเสริมการลงทุนตามกฎหมายอื่น ๆ</option>
+				<option value="31">ชั่วคราว ทั่วไป</option>
+				<option value="45">ชนกลุ่มน้อย</option>
+			  <option value="46">คนต่างด้าวที่เข้ามาทำงานในลักษณะไป-กลับ หรือตามฤดูกาล</option>
 			</select>
 	</div>
 	</div>
 </div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนแรงงานนอกระบบ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="howFilter">
-				<option value="00">น้อยกว่า 20</option>
-				<option value="20">20-50</option>
-				<option value="51">51-100</option>
-				<option value="101">101-150</option>
-			</select>
-	</div>
-	</div>
-</div>
+
 <br />
 <div class="row">
   <div class="col-md-12 text-center">

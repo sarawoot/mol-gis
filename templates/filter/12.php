@@ -12,20 +12,7 @@
 	</div>
 	</div>
 </div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="WEIGHT_AMT" class="col-md-3 col-md-offset-1 control-label" >จำนวนแรงงานนอกระบบ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="WEIGHT_AMT" name="WEIGHT_AMT">
-				<option value="0:320000">น้อยกว่า 320000</option>
-				<option value="320001:640000">320001:640000</option>
-				<option value="640001:960000">640001:960000</option>
-				<option value="960001:1280000">960001:1280000</option>
-				<option value="1280001:1600000">1280001:1600000</option>
-			</select>
-	</div>
-	</div>
-</div>
+
 <br />
 <div class="row">
   <div class="col-md-12 text-center">
