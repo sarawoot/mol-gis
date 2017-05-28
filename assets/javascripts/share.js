@@ -7,31 +7,31 @@ if (Array.prototype.remove === undefined) {
 }
 
 if (ol.Map.prototype.getLayer === undefined) {
-  ol.Map.prototype.getLayer = function (id) {
+  ol.Map.prototype.getLayer = function(id) {
     var layer;
-    this.getLayers().forEach(function (lyr) {
-        if (id == lyr.get('id')) {
-          layer = lyr;
-        }
+    this.getLayers().forEach(function(lyr) {
+      if (id == lyr.get('id')) {
+        layer = lyr;
+      }
     });
     return layer;
   };
 }
 
-var removeOtherInteraction = function () {
+var removeOtherInteraction = function() {
   var sl = [];
-  _.each(map.getInteractions().a, function(item, i){
+  _.each(map.getInteractions().a, function(item, i) {
     if (i > 8) {
       sl.push(item);
     }
   });
-  _.each(sl, function(item){
+  _.each(sl, function(item) {
     map.removeInteraction(item);
   });
 }
 
-var clearMap = function (){
-  features.clear();  
+var clearMap = function() {
+  features.clear();
   map.getOverlays().clear();
   map.addOverlay(popup);
   map.removeLayer(provinceLayer);
@@ -43,4 +43,7 @@ var clearMap = function (){
   if (!$("#collapseLayer").is(":visible")) {
     $("#headingLayer a").click();
   }
+  map.getView().setZoom(6);
+  map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
+  ;
 }

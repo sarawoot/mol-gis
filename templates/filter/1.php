@@ -25,7 +25,7 @@ oci_close($conn);
 ?>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			ประเภทของความพิการ<br> <select class="form-control "
 				id="DISABILTIY_TYPE" name="DISABILTIY_TYPE">
 				<option value="">เลือกข้อมูล</option>
@@ -38,7 +38,7 @@ oci_close($conn);
 </div>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			วุฒิการศึกษา<br> <select class="form-control " id="GRAD_EDU"
 				name="GRAD_EDU">
 				<option value="">เลือกข้อมูล</option>

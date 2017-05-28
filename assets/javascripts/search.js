@@ -1,3 +1,5 @@
+var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
+
 var searchdata = {
   init : function() {
     data = this.getData();
@@ -31,6 +33,15 @@ var searchdata = {
   },
 
   addLayer : function(res) {
+    $("#panelResult").show();
+    setTimeout(function() {
+      $('#collapseResult div').load(
+          'templates/filter/result.php?intervals=' + res.intervals + '&'
+              + $('#searchForm').serialize());
+      if (!$("#collapseResult").is(":visible")) {
+        $("#headingResult a").click();
+      }
+    }, 500);
     map.removeLayer(provinceLayer);
     sld_body = this.generate_xml(res);
 
@@ -72,8 +83,6 @@ var searchdata = {
   },
 
   generate_xml : function(res) {
-    var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
-
     var sld_body = '';
     var title = 'Provinces';
     var layer_name = 'mol:provinces';

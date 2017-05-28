@@ -7,7 +7,7 @@ $year_end = 2548;
 ?>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			ปี<br> <select class="form-control " id="YEARS" name="YEARS">
 				<option value="">เลือกข้อมูล</option>
 				<?php for($i = $year_start ; $i >= $year_end;$i--){?>

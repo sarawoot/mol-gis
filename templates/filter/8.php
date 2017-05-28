@@ -22,7 +22,7 @@ $year_end = 2550;
 ?>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-12">
+		<div class="col-md-10">
 		ปี<br>
 			<select class="form-control " id="YEAR_TH" name="YEAR_TH">
 				<option value="">เลือกข้อมูล</option>
@@ -35,7 +35,7 @@ $year_end = 2550;
 </div>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-12">
+		<div class="col-md-10">
 		ประเภทลักษณะความบกพร่อง<br>
 			<select class="form-control " id="DISABILITY_GROUP_CODE"
 				name="DISABILITY_GROUP_CODE" onchange="$('#DISABILITY_TYPE_CODE').load('controllers/group_disable_type.php?DISABILITY_GROUP_CODE=03');">
