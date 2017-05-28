@@ -1,5 +1,9 @@
           <div class="panel panel-default"  id="panelSearch" style="display: none;">
+<<<<<<< HEAD
             <div class="panel-heading" role="tab" id="headingLayerSearch">
+=======
+            <div class="panel-heading" role="tab" id="searchLayer">
+>>>>>>> refs/heads/master
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#leftMenuSearch" href="#collapseLayerSearch" aria-expanded="false" aria-controls="collapseLayerSearch">
                   <i class="fa fa-search"></i>
@@ -10,7 +14,7 @@
                 </span>-->
               </h4>
             </div>
-            <div id="collapseLayerSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLayer">
+            <div id="collapseLayerSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="searchLayer">
               <div class="panel-body" style="height:500px;overflow:auto;padding:1px">
                   <select id="layerSearchSelectForm"  class="form-control" ></select>
                   <br/>

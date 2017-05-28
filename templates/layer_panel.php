@@ -10,7 +10,7 @@
                 </span>
               </h4>
             </div>
-            <div id="collapseLayer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLayer">
+            <div id="collapseLayer" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingLayer">
               <div class="panel-body" style="height:350px;overflow:auto;padding:1px">
                 <input type="text" class="form-control" placeholder="ค้นหา" id="searchLayerSwitcher">
                 <div id="layerSwitcher"></div>

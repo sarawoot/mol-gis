@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="MONTH" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
+	<label for="MONTH_CODE" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
 	<div class="col-md-8">
-			<select class="form-control " id="MONTH" name="MONTH">
+			<select class="form-control " id="MONTH_CODE" name="MONTH_CODE">
 				<option value="1">มกราคม</option>
 				<option value="2">กุมภาพันธ์</option>
 				<option value="3">มีนาคม</option>
@@ -29,20 +29,6 @@
 				<option value="10">ตุลาคม</option>
 				<option value="11">พฤศจิกายน</option>
 				<option value="12">ธันวาคม</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="WEIGHT_AMT" class="col-md-3 col-md-offset-1 control-label" >จำนวนผู้อยู่ในวัยทำงาน อายุ 15 ปี ขึ้นไป</label>
-	<div class="col-md-8">
-			<select class="form-control " id="WEIGHT_AMT" name="WEIGHT_AMT">
-				<option value="0:1800000">น้อยกว่า 1800000</option>
-				<option value="1800001:3600000">1800001-3600000</option>
-				<option value="3600001:5400000">3600001-5400000</option>
-				<option value="5400000:7200000">5400000-7200000</option>
-				<option value="7200001:9000000">7200001-9000000</option>
 			</select>
 	</div>
 	</div>

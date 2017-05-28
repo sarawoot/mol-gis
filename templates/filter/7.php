@@ -3,7 +3,7 @@
   <div class="form-group col-md-12">
 	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="YEARS">
+			<select class="form-control " id="YEARS" name="YEARS">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="typeFilter" class="col-md-3 col-md-offset-1 control-label" >ประเภทความพิการ</label>
+	<label for="DISABILITY_GROUP_CODE" class="col-md-3 col-md-offset-1 control-label" >ประเภทความพิการ</label>
 	<div class="col-md-8">
-			<select class="form-control " id="typeFilter">
+			<select class="form-control " id="DISABILITY_GROUP_CODE" name="DISABILITY_GROUP_CODE">
 				<option value="01">ความพิการทางการมองเห็น</option>
 				<option value="02">ความพิการทางการได้ยินและสื่อความหมาย</option>
 				<option value="03">ความพิการทางการเคลื่อนไหวหรือทางร่างกาย</option>
@@ -26,19 +26,7 @@
 	</div>
 	</div>
 </div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวน</label>
-	<div class="col-md-8">
-			<select class="form-control " id="howFilter">
-				<option value="00">น้อยกว่า 20</option>
-				<option value="20">20-50</option>
-				<option value="51">51-100</option>
-				<option value="101">101-150</option>
-			</select>
-	</div>
-	</div>
-</div>
+
 <br />
 <div class="row">
   <div class="col-md-12 text-center">
