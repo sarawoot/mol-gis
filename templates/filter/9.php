@@ -12,20 +12,6 @@
 	</div>
 	</div>
 </div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="WEIGHT_AMT" class="col-md-3 col-md-offset-1 control-label" >จำนวนผู้สูงอายุ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="WEIGHT_AMT" name="WEIGHT_AMT">
-				<option value="0:180000">น้อยกว่า 180000</option>
-				<option value="180001:360000">180001-360000</option>
-				<option value="360001:540000">360001-540000</option>
-				<option value="540000:720000">540000-720000</option>
-				<option value="720001:900000">720001-900000</option>
-			</select>
-	</div>
-	</div>
-</div>
 <br />
 <div class="row">
   <div class="col-md-12 text-center">

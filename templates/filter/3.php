@@ -1,9 +1,9 @@
-<!-- ตำแหน่งงานว่าง -->
+<!-- ตำแหน่งงานว่าง VIEW_GIS_DSD_PASS_TESTING-->
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
+	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="YEARS"  name="YEARS">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,39 +14,31 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="addressFilter" class="col-md-3 col-md-offset-1 control-label" >ที่อยู่ตามทะเบียนบ้าน/ที่อยู่ตามสถานที่ติดต่อ</label>
+	<label for="MONTH_CODE" class="col-md-2 col-md-offset-2 control-label">เดือน</label>
 	<div class="col-md-8">
-			<select class="form-control " id="addressFilter">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
+			<select class="form-control " id="MONTH_CODE" name="MONTH_CODE">
+				<option value="1">มกราคม</option>
+				<option value="2">กุมภาพันธ์</option>
+				<option value="3">มีนาคม</option>
+				<option value="4">เมษายน</option>
+				<option value="5">พฤษภาคม</option>
+				<option value="6">มิถุนายน</option>
+				<option value="7">กรกฎาคม </option>
+				<option value="8">สิงหาคม</option>
+				<option value="9">กันยายน</option>
+				<option value="10">ตุลาคม</option>
+				<option value="11">พฤศจิกายน</option>
+				<option value="12">ธันวาคม</option>
 			</select>
 	</div>
 	</div>
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="courseFilter" class="col-md-3 col-md-offset-1 control-label" >หลักสูตร</label>
+	<label for="LAW_OCCUPATION_CODE" class="col-md-3 col-md-offset-1 control-label" >กลุ่มสาขาอาชีพ</label>
 	<div class="col-md-8">
-			<select class="form-control " id="courseFilter">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label" >จำนวนตแหน่งว่าง</label>
-	<div class="col-md-8">
-			<select class="form-control " id="howFilter">
-				<option value="00">น้อยกว่า 20</option>
-				<option value="20">20-50</option>
-				<option value="51">51-100</option>
-				<option value="101">101-150</option>
+			<select class="form-control " id="LAW_OCCUPATION_CODE" name="LAW_OCCUPATION_CODE">
+				<option value="5">ช่างอุตสาหกรรมศิลป์</option>
 			</select>
 	</div>
 	</div>

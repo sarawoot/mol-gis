@@ -1,9 +1,9 @@
 <!-- สถิติผู้พิการ (ราย 5 ปี) VIEW_GIS_STAT_NSO_DISABILITY-->
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="yearFilter" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
+	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
 	<div class="col-md-8">
-			<select class="form-control " id="yearFilter">
+			<select class="form-control " id="YEARS" name="YEARS">
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
 				<option value="2015">2015</option>
@@ -14,9 +14,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="typeFilter" class="col-md-3 col-md-offset-1 control-label" >ประเภทลักษณะความบกพร่อง</label>
+	<label for="DISABILITY_GROUP_CODE" class="col-md-3 col-md-offset-1 control-label" >ประเภทลักษณะความบกพร่อง</label>
 	<div class="col-md-8">
-			<select class="form-control " id="typeFilter">
+			<select class="form-control " id="DISABILITY_GROUP_CODE" name="DISABILITY_GROUP_CODE">
 				<option value="01">บกพร่องทางการมองเห็น</option>
 				<option value="02">บกพร่องทางการได้ยิน</option>
 				<option value="03">การพิการทางการสื่อความหมาย</option>
@@ -31,9 +31,9 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-	<label for="defFilter" class="col-md-3 col-md-offset-1 control-label" >ลักษณะความบกพร่ง</label>
+	<label for="DISABILITY_TYPE_CODE" class="col-md-3 col-md-offset-1 control-label" >ลักษณะความบกพร่ง</label>
 	<div class="col-md-8">
-			<select class="form-control " id="defFilter">
+			<select class="form-control " id="DISABILITY_TYPE_CODE" name="DISABILITY_TYPE_CODE">
 					<option value="1">ตาบอด 2 ข้าง</option>
 					<option value="1">ตาบอดข้างเดียว</option>
 					<option value="10">นิ้วมือขาด ไม่สามารถหยิบจับสิ่งของได้</option>
@@ -87,20 +87,6 @@
 					<option value="7">หูตึงข้างเดียว</option>
 					<option value="7">แขนขาด</option>
 					<option value="8">ขาขาด</option>
-			</select>
-	</div>
-	</div>
-</div>
-<div class="row">
-  <div class="form-group col-md-12">
-	<label for="howFilter" class="col-md-3 col-md-offset-1 control-label">จำนวนผู้พิการ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="howFilter">
-				<option value="0:800">น้อยกว่า 800</option>
-				<option value="801:1600">801-1600</option>
-				<option value="1601:2400">1601-2400</option>
-				<option value="2401:3200">2401:3200</option>
-				<option value="3201:4000">3201:4000</option>
 			</select>
 	</div>
 	</div>
