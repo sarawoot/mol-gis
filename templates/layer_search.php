@@ -1,9 +1,6 @@
           <div class="panel panel-default"  id="panelSearch" style="display: none;">
-<<<<<<< HEAD
             <div class="panel-heading" role="tab" id="headingLayerSearch">
-=======
-            <div class="panel-heading" role="tab" id="searchLayer">
->>>>>>> refs/heads/master
+
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#leftMenuSearch" href="#collapseLayerSearch" aria-expanded="false" aria-controls="collapseLayerSearch">
                   <i class="fa fa-search"></i>
