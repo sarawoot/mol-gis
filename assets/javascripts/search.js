@@ -31,6 +31,7 @@ var searchdata = {
   },
 
   addLayer : function(res) {
+    map.removeLayer(provinceLayer);
     sld_body = this.generate_xml(res);
 
     provinceLayer = new ol.layer.Tile({

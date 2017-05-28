@@ -50,7 +50,7 @@ function genSql($param){
       break;
     case 13 :
       $tbl = 'VIEW_GIS_DOE_FOREIGN_WORKER';
-      $sum_field = 'FPREIGN_AMT';
+      $sum_field = 'FOREIGN_AMT';
       break;
     
     default :
@@ -67,49 +67,69 @@ function genSql($param){
     default :
       $sql = " SELECT  sum($sum_field)cnt ,CWT_CODE,CWT_DESC FROM $tbl WHERE 1=1 ";
       
+      if (isset($param["MONTH_CODE"])){
+        if (! empty($param["MONTH_CODE"]))
+          $sql .= " AND MONTH_CODE = '" . replace_str($param["MONTH_CODE"]) . "'";
+      }
       if (isset($param["GRAD_EDU"])){
-        $sql .= " AND GRAD_EDU = '" . replace_str($param["GRAD_EDU"]) . "'";
+        if (! empty($param["GRAD_EDU"]))
+          $sql .= " AND GRAD_EDU = '" . replace_str($param["GRAD_EDU"]) . "'";
       }
       if (isset($param["DISABILTIY_TYPE"])){
-        $sql .= " AND DISABILTIY_TYPE = '" . replace_str($param["FOREIGN_TYPE_CODE"]) . "'";
+        if (! empty($param["DISABILTIY_TYPE"]))
+          $sql .= " AND DISABILTIY_TYPE = '" . replace_str($param["DISABILTIY_TYPE"]) . "'";
       }
       if (isset($param["FOREIGN_TYPE_CODE"])){
-        $sql .= " AND FOREIGN_TYPE_CODE = '" . replace_str($param["FOREIGN_TYPE_CODE"]) . "'";
+        if (! empty($param["GRFOREIGN_TYPE_CODEAD_EDU"]))
+          $sql .= " AND FOREIGN_TYPE_CODE = '" . replace_str($param["FOREIGN_TYPE_CODE"]) . "'";
       }
       if (isset($param["LAW_OCCUPATION_CODE"])){
-        $sql .= " AND LAW_OCCUPATION_CODE = '" . ( int ) $param["LAW_OCCUPATION_CODE"] . "'";
+        if (! empty($param["LAW_OCCUPATION_CODE"]))
+          $sql .= " AND LAW_OCCUPATION_CODE = '" . ( int ) $param["LAW_OCCUPATION_CODE"] . "'";
       }
       
       if (isset($param["TRAIN_ACTIVITY_CODE"])){
-        $sql .= " AND TRAIN_ACTIVITY_CODE = '" . ( int ) $param["TRAIN_ACTIVITY_CODE"] . "'";
+        if (! empty($param["TRAIN_ACTIVITY_CODE"]))
+          $sql .= " AND TRAIN_ACTIVITY_CODE = '" . ( int ) $param["TRAIN_ACTIVITY_CODE"] . "'";
       }
       
       if (isset($param["CWT_CODE"])){
-        $sql .= " AND CWT_CODE = '" . ( int ) $param["CWT_CODE"] . "'";
+        if (! empty($param["CWT_CODE"]))
+          $sql .= " AND CWT_CODE = '" . ( int ) $param["CWT_CODE"] . "'";
       }
       
       if (isset($param["YEAR_TH"])){
-        $sql .= " AND YEAR_TH = '" . ( int ) $param["YEAR_TH"] . "'";
+        if (! empty($param["YEAR_TH"]))
+          $sql .= " AND YEAR_TH = '" . ( int ) $param["YEAR_TH"] . "'";
+      }
+      if (isset($param["YEARS"])){
+        if (! empty($param["YEARS"]))
+          $sql .= " AND YEARS = '" . ( int ) $param["YEARS"] . "'";
       }
       if (isset($param["DISABILITY_GROUP_CODE"])){
-        $sql .= " AND DISABILITY_GROUP_CODE = '" . replace_str($param["DISABILITY_GROUP_CODE"]) . "'";
+        if (! empty($param["DISABILITY_GROUP_CODE"]))
+          $sql .= " AND DISABILITY_GROUP_CODE = '" . replace_str($param["DISABILITY_GROUP_CODE"]) . "'";
       }
       
       if (isset($param["DISABILITY_TYPE_CODE"])){
-        $sql .= " AND DISABILITY_TYPE_CODE = '" . replace_str($param["DISABILITY_TYPE_CODE"]) . "'";
+        if (! empty($param["DISABILITY_TYPE_CODE"]))
+          $sql .= " AND DISABILITY_TYPE_CODE = '" . replace_str($param["DISABILITY_TYPE_CODE"]) . "'";
       }
       
       if (isset($param["MONTH_CODE"])){
-        $sql .= " AND MONTH_CODE = " . ( int ) $param["MONTH_CODE"];
+        if (! empty($param["MONTH_CODE"]))
+          $sql .= " AND MONTH_CODE = " . ( int ) $param["MONTH_CODE"];
       }
       
       if (isset($param["QUARTER"])){
-        $sql .= " AND QUARTER = " . ( int ) $param["QUARTER"];
+        if (! empty($param["QUARTER"]))
+          $sql .= " AND QUARTER = " . ( int ) $param["QUARTER"];
       }
       
       $sql .= " GROUP BY CWT_CODE,CWT_DESC";
       break;
   }
+//   echo $sql;
   return $sql;
 }
 
