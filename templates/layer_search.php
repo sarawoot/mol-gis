@@ -27,7 +27,6 @@
 					<p>
 						<img src="assets/images/loading-bar.gif">
 					</p>
-					<h3>Loading..</h3>
 				</center>
 			</div>
 		</div>
