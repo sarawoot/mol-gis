@@ -63,7 +63,7 @@ function genSql($param){
   ];
   
   switch(true){
-    case (in_array($form_array, $param['formSearch'])) :
+    case (in_array($param['formSearch'], $form_array)) :
     default :
       $sql = " SELECT  sum($sum_field)cnt ,CWT_CODE,CWT_DESC FROM $tbl WHERE 1=1 ";
       
@@ -129,7 +129,7 @@ function genSql($param){
       $sql .= " GROUP BY CWT_CODE,CWT_DESC";
       break;
   }
-//   echo $sql;
+  // echo $sql;
   return $sql;
 }
 

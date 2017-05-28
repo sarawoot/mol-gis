@@ -115,7 +115,7 @@ switch($_GET['formSearch']){
         $DISABILITY_GROUP_NAME = $row["DISABILITY_GROUP_NAME"];
         
         $title .= "ประเภทลักษณะความบกพร่องคือ" . $DISABILITY_GROUP_NAME . '&nbsp;';
-        oci_free_statement($result_min);
+        oci_free_statement($result);
         
         if (isset($_GET["DISABILITY_TYPE_CODE"])){
           if (! empty($_GET["DISABILITY_TYPE_CODE"])){
@@ -152,21 +152,29 @@ oci_close($conn);
 		<font>แสดงผลการค้นหาข้อมูล<?php echo $name,' ',$title?></font>
 	</div>
 	<div id="DivSD_measure">
+	<?php
+
+if (isset($_GET['intervals'])){
+  if (! empty($_GET['intervals'])){
+    ?>
 		<center>
 			<font>ระดับเกณฑ์การวัด</pre></font>
 		</center>
 		<table>
 			<tbody>
-				<?php foreach($map_color as $k=>$v){?>
+				<?php 
+				$kk1 = [0,2,4,6,8];
+				$kk2 = [1,3,5,7,9];
+				foreach($map_color as $k=>$v){?>
 				<tr>
 					<td style="background-color: <?php echo $v?>" border="1" width="50px">
 					</td>
 					<td>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 					<?php
-      $n1 = explode('.', $intervals[$k]);
-      $n2 = explode('.', $intervals[$k + 1]);
-      $num1 = number_format((( int ) $n1[0])) . '.' . (( int ) $n1[1]);
-      $num2 = number_format((( int ) $n2[0])) . '.' . (( int ) $n2[1]);
+      $n1 = explode('.', $intervals[$kk1[$k]]);
+      $n2 = explode('.', $intervals[$kk2[$k]]);
+      $num1 = number_format((( int ) $n1[0])) .   (isset($n1[1]) ? (( int ) '.'.$n1[1]) : '');
+      $num2 = number_format((( int ) $n2[0])) .   (isset($n2[1]) ? (( int ) '.'.$n2[1]) : '');
       echo $num1, ' - ', $num2?>
       				</td>
 					<td></td>
@@ -180,8 +188,25 @@ oci_close($conn);
 </tbody>
 		</table>
 		<br>
+			<?php
+  }else{
+    ?>
+  <center>
+			<font>ไม่พบข้อมูล</font>
+		</center>
+<?
+  }
+}else{
+  ?>
+  <center>
+			<font>ไม่พบข้อมูล</font>
+		</center>
+<?php
+}
+?>
 		<center>
 			<font>กราฟแสดงข้อมูล<?php echo $name?> แยกตามจังหวัด</font>
 		</center>
+
 	</div>
 </div>
