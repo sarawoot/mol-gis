@@ -1,5 +1,6 @@
           <div class="panel panel-default"  id="panelSearch" style="display: none;">
-            <div class="panel-heading" role="tab" id="searchLayer">
+            <div class="panel-heading" role="tab" id="headingLayerSearch">
+
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#leftMenuSearch" href="#collapseLayerSearch" aria-expanded="false" aria-controls="collapseLayerSearch">
                   <i class="fa fa-search"></i>

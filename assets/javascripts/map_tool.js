@@ -43,6 +43,16 @@ var mapTool = (function () {
            mapMode = 'search';
            searchtool.showPanel();
            searchtool.init();
+           
+           setTimeout(function () {
+             if (!$("#collapseLayerSearch").is(":visible")) {
+               $("#headingLayer a").click();
+             }  
+             if ($("#collapseLayerSearch").is(":hidden")) {
+               $("#headingLayerSearch a").click();
+             }  
+             
+           },500);
         }
 
       }

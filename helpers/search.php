@@ -4,6 +4,10 @@ function genSql($param){
   $param['formSearch'] = ( int ) $param['formSearch'];
   $tbl = '';
   switch($param['formSearch']){
+    case 1 :
+      $tbl = 'VIEW_GIS_DOE_DISABILITY';
+      $sum_field = 'DISABILITY_AMT';
+      break;
     case 2 :
       $tbl = 'VIEW_GIS_DSD_PASS_TRAINING';
       $sum_field = 'PASS_TRAIN_AMT';
@@ -55,7 +59,7 @@ function genSql($param){
       break;
   }
   $form_array = [
-      2,3,4,5,6,7,8,9,10,11,12,13
+      1,2,3,4,5,6,7,8,9,10,11,12,13
   ];
   
   switch(true){
@@ -63,6 +67,12 @@ function genSql($param){
     default :
       $sql = " SELECT  sum($sum_field)cnt ,CWT_CODE,CWT_DESC FROM $tbl WHERE 1=1 ";
       
+      if (isset($param["GRAD_EDU"])){
+        $sql .= " AND GRAD_EDU = '" . replace_str($param["GRAD_EDU"]) . "'";
+      }
+      if (isset($param["DISABILTIY_TYPE"])){
+        $sql .= " AND DISABILTIY_TYPE = '" . replace_str($param["FOREIGN_TYPE_CODE"]) . "'";
+      }
       if (isset($param["FOREIGN_TYPE_CODE"])){
         $sql .= " AND FOREIGN_TYPE_CODE = '" . replace_str($param["FOREIGN_TYPE_CODE"]) . "'";
       }
