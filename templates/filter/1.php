@@ -1,188 +1,62 @@
 <!-- คนพิการมีงานทำ VIEW_GIS_DOE_DISABILITY-->
+<?php
+require_once ("../../config/database.php");
+$conn = connectionOracleDBUTF();
 
+$DISABILTIY_TYPE = [];
+$GRAD_EDU = [];
+$sql = 'SELECT DISTINCT DIS_TYPE AS DISABILTIY_TYPE FROM DB_MOL.CRIPPLE ORDER BY DIS_TYPE';
+$result1 = oci_parse($conn, $sql);
+oci_execute($result1);
+while(($row = oci_fetch_array($result1, OCI_BOTH)) != false){
+  $DISABILTIY_TYPE[] = $row["DISABILTIY_TYPE"];
+}
+
+$sql = 'SELECT DISTINCT N_EDU AS GRAD_EDU FROM DB_MOL.CRIPPLE ORDER BY N_EDU';
+$result2 = oci_parse($conn, $sql);
+oci_execute($result2);
+while(($row = oci_fetch_array($result2, OCI_BOTH)) != false){
+  $GRAD_EDU[] = $row["GRAD_EDU"];
+}
+oci_free_statement($result1);
+oci_free_statement($result2);
+oci_close($conn);
+
+?>
 <div class="row">
-  <div class="form-group col-md-12">
-	<label for="DISABILTIY_TYPE" class="col-md-3 col-md-offset-1 control-label" >ประเภทของความพิการ</label>
-	<div class="col-md-8">
-			<select class="form-control " id="DISABILTIY_TYPE" name="DISABILTIY_TYPE">
-				<option value="การเคลื่อนไหว">การเคลื่อนไหว</option>
-				<option value="การได้ยิน">การได้ยิน</option>
-				<option value="การมองเห็น">การมองเห็น</option>
-				<option value="พิการซ้ำซ้อน">พิการซ้ำซ้อน</option>
-				<option value="จิตใจ">จิตใจ</option>
-				<option value="สติปัญญา">สติปัญญา</option>
+	<div class="form-group col-md-12">
+		<div class="col-md-10">
+			ประเภทของความพิการ<br> <select class="form-control "
+				id="DISABILTIY_TYPE" name="DISABILTIY_TYPE">
+				<option value="">เลือกข้อมูล</option>
+				<?php foreach($DISABILTIY_TYPE as $k =>$v){?>
+				<option value="<?php echo $v?>"><?php echo $v?></option>
+				<?php }?>
 			</select>
-	</div>
+		</div>
 	</div>
 </div>
 <div class="row">
-  <div class="form-group col-md-12">
-	<label for="GRAD_EDU" class="col-md-3 col-md-offset-1 control-label" >วุฒิการศึกษา</label>
-	<div class="col-md-8">
-			<select class="form-control " id="GRAD_EDU" name="GRAD_EDU">
-			  <option value="ม.6 ศิลปกรรม">ม.6 ศิลปกรรม</option>
-				<option value="ม.6ม.ศ.5ศิลปศาสตร์">ม.6ม.ศ.5ศิลปศาสตร์</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษาพลศึกษา,พลานามัย,สันทนาการ">ป.ตรีการสอนมัธยมศึกษาพลศึกษา,พลานามัย,สันทนาการ</option>
-				<option value="ปวช.ช่างไฟฟ้ากำลัง">ปวช.ช่างไฟฟ้ากำลัง</option>
-				<option value="อนุปริญญาการศึกษา(การศึกษา ปฐมวัย)">อนุปริญญาการศึกษา(การศึกษา ปฐมวัย)</option>
-				<option value="ป.ตรีดนตรี(การสอน)">ป.ตรีดนตรี(การสอน)</option>
-				<option value="ปวส.ช่างเทคนิคคอมพิวเตอร์">ปวส.ช่างเทคนิคคอมพิวเตอร์</option>
-				<option value="ป.ตรีประวัติศาสตร์">ป.ตรีประวัติศาสตร์</option>
-				<option value="ปวช.ช่างยนต์">ปวช.ช่างยนต์</option>
-				<option value="ป.ตรีวิศวกรรมคอมพิวเตอร์">ป.ตรีวิศวกรรมคอมพิวเตอร์</option>
-				<option value="ม.3ม.ศ.3">ม.3ม.ศ.3</option>
-				<option value="ม.6ม.ศ.5">ม.6ม.ศ.5</option>
-				<option value="ป.ตรีวิทยาศาสตร์ทั่วไป">ป.ตรีวิทยาศาสตร์ทั่วไป</option>
-				<option value="ป.ตรีการจัดการ,การบริหารทั่วไป">ป.ตรีการจัดการ,การบริหารทั่วไป</option>
-				<option value="ปวส.การบัญชี">ปวส.การบัญชี</option>
-				<option value="ป.ตรีรัฐศาสตร์(ทฤษฎีและเทคนิคทางรัฐศาสตร์)">ป.ตรีรัฐศาสตร์(ทฤษฎีและเทคนิคทางรัฐศาสตร์)</option>
-				<option value="ป.ตรีจิตวิทยาการศึกษา">ป.ตรีจิตวิทยาการศึกษา</option>
-				<option value="ปวช.ช่างก่อสร้าง">ปวช.ช่างก่อสร้าง</option>
-				<option value="ปวส.สัตวศาสตร์">ปวส.สัตวศาสตร์</option>
-				<option value="อนุปริญญาการศึกษามัธยมศึกษา(ภาษาอังกฤษ),ภาษาอังกฤษ">อนุปริญญาการศึกษามัธยมศึกษา(ภาษาอังกฤษ),ภาษาอังกฤษ</option>
-				<option value="ป.4">ป.4</option>
-				<option value="ปวช.พาณิชยกรรมการตลาดการขาย">ปวช.พาณิชยกรรมการตลาดการขาย</option>
-				<option value="ป.ตรีการสอนเด็กพิเศษ, การศึกษาพิเศษ">ป.ตรีการสอนเด็กพิเศษ, การศึกษาพิเศษ</option>
-				<option value="ป.ตรีการศึกษาปฐมวัย">ป.ตรีการศึกษาปฐมวัย</option>
-				<option value="ปวส.ช่างเชื่อมและโลหะแผ่น">ปวส.ช่างเชื่อมและโลหะแผ่น</option>
-				<option value="ไม่จำกัดวุฒิ">ไม่จำกัดวุฒิ</option>
-				<option value="ป.ตรีบริหารธุรกิจระหว่างประเทศ">ป.ตรีบริหารธุรกิจระหว่างประเทศ</option>
-				<option value="ปวช.สาขาพาณิชยกรรม">ปวช.สาขาพาณิชยกรรม</option>
-				<option value="ปวท.ทัศนศิลป์">ปวท.ทัศนศิลป์</option>
-				<option value="ป.ตรีเทคโนโลยีเซรามิกส์">ป.ตรีเทคโนโลยีเซรามิกส์</option>
-				<option value="ป.ตรีปรัชญา,ปรัชญาและศาสนา">ป.ตรีปรัชญา,ปรัชญาและศาสนา</option>
-				<option value="ป.ตรีคอมพิวเตอร์ธุรกิจ	">ป.ตรีคอมพิวเตอร์ธุรกิจ</option>
-				<option value="ป.ตรีวิศวกรรมอิเลกทรอนิกส์,โทรคมนาคม,ไฟฟ้าสื่อสาร">ป.ตรีวิศวกรรมอิเลกทรอนิกส์,โทรคมนาคม,ไฟฟ้าสื่อสาร</option>
-				<option value="ม.6ม.ศ.5วิทยาศาสตร์">ม.6ม.ศ.5วิทยาศาสตร์</option>
-				<option value="ป.ตรีบริหารธุรกิจ">ป.ตรีบริหารธุรกิจ</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา(ชีววิทยา)">ป.ตรีการสอนมัธยมศึกษา(ชีววิทยา)</option>
-				<option value="ปวท.คอมพิวเตอร์ธุรกิจ">ปวท.คอมพิวเตอร์ธุรกิจ</option>
-				<option value="ป.ตรีวิศวกรรมสิ่งแวดล้อม">ป.ตรีวิศวกรรมสิ่งแวดล้อม</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา(ธุรกิจ,ธุรกิจศึกษา)">ป.ตรีการสอนมัธยมศึกษา(ธุรกิจ,ธุรกิจศึกษา)</option>
-				<option value="ป.ตรีการสอนประถมศึกษา(สุขศึกษา)">ป.ตรีการสอนประถมศึกษา(สุขศึกษา)</option>
-				<option value="ปวส.พืชกรรม">ปวส.พืชกรรม</option>
-				<option value="ปวส.การตลาดการขาย">ปวส.การตลาดการขาย</option>
-				<option value="ปวช.การบัญชี">ปวช.การบัญชี</option>
-				<option value="ปวส.ช่างเทคนิคอุตสาหกรรม">ปวส.ช่างเทคนิคอุตสาหกรรม</option>
-				<option value="ป.ตรีการบริหารการศึกษา">ป.ตรีการบริหารการศึกษา</option>
-				<option value="ปวช.สาขาเกษตรกรรม">ปวช.สาขาเกษตรกรรม</option>
-				<option value="ป.ตรีวิศวกรรมโยธา">ป.ตรีวิศวกรรมโยธา</option>
-				<option value="ปวส.ช่างเขียนแบบเครื่องกล">ปวส.ช่างเขียนแบบเครื่องกล</option>
-				<option value="อนุปริญญาการศึกษา(ออกแบบ ผลิตภัณฑ์อุตสาหกรรม)">อนุปริญญาการศึกษา(ออกแบบ ผลิตภัณฑ์อุตสาหกรรม)</option>
-				<option value="ป.ตรีการประถมศึกษา">ป.ตรีการประถมศึกษา</option>
-				<option value="อนุปริญญาการศึกษามัธยมศึกษา(ดนตรีศึกษา),ดนตรี">อนุปริญญาการศึกษามัธยมศึกษา(ดนตรีศึกษา),ดนตรี</option>
-				<option value="ป.ตรีการบริหารงานอุตสาหกรรม">ป.ตรีการบริหารงานอุตสาหกรรม</option>
-				<option value="ปวช.ช่างอิเลกทรอนิกส์">ปวช.ช่างอิเลกทรอนิกส์</option>
-				<option value="ป.ตรีบรรณารักษ์ศาสตร์">ป.ตรีบรรณารักษ์ศาสตร์</option>
-				<option value="ป.ตรีรัฐศาสตร์การปกครอง,การเมือง,บริหารรัฐกิจ)">ป.ตรีรัฐศาสตร์การปกครอง,การเมือง,บริหารรัฐกิจ)</option>
-				<option value="ป.ตรีระบบสารสนเทศ">ป.ตรีระบบสารสนเทศ</option>
-				<option value="ปวช.ศิลปประยุกต์">ปวช.ศิลปประยุกต์</option>
-				<option value="ปวส.ช่างก่อสร้าง">ปวส.ช่างก่อสร้าง</option>
-				<option value="อนุปริญญาการศึกษา(ออกแบบประยุกต์ศิลป์)">อนุปริญญาการศึกษา(ออกแบบประยุกต์ศิลป์)</option>
-				<option value="ปวส.ช่างเครื่องกล">ปวส.ช่างเครื่องกล</option>
-				<option value="ปวส.เทคโนโลยีเสื้อผ้าและ เครื่องแต่งกาย">ปวส.เทคโนโลยีเสื้อผ้าและ เครื่องแต่งกาย</option>
-				<option value="สถาบันพัฒนาฯ (ช่างซ่อม จักรยานยนต์)">สถาบันพัฒนาฯ (ช่างซ่อม จักรยานยนต์)</option>
-				<option value="ป.ตรีเศรษฐศาสตร์">ป.ตรีเศรษฐศาสตร์</option>
-				<option value="ปวส.การโรงแรม">ปวส.การโรงแรม</option>
-				<option value="ป.ตรีวิจิตรศิลป์และประยุกต์ศิลป์">ป.ตรีวิจิตรศิลป์และประยุกต์ศิลป์</option>
-				<option value="ปวส.คอมพิวเตอร์ธุรกิจ">ปวส.คอมพิวเตอร์ธุรกิจ</option>
-				<option value="ป.7">ป.7</option>
-				<option value="ป.ตรีการออกแบบศิลปประยุกต์">ป.ตรีการออกแบบศิลปประยุกต์</option>
-				<option value="ป.ตรีบริหารธุรกิจ(บุคลากร)">ป.ตรีบริหารธุรกิจ(บุคลากร)</option>
-				<option value="ป.ตรีทัศนศิลป์">ป.ตรีทัศนศิลป์</option>
-				<option value="ปวท.ทุกสาขา">ปวท.ทุกสาขา</option>
-				<option value="ปก.ศ ต้น">ปก.ศ ต้น</option>
-				<option value="ปวช.ช่างเขียนแบบก่อสร้างช่างเทคนิคสถาปัตยกรรม">ปวช.ช่างเขียนแบบก่อสร้างช่างเทคนิคสถาปัตยกรรม</option>
-				<option value="ปวช.สาขาคหกรรมศาสตร์">ปวช.สาขาคหกรรมศาสตร์</option>
-				<option value="ป.ตรีรัฐศาสตร์">ป.ตรีรัฐศาสตร์</option>
-				<option value="ม.6 พาณิชยกรรม">ม.6 พาณิชยกรรม</option>
-				<option value="ป.ตรีนิติศาสตร์">ป.ตรีนิติศาสตร์</option>
-				<option value="ปวส.ช่างแม่พิมพ์พลาสติก">ปวส.ช่างแม่พิมพ์พลาสติก</option>
-				<option value="ป.ตรีสังคมวิทยา">ป.ตรีสังคมวิทยา</option>
-				<option value="ป.ตรีสัตวศาสตร์">ป.ตรีสัตวศาสตร์</option>
-				<option value="ปวส.ช่างไฟฟ้ากำลัง">ปวส.ช่างไฟฟ้ากำลัง</option>
-				<option value="ปวส.ช่างโลหะ">ปวส.ช่างโลหะ</option>
-				<option value="ป.ตรีวิศวกรรมขนส่ง	">	ป.ตรีวิศวกรรมขนส่ง	</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา (คณิตศาสตร์)	">	ป.ตรีการสอนมัธยมศึกษา (คณิตศาสตร์)	</option>
-				<option value="ปวส.พืชสวนประดับ	">	ปวส.พืชสวนประดับ	</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา(อุตสาหกรรมศิลป์(ออกแบบ-เขียน)	">	ป.ตรีการสอนมัธยมศึกษา(อุตสาหกรรมศิลป์(ออกแบบ-เขียน)	</option>
-				<option value="ปวส.เกษตรกรรม	">	ปวส.เกษตรกรรม	</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา (ประวัติศาสตร์)	">	ป.ตรีการสอนมัธยมศึกษา (ประวัติศาสตร์)	</option>
-				<option value="ป.ตรีภาษาไทย	">	ป.ตรีภาษาไทย	</option>
-				<option value="ป.ตรีเทคโนโลยีการเกษตร	">	ป.ตรีเทคโนโลยีการเกษตร	</option>
-				<option value="ปวช.ช่างกลโลหะช่างเชื่อมและ โลหะแผ่น	">	ปวช.ช่างกลโลหะช่างเชื่อมและ โลหะแผ่น	</option>
-				<option value="ปก.ศ สูง อนุปริญญาการศึกษา">ปก.ศ สูง อนุปริญญาการศึกษา</option>
-				<option value="ปวส.เทคโนโลยีอาหารและโภชนาการ">ปวส.เทคโนโลยีอาหารและโภชนาการ</option>
-				<option value="ป.6">ป.6</option>
-				<option value="ม.6เกษตรกรรม">ม.6เกษตรกรรม</option>
-				<option value="ป.ตรีคหกรรมศาสตร์">ป.ตรีคหกรรมศาสตร์</option>
-				<option value="ป.ตรีการสอนประถมศึกษา(วิทยาศาสตร์ทั่วไป)">ป.ตรีการสอนประถมศึกษา(วิทยาศาสตร์ทั่วไป)</option>
-				<option value="ปวส.จิตรกรรม">ปวส.จิตรกรรม</option>
-				<option value="ม.6 จิตรกรรมและออกแบบตกแต่ง">ม.6 จิตรกรรมและออกแบบตกแต่ง</option>
-				<option value="อนุปริญญาการศึกษา(การจัดการทั่วไป)">อนุปริญญาการศึกษา(การจัดการทั่วไป)</option>
-				<option value="ปวช.ช่างพิมพ์">ปวช.ช่างพิมพ์</option>
-				<option value="ป.ตรีสาธารณสุขศาสตร์">ป.ตรีสาธารณสุขศาสตร์</option>
-				<option value="ปวส.ทุกสาขา">ปวส.ทุกสาขา</option>
-				<option value="ปวส.ช่างอิเลกทรอนิกส์">ปวส.ช่างอิเลกทรอนิกส์</option>
-				<option value="ป.ตรีการจัดการทรัพยากรป่าไม้">ป.ตรีการจัดการทรัพยากรป่าไม้</option>
-				<option value="ป.ตรีการเงินและการธนาคาร">ป.ตรีการเงินและการธนาคาร</option>
-				<option value="ป.ตรีรัฐศาสตร์(การบริหารงานบุคคล)">ป.ตรีรัฐศาสตร์(การบริหารงานบุคคล)</option>
-				<option value="ปวส.บริหารธุรกิจการจัดการ">ปวส.บริหารธุรกิจการจัดการ</option>
-				<option value="ปวส.ช่างกลโรงงาน">ปวส.ช่างกลโรงงาน</option>
-				<option value="อนุปริญญาการศึกษามัธยมศึกษา(วิทยาศาสตร์ทั่วไป)">อนุปริญญาการศึกษามัธยมศึกษา(วิทยาศาสตร์ทั่วไป)</option>
-				<option value="ป.ตรีสถาปัตยกรรมภายใน,ออกแบบนิเทศศิลป์,มัณฑนศิลป์">ป.ตรีสถาปัตยกรรมภายใน,ออกแบบนิเทศศิลป์,มัณฑนศิลป์</option>
-				<option value="ป.ตรีพัฒนาสังคม">ป.ตรีพัฒนาสังคม</option>
-				<option value="ป.ตรีการสอนประถมศึกษา(สังคมศึกษา)">ป.ตรีการสอนประถมศึกษา(สังคมศึกษา)</option>
-				<option value="ป.ตรีวารสารศาสตร์,นิเทศศาสตร์การสื่อสารมวลชน">ป.ตรีวารสารศาสตร์,นิเทศศาสตร์การสื่อสารมวลชน</option>
-				<option value="ปริญญาตรีทุกสาขา">ปริญญาตรีทุกสาขา</option>
-				<option value="ป.ตรีวิศวกรรมอิเลกทรอนิกส์">ป.ตรีวิศวกรรมอิเลกทรอนิกส์</option>
-				<option value="ปวช.ช่างกลโรงงาน">ปวช.ช่างกลโรงงาน</option>
-				<option value="ป.ตรีการตลาด">ป.ตรีการตลาด</option>
-				<option value="ป.ตรีการออกแบบผลิตภัณฑ์, ศิลปอุตสาหกรรม">ป.ตรีการออกแบบผลิตภัณฑ์, ศิลปอุตสาหกรรม</option>
-				<option value="ป.ตรีบริหารธุรกิจเกษตร">ป.ตรีบริหารธุรกิจเกษตร</option>
-				<option value="ป.ตรีคณิตศาสตร์">ป.ตรีคณิตศาสตร์</option>
-				<option value="ป.ตรีการแนะแนว,จิตวิทยาและการแนะแนว">ป.ตรีการแนะแนว,จิตวิทยาและการแนะแนว</option>
-				<option value="ป.ตรีเทคโนโลยีทางการศึกษา, โสตทัศนศึกษาฯ">ป.ตรีเทคโนโลยีทางการศึกษา, โสตทัศนศึกษาฯ</option>
-				<option value="ปวช.คอมพิวเตอร์">ปวช.คอมพิวเตอร์</option>
-				<option value="ปวส.ช่างยนต์">ปวส.ช่างยนต์</option>
-				<option value="ปวส.สาขาพาณิชยกรรม">ปวส.สาขาพาณิชยกรรม</option>
-				<option value="ปวส.การท่องเที่ยว">ปวส.การท่องเที่ยว</option>
-				<option value="อนุปริญญาการศึกษามัธยมศึกษา(ภาษาไทย)">อนุปริญญาการศึกษามัธยมศึกษา(ภาษาไทย)</option>
-				<option value="ป.ตรีสังคมสงเคราะห์ศาสตร์">ป.ตรีสังคมสงเคราะห์ศาสตร์</option>
-				<option value="ป.ตรีศิลปศึกษา(การสอน)">ป.ตรีศิลปศึกษา(การสอน)</option>
-				<option value="อนุปริญญาการศึกษาสาขา ศิลปศาสตร์">อนุปริญญาการศึกษาสาขา ศิลปศาสตร์</option>
-				<option value="ม.6 ช่างไฟฟ้ากำลัง">ม.6 ช่างไฟฟ้ากำลัง</option>
-				<option value="ป.ตรีวาทวิทยาและสื่อสารการ แสดง">ป.ตรีวาทวิทยาและสื่อสารการ แสดง</option>
-				<option value="ม.6เลขานุการบริหารธุรกิจโรงแรม">ม.6เลขานุการบริหารธุรกิจโรงแรม</option>
-				<option value="ปวช.ทุกสาขา">ปวช.ทุกสาขา</option>
-				<option value="ป.ตรีภาษาอังกฤษ">ป.ตรีภาษาอังกฤษ</option>
-				<option value="ป.ตรีการสอนมัธยมศึกษา(เกษตรศาสตร์)">ป.ตรีการสอนมัธยมศึกษา(เกษตรศาสตร์)</option>
-				<option value="ป.ตรีการสอนประถมศึกษา(ภาษาไทย)">ป.ตรีการสอนประถมศึกษา(ภาษาไทย)</option>
-				<option value="ฝึกอาชีพระยะสั้น(คอมพิวเตอร์)">ฝึกอาชีพระยะสั้น(คอมพิวเตอร์)</option>
-				<option value="ปวท.การบัญชี	">ปวท.การบัญชี</option>
-				<option value="ม.6เกษตรกรรม(พืชกรรมทั่วไป)">ม.6เกษตรกรรม(พืชกรรมทั่วไป)</option>
-				<option value="ป.ตรีวิศวกรรมคอมพิวเตอร์และ ระบบอัตโนมัติ">ป.ตรีวิศวกรรมคอมพิวเตอร์และ ระบบอัตโนมัติ</option>
-				<option value="ป.ตรีสังคมวิทยา,สังคมวิทยาและมานุษยวิทยา,สังคมศาสตร์">ป.ตรีสังคมวิทยา,สังคมวิทยาและมานุษยวิทยา,สังคมศาสตร์</option>
-				<option value="ป.ตรีการบัญชี">ป.ตรีการบัญชี</option>
-				<option value="ป.ตรีครุศาสตร์,ศึกษาศาสตร์">ป.ตรีครุศาสตร์,ศึกษาศาสตร์</option>
-				<option value="ป.ตรีเทคโนโลยีและนวัตกรรมทาง การศึกษา">ป.ตรีเทคโนโลยีและนวัตกรรมทาง การศึกษา</option>
-				<option value="ป.ตรีมนุษยศาสตร์,มานุษยวิทยา">ป.ตรีมนุษยศาสตร์,มานุษยวิทยา</option>
-				<option value="ป.ตรีเศรษฐศาสตร์การเกษตร">ป.ตรีเศรษฐศาสตร์การเกษตร</option>
-				<option value="ป.ตรีการโรงแรม">ป.ตรีการโรงแรม</option>
-				<option value="สถาบันพัฒนาฯ (ช่างอิเลก-ทรอนิกส์อุตสาหกรรมฯ)">สถาบันพัฒนาฯ (ช่างอิเลก-ทรอนิกส์อุตสาหกรรมฯ)</option>
-				<option value="ป.ตรีเกษตรกลวิธาน">ป.ตรีเกษตรกลวิธาน</option>
-				<option value="ป.ตรีการสอนคหกรรมศาสตร์">ป.ตรีการสอนคหกรรมศาสตร์</option>
+	<div class="form-group col-md-12">
+		<div class="col-md-10">
+			วุฒิการศึกษา<br> <select class="form-control " id="GRAD_EDU"
+				name="GRAD_EDU">
+				<option value="">เลือกข้อมูล</option>
+				<?php foreach($GRAD_EDU as $k =>$v){?>
+				<option value="<?php echo $v?>"><?php echo $v?></option>
+				<?php }?>
 			</select>
-	</div>
+		</div>
 	</div>
 </div>
 <br />
 <div class="row">
-  <div class="col-md-12 text-center">
-	<input type="button" id="searchLayer" onclick="ClickSearchLayer()" class="btn btn-primary" value="ค้นหา"/>
-	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
+	<div class="col-md-12 text-center">
+		<input type="button" id="searchLayer" onclick="ClickSearchLayer()"
+			class="btn btn-primary" value="ค้นหา" />
+		<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch"   name="formSearch" type="hidden" value="1">
+<input id="formSearch" name="formSearch" type="hidden" value="1">
 <input type="hidden" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">

@@ -3,7 +3,7 @@ header('');
 require ("../config/database.php");
 require ("../helpers/share_func.php");
 require ("../helpers/search.php");
-$conn = connectionOracleDB();
+$conn = connectionOracleDBUTF();
 
 $sql = "";
 $num_min = 0;
@@ -12,7 +12,7 @@ $level = 5;
 $intervals = array();
 $result = array();
 
-$sql = genSql();
+$sql = genSql($_GET);
 
 
 if ($sql != ""){

@@ -1,3 +1,5 @@
+var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
+
 var searchdata = {
   init : function() {
     data = this.getData();
@@ -31,6 +33,16 @@ var searchdata = {
   },
 
   addLayer : function(res) {
+    $("#panelResult").show();
+    setTimeout(function() {
+      $('#collapseResult div').load(
+          'templates/filter/result.php?intervals=' + res.intervals + '&'
+              + $('#searchForm').serialize());
+      if (!$("#collapseResult").is(":visible")) {
+        $("#headingResult a").click();
+      }
+    }, 500);
+    map.removeLayer(provinceLayer);
     sld_body = this.generate_xml(res);
 
     provinceLayer = new ol.layer.Tile({
@@ -60,6 +72,12 @@ var searchdata = {
       dataType : "json",
       type : "get",
       async : false,
+      beforeSend : function() {
+        $('#loads').show();
+      },
+      complete : function() {
+        $('#loads').hide();
+      },
       success : function(data) {
         json = data;
       },
@@ -71,8 +89,6 @@ var searchdata = {
   },
 
   generate_xml : function(res) {
-    var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
-
     var sld_body = '';
     var title = 'Provinces';
     var layer_name = 'mol:provinces';
@@ -225,4 +241,11 @@ map.on('singleclick', function(evt) {
 
 });
 
+function hideResultPanel(obj) {
+  setTimeout(function() {
+
+    $("#panelResult").hide();
+
+  }, 500);
+}
 // searchdata.init();
