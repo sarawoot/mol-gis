@@ -38,7 +38,7 @@
            <?php require 'templates/buffer_panel.php'; ?>
            <?php require 'templates/what_if_panel.php'; ?>
            <?php require 'templates/result_panel.php'; ?>
-           
+           <?php require 'templates/layer_search.php'; ?>
 
         </div>
       </div>
@@ -47,6 +47,7 @@
   <div class="mini-submenu mini-submenu-left pull-left">
     <i class="fa fa-list-alt"></i>
   </div>
+
   <div id="map"></div>
   <?php require 'templates/map_tools.php'; ?>
 
@@ -70,6 +71,7 @@
   <script src="assets/javascripts/what_if.js"></script>
   <script src="assets/javascripts/map_tool.js"></script>
   <script src="assets/javascripts/config.js"></script>
-<script src="assets/javascripts/search.js"></script>
+  <script src="assets/javascripts/layer_search.js"></script>
+  <script src="assets/javascripts/search.js"></script>
 </body>
 </html>

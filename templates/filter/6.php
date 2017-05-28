@@ -1,4 +1,4 @@
-<!-- สถิติการสำรวจประชากร (รายเดือน) VIEW_GIS_STAT_NSO_MONTHLY-->
+<!-- ผู้ประกันตน ม.40 -->
 <div class="row">
   <div class="form-group col-md-12">
 	<label for="YEARS" class="col-md-2 col-md-offset-2 control-label" >ปี</label>
@@ -40,6 +40,6 @@
 	<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
 	</div>
 </div>
-<input id="formSearch" name="formSearch" type="hidden" value="10">
-<input type="hidden" name="province" id="province" value="">
-<input type="hidden" name="amphur" id="amphur" value="">
+<input id="formSearch" name="formSearch" type="hidden" value="6"/>
+<input type="hidden" name="province" id="province" value=""/>
+<input type="hidden" name="amphur" id="amphur" value=""/>
