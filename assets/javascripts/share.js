@@ -35,6 +35,7 @@ var clearMap = function() {
   map.getOverlays().clear();
   map.addOverlay(popup);
   map.removeLayer(provinceLayer);
+  whatIf.clearWhatIf();
   popup.hide();
   $("#panelBuffer").hide();
   $("#panelResult").hide();
@@ -45,8 +46,7 @@ var clearMap = function() {
   }
   map.getView().setZoom(6);
   map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
-  ;
-  whatIf.clearWhatIf();
+  
 }
 
 function tileLoadFunction(image, src) {

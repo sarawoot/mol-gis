@@ -198,4 +198,7 @@ map.on('singleclick', function(evt) {
   if (mapMode == 'buffer') {
     buffer.setup(coordinate);
   }
+  if (mapMode == 'what-if') {
+    whatIf.getProvincePoint(evt);
+  }
 });

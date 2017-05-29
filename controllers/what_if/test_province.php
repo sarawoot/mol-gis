@@ -1,6 +1,10 @@
 <?php
-  $sql = "SELECT GP.PROVINCE_CODE,GP.ZONE_DOPA,GP.PROVINCE_NAME ";
-  $sql .= ",ROUND((((PEOPLE / TOTAL)* ".$_REQUEST['num'].") / ((GRADUATE / ATTEND) * 100)) * 100) AS ValTest ";
+  include '../../config/database.php';
+  include '../../helpers/share_func.php';
+  $conn = connectionOracleDB();
+
+  $sql = "SELECT GP.PROVINCE_CODE, ";
+  $sql .= ",ROUND((((PEOPLE / TOTAL)* ".$_REQUEST['num'].") / ((GRADUATE / ATTEND) * 100)) * 100) AS VALTEST ";
   $sql .= "FROM(SELECT MSC.PROVINCE_ID,SUM(MSC.MALE_QUANTITY + MSC.FEMALE_QUANTITY) AS PEOPLE ";
   $sql .= ",(SELECT SUM(MALE_QUANTITY + FEMALE_QUANTITY) ";
   $sql .= "FROM STAT_MOE_CITIZEN@L_STMOL ";
@@ -29,6 +33,39 @@
   $sql .= "RIGHT JOIN DB_MOL.GIS_PROVINCE GP ";
   $sql .= "ON WhatIFTest.PROVINCE_ID = GP.PROVINCE_CODE ";
   $sql .= "ORDER BY GP.PROVINCE_CODE ";
-  echo $sql;
+  
+
+  $result = oci_parse($conn, $sql);
+  $r = oci_execute($result);
+  if (!$r) {
+    echo "[]";
+    exit();
+  }
+
+  $res = array();
+
+  while (($row = oci_fetch_array($result, OCI_BOTH)) != false) {
+    if (!isset($minVal)) {
+      $minVal = intval($row["VALTEST"]);
+      $maxVal = intval($row["VALTEST"]);
+    }
+    if (intval($row["VALTEST"]) > $maxVal) {
+      $maxVal = intval($row["VALTEST"]);
+    }
+    if (intval($row["VALTEST"]) < $minVal) {
+      $minVal = intval($row["VALTEST"]);
+    }
+    $res[] =  array(
+      "code" => $row["PROVINCE_CODE"],
+      "cnt" => $row["VALTEST"]
+    );
+  }
+
+  echo json_encode(array(
+    'data' => $res,
+    'intervals' => IntervalInt($minVal, $maxVal, 5)
+  ));
+  oci_free_statement($result);
+  oci_close($conn); 
 
 ?>

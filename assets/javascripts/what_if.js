@@ -45,7 +45,7 @@ var whatIf = (function () {
         return false;
       }
       $.ajax({
-        url: 'controllers/what_if/train_province.php',
+        url: 'controllers/what_if/province.php',
         type: 'GET',
         dataType: 'JSON',
         data: {
@@ -142,6 +142,7 @@ var whatIf = (function () {
         $("#headingWhatIf a").click();
       }  
     },500);
+    mapMode = 'what-if';
     categoryChange();
   }
 
@@ -194,11 +195,59 @@ var whatIf = (function () {
     })
   }
 
+  var getLayer = function () {
+    var layerTmps;
+    _.each(map.getLayers().getArray(), function(layer) { 
+      if ( layer.get('name') == 'what-if' ) {
+        layerTmps = layer;
+      }
+    });
+    return layerTmps;
+  }
+
+  var getProvincePoint = function (evt) {
+    var layer = getLayer();
+
+    
+    var getUrlInfo = function(layer){
+      var view = map.getView();
+      var viewResolution = view.getResolution();
+      var source = layer.getSource();
+      var url = source.getGetFeatureInfoUrl(
+        evt.coordinate, viewResolution, view.getProjection(),
+        {'INFO_FORMAT': 'application/json', 'FEATURE_COUNT': 1});
+      return url;
+    };
+
+    if (layer) {
+      var url = getUrlInfo(layer);
+      var dataEntries = url.split("&");
+      var params = "";
+      for (var i = 0; i < dataEntries.length; i++) {
+        if (i === 0) {
+          url = dataEntries[i];
+        } else if (!/SLD_BODY/.test(dataEntries[i])) {
+          params = params + "&" + dataEntries[i];
+        }
+      }
+      $.ajax({
+        url : url,
+        dataType : 'json',
+        type : 'POST',
+        data : params,
+        success: function (res) {
+          // debugger
+        }
+      });
+    }
+  }
+
   return {
     setup: setup,
     init: init,
     clearWhatIf: clearWhatIf,
-    colors: colors
+    colors: colors,
+    getProvincePoint: getProvincePoint
   }
 })();
 
