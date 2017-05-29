@@ -37,8 +37,8 @@
            <?php require 'templates/layer_panel.php'; ?>
            <?php require 'templates/buffer_panel.php'; ?>
            <?php require 'templates/what_if_panel.php'; ?>
-           <?php require 'templates/result_panel.php'; ?>
            <?php require 'templates/layer_search.php'; ?>
+           <?php require 'templates/result_panel.php'; ?>
 
         </div>
       </div>
