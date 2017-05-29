@@ -16,7 +16,7 @@
 	<div id="collapseLayerSearch" class="panel-collapse collapse"
 		role="tabpanel" aria-labelledby="searchLayer">
 		<div class="panel-body"
-			style="height: 500px; overflow: auto; padding: 1px">
+			style=" overflow: auto; padding: 1px">
 			<select id="layerSearchSelectForm" class="form-control"><option
 				
 				<option value="-1">กรุณาเลือก</option>
