@@ -3,7 +3,6 @@
   include '../../config/database.php';
   $conn = connectionOracleDB();
 
-
   if ($_REQUEST["category"] == 'train') {
     $sql = "SELECT DISTINCT(TRAIN_OCCUPATION_GROUP_CODE) AS CODE,TRAIN_OCCUPATION_GROUP_NAME as NAME FROM DB_MOL.STD_TRAIN_COURSE";
     $sql .= " WHERE TRAIN_OCCUPATION_GROUP_NAME != 'NULL'";

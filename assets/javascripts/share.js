@@ -46,4 +46,43 @@ var clearMap = function() {
   map.getView().setZoom(6);
   map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
   ;
+  whatIf.clearWhatIf();
+}
+
+function tileLoadFunction(image, src) {
+  var img = image.getImage();
+  if (typeof window.btoa === 'function') {
+    var xhr = new XMLHttpRequest();
+    var dataEntries = src.split("&");
+    var url;
+    var params = "";
+    for (var i = 0; i < dataEntries.length; i++) {
+      if (i === 0) {
+        url = dataEntries[i];
+      } else {
+        params = params + "&" + dataEntries[i];
+      }
+    }
+    xhr.open('POST', url, true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function(e) {
+      if (this.status === 200) {
+        var uInt8Array = new Uint8Array(this.response);
+        var i = uInt8Array.length;
+        var binaryString = new Array(i);
+        while (i--) {
+          binaryString[i] = String.fromCharCode(uInt8Array[i]);
+        }
+        var data = binaryString.join('');
+        var type = xhr.getResponseHeader('content-type');
+        if (type.indexOf('image') === 0) {
+          img.src = 'data:' + type + ';base64,' + window.btoa(data);
+        }
+      }
+    };
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+  } else {
+    img.src = src;
+  }
 }

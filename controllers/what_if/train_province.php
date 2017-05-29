@@ -1,6 +1,7 @@
 <?php
   
   include '../../config/database.php';
+  include '../../helpers/share_func.php';
   $conn = connectionOracleDB();
 
   $sql = "SELECT WhatIFTrain.PROVINCE_CODE ";
@@ -28,6 +29,7 @@
   $sql .= "WHERE MSC.ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL)  ";
   $sql .= "AND MSC.AGE BETWEEN 15 AND 60 ";
   $sql .= "GROUP BY MSC.PROVINCE_CODE) WhatIFTrain ";
+  $sql .= "RIGHT JOIN DB_MOL.GIS_PROVINCE GP ON WhatIFTrain.PROVINCE_CODE = GP.PROVINCE_CODE ";
   $sql .= "ORDER BY WhatIFTrain.PROVINCE_CODE ";
 
   $result = oci_parse($conn, $sql);
@@ -38,15 +40,28 @@
   }
 
   $res = array();
-  while (($row = oci_fetch_array($result, OCI_BOTH)) != false) {
-    $res[] =  array(
-      "code" => iconv('tis-620', 'utf-8', $row["PROVINCE_CODE"]),
-      "num" => iconv('tis-620', 'utf-8', $row["VALTRAIN"])
-    );
-    
-  }
-  echo json_encode($res);
-  oci_free_statement($result);
 
+  while (($row = oci_fetch_array($result, OCI_BOTH)) != false) {
+    if (!isset($minVal)) {
+      $minVal = intval($row["VALTRAIN"]);
+      $maxVal = intval($row["VALTRAIN"]);
+    }
+    if (intval($row["VALTRAIN"]) > $maxVal) {
+      $maxVal = intval($row["VALTRAIN"]);
+    }
+    if (intval($row["VALTRAIN"]) < $minVal) {
+      $minVal = intval($row["VALTRAIN"]);
+    }
+    $res[] =  array(
+      "code" => $row["PROVINCE_CODE"],
+      "cnt" => $row["VALTRAIN"]
+    );
+  }
+
+  echo json_encode(array(
+    'data' => $res,
+    'intervals' => IntervalInt($minVal, $maxVal, 5)
+  ));
+  oci_free_statement($result);
   oci_close($conn);                        
 ?>

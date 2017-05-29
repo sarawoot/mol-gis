@@ -170,9 +170,9 @@ var searchdata = {
 
 var provinceLayer = new ol.layer.Tile({
   source : new ol.source.TileWMS({
-    url : config.geoserverUrl + "/oae/wms",
+    url : config.geoserverUrl + "/mol/wms",
     params : {
-      LAYERS : 'oae:provinces',
+      LAYERS : 'mol:provinces',
       STYLES : undefined,
       TILED : true
     },
