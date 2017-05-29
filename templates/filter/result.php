@@ -194,7 +194,7 @@ if (isset($_GET['intervals'])){
   <center>
 			<font>ไม่พบข้อมูล</font>
 		</center>
-<?
+<?php
   }
 }else{
   ?>
