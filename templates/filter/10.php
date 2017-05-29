@@ -4,10 +4,10 @@ require_once ("../../config/static.php");
 
 $year_start = date('Y') + 543;
 $year_end = 2557;
+$m = 1;
 ?>
 <div class="row">
 	<div class="form-group col-md-12">
-		<label for="YEARS" class="col-md-2 col-md-offset-2 control-label">ปี</label>
 		<div class="col-md-12">
 			ปี<br> <select class="form-control " id="YEARS" name="YEARS">
 				<option value="">เลือกข้อมูล</option>
@@ -25,7 +25,7 @@ $year_end = 2557;
 				name="MONTH_CODE">
 				<option value="">เลือกข้อมูล</option>
 				<?php foreach($month_conf as $k=>$v){?>
-				<option value="<?php echo $k?>"><?php echo $v?></option>
+				<option value="<?php echo $m?>"><?php echo $v;$m++?></option>
 				<?php }?>
 			</select>
 		</div>
@@ -36,7 +36,7 @@ $year_end = 2557;
 	<div class="col-md-12 text-center">
 		<input type="button" id="searchLayer" onclick="ClickSearchLayer()"
 			class="btn btn-primary" value="ค้นหา" />
-		<button type="button" id="clearLayer" class="btn btn-danger">ล้างข้อมูล</button>
+		<button type="reset" id="clearLayer" class="btn btn-danger" onclick="clearSearchResult()">ล้างข้อมูล</button>
 	</div>
 </div>
 <input id="formSearch" name="formSearch" type="hidden" value="10">

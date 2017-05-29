@@ -17,8 +17,7 @@
 		role="tabpanel" aria-labelledby="searchLayer">
 		<div class="panel-body"
 			style="height: 500px; overflow: auto; padding: 1px">
-			<select id="layerSearchSelectForm" class="form-control"><option
-				
+			<select id="layerSearchSelectForm" class="form-control">
 				<option value="-1">กรุณาเลือก</option>
 				<option value="1">คนพิการมีงานทำ</option>
 				<option value="2">ผู้ผ่านการฝึกอบรม</option>
@@ -32,7 +31,8 @@
 				<option value="10">สถิติการสำรวจประชากร (รายเดือน)</option>
 				<option value="11">สถิติการสำรวจประชากร (รายไตรมาส)</option>
 				<option value="12">สถิตแรงงานนอกระบบ</option>
-				<option value="13">สถิตแรงงานต่างด้าว</option></select> <br />
+				<option value="13">สถิตแรงงานต่างด้าว</option>
+			</select> <br />
 			<form name="searchForm" id="searchForm">
 				<div id="layerSearchForm"></div>
 			</form>

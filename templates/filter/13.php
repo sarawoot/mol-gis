@@ -48,9 +48,8 @@ oci_close($conn);
 	<div class="form-group col-md-12">
 
 		<div class="col-md-12">
-			ประเภทการได้รับอนุญาต<br>
-			<select class="form-control" id="FOREIGN_TYPE_CODE"
-				name="FOREIGN_TYPE_CODE">
+			ประเภทการได้รับอนุญาต<br> <select class="form-control"
+				id="FOREIGN_TYPE_CODE" name="FOREIGN_TYPE_CODE">
 				<option value="">เลือกข้อมูล</option>
 				<?php foreach($FOREIGN_TYPE_CODE as $k=>$v){?>
 					<option value="<?php echo $k;?>"><?php echo $v;?></option>
@@ -64,8 +63,9 @@ oci_close($conn);
 <div class="row">
 	<div class="col-md-12 text-center">
 		<input type="button" id="searchLayer" onclick="ClickSearchLayer()"
-			class="btn btn-primary" value="ค้นหา" /> <input type="button"
-			id="clearLayer" class="btn btn-danger" value="ล้างข้อมูล" />
+			class="btn btn-primary" value="ค้นหา" />
+		<button type="reset" id="clearLayer" class="btn btn-danger"
+			onclick="clearSearchResult()">ล้างข้อมูล</button>
 	</div>
 </div>
 <input id="formSearch" name="formSearch" type="hidden" value="13">
