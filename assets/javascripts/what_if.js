@@ -1,6 +1,33 @@
 var whatIf = (function () {
 
   var init = function () {
+    $("#whatIfCategory").change(function () {
+      categoryChange();
+    });
+
+    $("#whatIfBranchOccupation").change(function () {
+      var category = $("#whatIfCategory").val();
+      $.ajax({
+        url: 'controllers/what_if/occupation.php',
+        dataType: 'JSON',
+        type: 'GET',
+        data: {
+          category: $("#whatIfCategory").val(),
+          branch: this.value
+        },
+        success: function (res) {
+          $("#whatIfOccupation").empty();
+          $("#whatIfOccupation").append("<option value=''>กรุณาเลือก</option>");
+          _.each(res, function (row) {
+            $("#whatIfOccupation").append($("<option>",{
+              text: row.name,
+              value: row.code
+            }));
+          });
+        }
+      })
+    })
+
     $("#whatIfconfirm").click(function () {
       var branch = $("#whatIfBranchOccupation").val();
       var occupation = $("#whatIfOccupation").val();
@@ -30,10 +57,10 @@ var whatIf = (function () {
           
         }
       })
-    })
+    }) 
   }
   
-  var setup = function () {
+  var categoryChange = function () {
     $("#whatIfOccupation").empty();
     $.ajax({
       url: 'controllers/what_if/branch_occupation.php',
@@ -66,6 +93,9 @@ var whatIf = (function () {
         });
       }
     });
+  }
+
+  var setup = function () {
     $("input[name=mapTool][value=pan]").parent().click();
     $("#panelWhatIf").show();
     setTimeout(function () {
@@ -73,35 +103,9 @@ var whatIf = (function () {
         $("#headingWhatIf a").click();
       }  
     },500);
+    categoryChange();
   }
 
-
-
-  $("#whatIfCategory").change(function () {
-    setup();
-  });
-  $("#whatIfBranchOccupation").change(function () {
-    var category = $("#whatIfCategory").val();
-    $.ajax({
-      url: 'controllers/what_if/occupation.php',
-      dataType: 'JSON',
-      type: 'GET',
-      data: {
-        category: $("#whatIfCategory").val(),
-        branch: this.value
-      },
-      success: function (res) {
-        $("#whatIfOccupation").empty();
-        $("#whatIfOccupation").append("<option value=''>กรุณาเลือก</option>");
-        _.each(res, function (row) {
-          $("#whatIfOccupation").append($("<option>",{
-            text: row.name,
-            value: row.code
-          }));
-        });
-      }
-    })
-  })
 
   return {
     setup: setup,
