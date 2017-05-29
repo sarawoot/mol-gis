@@ -14,7 +14,6 @@ $result = array();
 
 $sql = genSql($_GET);
 
-
 if ($sql != ""){
   $result = oci_parse($conn, $sql);
   oci_execute($result);
@@ -23,13 +22,13 @@ if ($sql != ""){
   $result_min = oci_parse($conn, $sql_min);
   oci_execute($result_min);
   $row = oci_fetch_array($result_min, OCI_BOTH);
-  $num_min = $row["MIN_CNT"];
+  $num_min = isset($row["MIN_CNT"]) ? $row["MIN_CNT"] : 0;
   
   $sql_max = "SELECT MAX(CNT) AS MAX_CNT FROM (" . $sql . ")";
   $result_max = oci_parse($conn, $sql_max);
   oci_execute($result_max);
   $row = oci_fetch_array($result_max, OCI_BOTH);
-  $num_max = $row["MAX_CNT"];
+  $num_max = isset($row["MAX_CNT"])?$row["MAX_CNT"] : 0;;
   
   oci_free_statement($result_min);
   oci_free_statement($result_max);
@@ -39,14 +38,12 @@ if ($num_max > 0){
 }
 
 $data = array(
-    "intervals" => $intervals,
-    "data" => array()
+    "intervals" => $intervals,"data" => array()
 );
 
 while(($row = oci_fetch_array($result, OCI_BOTH)) != false){
   $data["data"][] = array(
-      "id_code" => $row["CWT_CODE"],
-      "cnt" => $row["CNT"]
+      "id_code" => $row["CWT_CODE"],"cnt" => $row["CNT"]
   );
 }
 

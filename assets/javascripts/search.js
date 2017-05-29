@@ -114,6 +114,10 @@ var searchdata = {
                               + colors[idx] + '</CssParameter>';
                           sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
 
+                        } else if (item.cnt == 0) {
+                          
+                          sld_body += '<CssParameter name="fill">#333333</CssParameter>';
+                          sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
                         }
                       })
               sld_body += '</Fill><Stroke><CssParameter name="stroke">#FFFFFF</CssParameter><CssParameter name="stroke-width">2</CssParameter></Stroke></PolygonSymbolizer><TextSymbolizer><Label>'
