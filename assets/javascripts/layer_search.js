@@ -1,19 +1,19 @@
 var searchtool = (function() {
   var init = function() {
-    var dataTmp = getData();
-    var data = [];
-
-    $('#layerSearchSelectForm').append($('<option>', {
-      value : '-1',
-      text : 'กรุณาเลือก'
-    }));
-    $.each(dataTmp, function(i, item) {
-
-      $('#layerSearchSelectForm').append($('<option>', {
-        value : item.id,
-        text : item.text
-      }));
-    });
+//    var dataTmp = getData();
+//    var data = [];
+//
+//    $('#layerSearchSelectForm').append($('<option>', {
+//      value : '-1',
+//      text : 'กรุณาเลือก'
+//    }));
+//    $.each(dataTmp, function(i, item) {
+//
+//      $('#layerSearchSelectForm').append($('<option>', {
+//        value : item.id,
+//        text : item.text
+//      }));
+//    });
 
   };
 
