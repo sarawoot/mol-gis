@@ -1,7 +1,7 @@
 <!-- ผู้สูงอายุ -->
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-10">
+		<div class="col-md-12">
 			ปี<br>
 			<select class="form-control " id="YEARS" name="YEARS">
 				<option value="2017">2017</option>
@@ -14,7 +14,7 @@
 </div>
 <div class="row">
 	<div class="form-group col-md-12">
-		<div class="col-md-10">
+		<div class="col-md-12">
 			ประเภทความพิการ<br> <select class="form-control "
 				id="DISABILITY_GROUP_CODE" name="DISABILITY_GROUP_CODE">
 				<option value="01">ความพิการทางการมองเห็น</option>
