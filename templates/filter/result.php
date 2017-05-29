@@ -5,9 +5,11 @@ require_once ("../../config/database.php");
 $conn = connectionOracleDBUTF();
 $intervals = explode(',', $_GET['intervals']);
 // ประจำปีงบประมาณ 2559 เป็นการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ ทุกประเภทของผู้สมัครทดสอบในสาขาภาคบริการ และทุกสาขาอาชีพ
+$title = '';
+$name = '';
 switch($_GET['formSearch']){
   case 1 :
-    $title = '';
+    
     if (isset($_GET["DISABILTIY_TYPE"])){
       if (! empty($_GET["DISABILTIY_TYPE"])){
         $title .= "ประเภทของความพิการคือ" . $_GET['DISABILTIY_TYPE'] . '&nbsp;';
@@ -19,13 +21,23 @@ switch($_GET['formSearch']){
     }
     $name = 'คนพิการมีงานทำ';
     break;
+  case 10 :
+    if (isset($_GET["MONTH_CODE"])){
+      if (! empty($_GET["MONTH_CODE"])){
+        if (strlen($_GET['MONTH_CODE']) == 1){
+          $_GET['MONTH_CODE'] = '0' . $_GET['MONTH_CODE'];
+        }
+        $title .= "ประจำเดือน" . $month_conf[$_GET['MONTH_CODE']] . '&nbsp;';
+      }
+    }
+    break;
   case 2 :
   case 3 :
   case 4 :
   case 5 :
   case 6 :
   case 9 :
-  case 10 :
+  
   case 11 :
   case 12 :
   case 13 :
@@ -36,7 +48,7 @@ switch($_GET['formSearch']){
       }
     }
     if (isset($_GET["YEAR_TH"])){
-      if (! empty($_GET["YEARS"])){
+      if (! empty($_GET["YEAR_TH"])){
         $title .= "ประจำปีงบประมาณ " . $_GET['YEAR_TH'] . '&nbsp;';
       }
     }
@@ -48,9 +60,40 @@ switch($_GET['formSearch']){
     switch($_GET['formSearch']){
       case 2 :
         $name = 'ผู้ผ่านการฝึกอบรม';
+        if (isset($_GET["TRAIN_ACTIVITY_CODE"])){
+          if (! empty($_GET["TRAIN_ACTIVITY_CODE"])){
+            $sql = 'SELECT  TRAIN_ACTIVITY_CODE,TRAIN_ACTIVITY_NAME FROM DB_MOL.STD_TRAIN_ACTIVITY WHERE TRAIN_ACTIVITY_CODE = ' . (( int ) $_GET["TRAIN_ACTIVITY_CODE"]) . '  AND ROWNUM <2';
+            $result1 = oci_parse($conn, $sql);
+            oci_execute($result1);
+            $row = oci_fetch_array($result1, OCI_BOTH);
+            $title .= "กิจกรรมการฝึกอบรม" . $row["TRAIN_ACTIVITY_NAME"] . '&nbsp;';
+            oci_free_statement($result1);
+          }
+        }
+        
+        if (isset($_GET["LAW_OCCUPATION_CODE"])){
+          if (! empty($_GET["LAW_OCCUPATION_CODE"])){
+            $sql = 'SELECT * FROM DB_MOL.STD_LAW_OCCUPATION  WHERE LAW_OCCUPATION_CODE = ' . (( int ) $_GET["LAW_OCCUPATION_CODE"]) . '  AND rownum <2';
+            $result1 = oci_parse($conn, $sql);
+            oci_execute($result1);
+            $row = oci_fetch_array($result1, OCI_BOTH);
+            $title .= "กลุ่มสาขาอาชีพ" . $row["LAW_OCCUPATION_NAME"] . '&nbsp;';
+            oci_free_statement($result1);
+          }
+        }
         break;
       case 3 :
         $name = 'ผู้ผ่านการทดสอบ';
+        if (isset($_GET["LAW_OCCUPATION_CODE"])){
+          if (! empty($_GET["LAW_OCCUPATION_CODE"])){
+            $sql = 'SELECT * FROM DB_MOL.STD_LAW_OCCUPATION  WHERE LAW_OCCUPATION_CODE = ' . (( int ) $_GET["LAW_OCCUPATION_CODE"]) . '  AND rownum <2';
+            $result1 = oci_parse($conn, $sql);
+            oci_execute($result1);
+            $row = oci_fetch_array($result1, OCI_BOTH);
+            $title .= "กลุ่มสาขาอาชีพ" . $row["LAW_OCCUPATION_NAME"] . '&nbsp;';
+            oci_free_statement($result1);
+          }
+        }
         break;
       case 4 :
         $name = 'ตำแหน่งงานว่าง';
@@ -101,6 +144,11 @@ switch($_GET['formSearch']){
     break;
   case 8 :
     $title = '';
+    if (isset($_GET["YEAR_TH"])){
+      if (! empty($_GET["YEAR_TH"])){
+        $title .= "ประจำปีงบประมาณ " . $_GET['YEAR_TH'] . '&nbsp;';
+      }
+    }
     if (isset($_GET["YEARS"])){
       if (! empty($_GET["YEARS"])){
         $title .= "ประจำปีงบประมาณ " . $_GET['YEARS'] . '&nbsp;';
@@ -162,10 +210,15 @@ if (isset($_GET['intervals'])){
 		</center>
 		<table>
 			<tbody>
-				<?php 
-				$kk1 = [0,2,4,6,8];
-				$kk2 = [1,3,5,7,9];
-				foreach($map_color as $k=>$v){?>
+				<?php
+    $kk1 = [
+        0,2,4,6,8
+    ];
+    $kk2 = [
+        1,3,5,7,9
+    ];
+    foreach($map_color as $k => $v){
+      ?>
 				<tr>
 					<td style="background-color: <?php echo $v?>" border="1" width="50px">
 					</td>
@@ -173,8 +226,8 @@ if (isset($_GET['intervals'])){
 					<?php
       $n1 = explode('.', $intervals[$kk1[$k]]);
       $n2 = explode('.', $intervals[$kk2[$k]]);
-      $num1 = number_format((( int ) $n1[0])) .   (isset($n1[1]) ? (( int ) '.'.$n1[1]) : '');
-      $num2 = number_format((( int ) $n2[0])) .   (isset($n2[1]) ? (( int ) '.'.$n2[1]) : '');
+      $num1 = number_format((( int ) $n1[0])) . (isset($n1[1]) ? (( int ) '.' . $n1[1]) : '');
+      $num2 = number_format((( int ) $n2[0])) . (isset($n2[1]) ? (( int ) '.' . $n2[1]) : '');
       echo $num1, ' - ', $num2?>
       				</td>
 					<td></td>
