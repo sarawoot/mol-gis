@@ -9,27 +9,54 @@ var searchdata = {
   },
 
   setup : function() {
-    /*
-     * if (mapMode == 'search') { map.on('dblclick', function(evt) { var lonlat =
-     * ol.proj .transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'); var
-     * getUrlInfo = function(layerInfo) { var view = map.getView(); var
-     * viewResolution = view.getResolution(); var source =
-     * layerInfo.getSource(); var url =
-     * source.getGetFeatureInfoUrl(evt.coordinate, viewResolution,
-     * view.getProjection(), { 'INFO_FORMAT' : 'application/json',
-     * 'FEATURE_COUNT' : 1 }); return url; }; var url =
-     * getUrlInfo(provinceLayer); var dataEntries = url.split("&"); var params =
-     * ""; for (var i = 0; i < dataEntries.length; i++) { if (i === 0) { url =
-     * dataEntries[i]; } else if (!/SLD_BODY/.test(dataEntries[i])) { params =
-     * params + "&" + dataEntries[i]; } } $.ajax({ url : url, dataType : 'json',
-     * type : 'POST', data : params, async : false, success : function(res) { if
-     * (res.features.length > 0) { var prov_code =
-     * res.features[0].properties.prov_code; $('#province').val(prov_code);
-     * centermap = true searchdata.init(); CenterMap(lonlat[0], lonlat[1],
-     * centermap) } } });
-     * 
-     * }); }
-     */
+
+    if (mapMode == 'search') {
+      map.on('dblclick', function(evt) {
+        if ($('#formSearch').val() == 9) {
+          var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857',
+              'EPSG:4326');
+          var getUrlInfo = function(layerInfo) {
+            var view = map.getView();
+            var viewResolution = view.getResolution();
+            var source = layerInfo.getSource();
+            var url = source.getGetFeatureInfoUrl(evt.coordinate,
+                viewResolution, view.getProjection(), {
+                  'INFO_FORMAT' : 'application/json',
+                  'FEATURE_COUNT' : 1
+                });
+            return url;
+          };
+          var url = getUrlInfo(provinceLayer);
+          var dataEntries = url.split("&");
+          var params = "";
+          for (var i = 0; i < dataEntries.length; i++) {
+            if (i === 0) {
+              url = dataEntries[i];
+            } else if (!/SLD_BODY/.test(dataEntries[i])) {
+              params = params + "&" + dataEntries[i];
+            }
+          }
+          $.ajax({
+            url : url,
+            dataType : 'json',
+            type : 'POST',
+            data : params,
+            async : false,
+            success : function(res) {
+              if (res.features.length > 0) {
+                var prov_code = res.features[0].properties.prov_code;
+                $('#province').val(prov_code);
+                centermap = true
+                
+                CenterMap(lonlat[0], lonlat[1], centermap)
+              }
+            }
+          });
+        }
+
+      });
+    }
+
   },
 
   addLayer : function(res) {
@@ -191,7 +218,7 @@ map.on('singleclick', function(evt) {
   if (mapMode == 'search') {
     var coordinate = evt.coordinate;
     var xy = String(coordinate).split(',');
-    content.innerHTML = '';
+    //content.innerHTML = '';
     var getUrlInfo = function(layerInfo) {
       var view = map.getView();
       var viewResolution = view.getResolution();

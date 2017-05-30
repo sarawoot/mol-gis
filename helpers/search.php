@@ -132,5 +132,37 @@ function genSql($param){
   // echo $sql;
   return $sql;
 }
+function get_year_list($formSearch = 1){
+  global $conn;
+  if (! isset($conn)){
+    require_once ("../../config/database.php");
+    $conn = connectionOracleDBUTF();
+  }
+  $YEARS = [
+      2 => 'VIEW_GIS_DSD_PASS_TRAINING',3 => 'VIEW_GIS_DSD_PASS_TESTING',4 => 'VIEW_GIS_DOE_JOB_VACANCY',5 => 'VIEW_GIS_SSO_INSURED_M33',6 => 'VIEW_GIS_SSO_INSURED_M40',10 => 'VIEW_GIS_STAT_NSO_MONTHLY',11 => 'VIEW_GIS_STAT_NSO_QUARTER',12 => 'VIEW_GIS_STAT_NSO_INFORMAL_WK',
+      13 => 'VIEW_GIS_DOE_FOREIGN_WORKER'
+  ];
+  $YEAR_TH = [
+      8 => 'VIEW_GIS_STAT_NSO_DISABILITY',9 => 'VIEW_GIS_STAT_NSO_ELDER'
+  ];
+  $f = 'YEARS';
+  $tbl = '';
+  if (array_key_exists($formSearch, $YEARS)){
+    $tbl = $YEARS[$formSearch];
+  }
+  if (array_key_exists($formSearch, $YEAR_TH)){
+    $tbl = $YEAR_TH[$formSearch];
+    $f = 'YEAR_TH';
+  }
+  
+  $sql = " SELECT  DISTINCT $f FROM $tbl ORDER BY $f DESC";
+  $result = oci_parse($conn, $sql);
+  oci_execute($result);
+  $y = [];
+  while(($row = oci_fetch_array($result, OCI_BOTH)) != false){
+    $y[] = $row[$f];
+  }
+  return $y;
+}
 
 ?>
