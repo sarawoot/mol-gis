@@ -24,5 +24,8 @@ $year_end = 2554;
 	</div>
 </div>
 <input id="formSearch" name="formSearch" type="hidden" value="9">
-<input type="hidden" name="province" id="province" value="">
+<input type="text" name="province" id="province" value="">
 <input type="hidden" name="amphur" id="amphur" value="">
+<script>
+searchdata.setup();
+</script>
