@@ -2,17 +2,23 @@
 <?php
 require_once ("../../config/static.php");
 
-$year_start = date('Y') + 543;
-$year_end = 2548;
+require_once ("../../helpers/search.php");
+$year = get_year_list(12);
 ?>
 <div class="row">
 	<div class="form-group col-md-12">
 		<div class="col-md-12">
 			ปี<br> <select class="form-control " id="YEARS" name="YEARS">
 				<option value="">เลือกข้อมูล</option>
-				<?php for($i = $year_start ; $i >= $year_end;$i--){?>
-				<option value="<?php echo $i?>"><?php echo $i?></option>
-				<?php }?>
+				<?php
+    if (count($year) > 0){
+      foreach($year as $k => $v){
+        ?>
+				<option value="<?php echo $v?>"><?php echo $v?></option>
+				<?php
+      }
+    }
+    ?>
 			</select>
 		</div>
 	</div>
