@@ -20,8 +20,9 @@ $year_end = 2548;
 <div class="row">
 	<div class="col-md-12 text-center">
 		<input type="button" id="searchLayer" onclick="ClickSearchLayer()"
-			class="btn btn-primary" value="ค้นหา" /> <input type="button"
-			id="clearLayer" class="btn btn-danger" value="ล้างข้อมูล" />
+			class="btn btn-primary" value="ค้นหา" />
+		<button type="reset" id="clearLayer" class="btn btn-danger"
+			onclick="clearSearchResult()">ล้างข้อมูล</button>
 	</div>
 </div>
 <input id="formSearch" name="formSearch" type="hidden" value="12">

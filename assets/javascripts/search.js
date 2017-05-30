@@ -115,7 +115,7 @@ var searchdata = {
                           sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
 
                         } else if (item.cnt == 0) {
-                          
+
                           sld_body += '<CssParameter name="fill">#333333</CssParameter>';
                           sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
                         }
@@ -247,9 +247,15 @@ map.on('singleclick', function(evt) {
 
 function hideResultPanel(obj) {
   setTimeout(function() {
-
-    $("#panelResult").hide();
-
+    if ($("#collapseResult").is(":visible")) {
+      $("#headingResult a").click();
+    }
   }, 500);
 }
+
+function clearSearchResult() {
+  map.removeLayer(provinceLayer);
+  $('#collapseResult div').html('');
+}
+
 // searchdata.init();
