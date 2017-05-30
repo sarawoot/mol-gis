@@ -17,7 +17,7 @@ oci_execute($result);
 
 $row = oci_fetch_array($result, OCI_BOTH);
 $n = explode('.', $row['CNT']);
-echo $procince_conf[$_GET['prov_code']], ' : ', number_format((( int ) $n[0])),  (isset($n[1]) ? '.'.(( int ) $n[1]) : '');
+echo $procince_conf[$_GET['prov_code']], ' : ', number_format((( int ) $n[0])),  (isset($n[1]) ? '.'.($n[1]) : '');
 oci_free_statement($result);
 oci_close($conn);
 ?>
