@@ -1,9 +1,7 @@
 <!-- สถิติการสำรวจประชากร (รายเดือน) VIEW_GIS_STAT_NSO_MONTHLY-->
 <?php
-require_once ("../../config/static.php");
-
-$year_start = date('Y') + 543;
-$year_end = 2557;
+require_once ("../../helpers/search.php");
+$year = get_year_list(10);
 $m = 1;
 ?>
 <div class="row">
@@ -11,9 +9,15 @@ $m = 1;
 		<div class="col-md-12">
 			ปี<br> <select class="form-control " id="YEARS" name="YEARS">
 				<option value="">เลือกข้อมูล</option>
-				<?php for($i = $year_start ; $i >= $year_end;$i--){?>
-				<option value="<?php echo $i?>"><?php echo $i?></option>
-				<?php }?>
+				<?php
+    if (count($year) > 0){
+      foreach($year as $k => $v){
+        ?>
+				<option value="<?php echo $v?>"><?php echo $v?></option>
+				<?php
+      }
+    }
+    ?>
 			</select>
 		</div>
 	</div>
@@ -36,7 +40,8 @@ $m = 1;
 	<div class="col-md-12 text-center">
 		<input type="button" id="searchLayer" onclick="ClickSearchLayer()"
 			class="btn btn-primary" value="ค้นหา" />
-		<button type="reset" id="clearLayer" class="btn btn-danger" onclick="clearSearchResult()">ล้างข้อมูล</button>
+		<button type="reset" id="clearLayer" class="btn btn-danger"
+			onclick="clearSearchResult()">ล้างข้อมูล</button>
 	</div>
 </div>
 <input id="formSearch" name="formSearch" type="hidden" value="10">
