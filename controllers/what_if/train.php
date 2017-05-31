@@ -4,13 +4,55 @@
   include '../../helpers/share_func.php';
   $conn = connectionOracleDB();
 
-  $sql = "SELECT WhatIFTrain.PROVINCE_CODE ";
+  if ($_REQUEST['type'] == 'tambon') {
+    $province_code = substr($_REQUEST['code'], 0,2);
+    $amphoe_code = substr($_REQUEST['code'], 2,2);
+  }
+
+
+  if ($_REQUEST['type'] == 'province') {
+    $sql = "SELECT WhatIFTrain.PROVINCE_CODE AS CODE ";
+  }
+
+  if ($_REQUEST['type'] == 'amphoe') {
+    $sql = "SELECT WhatIFTrain.AMPHUR_CODE AS CODE";
+  }
+
+  if ($_REQUEST['type'] == 'tambon') {
+    $sql = "SELECT WhatIFTrain.TUMBON_CODE AS CODE";
+  }
+
   $sql .= ",ROUND((((PEOPLE / TOTAL)* ".$_REQUEST['num'].") / ((GRADUATE / ATTEND) * 100)) * 100) AS CNT ";
-  $sql .= "FROM(SELECT MSC.PROVINCE_CODE,SUM(MSC.MALE_QUANTITY + MSC.FEMALE_QUANTITY) AS PEOPLE ";
+
+  if ($_REQUEST['type'] == 'province') {
+    $sql .= "FROM(SELECT MSC.PROVINCE_CODE,SUM(MSC.MALE_QUANTITY + MSC.FEMALE_QUANTITY) AS PEOPLE ";
+  }
+  if ($_REQUEST['type'] == 'amphoe') {
+    $sql .= "FROM(SELECT MSC.AMPHUR_CODE,SUM(MSC.MALE_QUANTITY + MSC.FEMALE_QUANTITY) AS PEOPLE ";
+  }
+  if ($_REQUEST['type'] == 'tambon') {
+    $sql .= "FROM(SELECT MSC.TUMBON_CODE,SUM(MSC.MALE_QUANTITY + MSC.FEMALE_QUANTITY) AS PEOPLE ";
+  }
+
   $sql .= ",(SELECT SUM(MALE_QUANTITY + FEMALE_QUANTITY) ";
-  $sql .= "FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
-  $sql .= "WHERE ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL) ";
-  $sql .= "AND AGE BETWEEN 15 AND 60) TOTAL ";
+
+  if ($_REQUEST['type'] == 'province') {
+    $sql .= "FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
+    $sql .= "WHERE ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL) ";
+    $sql .= "AND AGE BETWEEN 15 AND 60) TOTAL ";
+  }
+  if ($_REQUEST['type'] == 'amphoe') {
+    $sql .= "FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
+    $sql .= "WHERE ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
+    $sql .= " where PROVINCE_CODE=".$_REQUEST['code'].") ";
+    $sql .= "AND AGE BETWEEN 15 AND 60 AND PROVINCE_CODE = ".$_REQUEST['code'].") TOTAL";
+  }
+  if ($_REQUEST['type'] == 'tambon') {
+    $sql .= "FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
+    $sql .= "WHERE ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL ";
+    $sql .= " where AMPHUR_CODE=".$amphoe_code." and PROVINCE_CODE = ".$province_code.") ";
+    $sql .= "AND AGE BETWEEN 15 AND 60 AND AMPHUR_CODE = ".$amphoe_code." and PROVINCE_CODE = ".$province_code.") TOTAL";
+  }
   $sql .= ",(SELECT COUNT(TDT.PERSONAL_ID) from DB_MOL.TRT_DSD_TRAINING TDT ";
   $sql .= "LEFT JOIN DB_MOL.LKU_DSD_TRAINING_COURSE LDTC ON TDT.TRAINING_ID = LDTC.TRAINING_ID ";
   $sql .= "LEFT JOIN DB_MOL.STD_TRAIN_COURSE STC ON LDTC.TRAIN_COURSE_CODE = STC.TRAIN_COURSE_CODE ";
@@ -25,16 +67,27 @@
   $sql .= "AND LDTC.TARGET_BUDGET_YEAR = '".$_REQUEST['year']."' ";
   $sql .= "AND STC.LAW_OCCUPATION_CODE = '".$_REQUEST['branch']."' ";
   $sql .= "AND STC.TRAIN_OCCUPATION_GROUP_CODE = '".$_REQUEST['occupation']."') GRADUATE ";
-  $sql .= "FROM VIEW_STAT_MOE_CITIZEN@L_STMOL MSC ";
-  $sql .= "WHERE MSC.ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL)  ";
-  $sql .= "AND MSC.AGE BETWEEN 15 AND 60 ";
-  $sql .= "GROUP BY MSC.PROVINCE_CODE) WhatIFTrain ";
-  $sql .= "RIGHT JOIN DB_MOL.GIS_PROVINCE GP ON WhatIFTrain.PROVINCE_CODE = GP.PROVINCE_CODE ";
-  $sql .= "ORDER BY WhatIFTrain.PROVINCE_CODE ";
-
-
-
-
+  
+  if ($_REQUEST['type'] == 'province') {
+    $sql .= " FROM VIEW_STAT_MOE_CITIZEN@L_STMOL MSC ";
+    $sql .= " WHERE MSC.ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL) ";
+    $sql .= " AND MSC.AGE BETWEEN 15 AND 60 ";
+    $sql .= " GROUP BY MSC.PROVINCE_CODE) WhatIFTrain ";
+  }
+  if ($_REQUEST['type'] == 'amphoe') {
+    $sql .= " FROM VIEW_STAT_MOE_CITIZEN@L_STMOL MSC ";
+    $sql .= " WHERE MSC.ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL";
+    $sql .= "  where PROVINCE_CODE=".$_REQUEST['code'].") and PROVINCE_CODE=".$_REQUEST['code'];
+    $sql .= " AND MSC.AGE BETWEEN 15 AND 60 ";
+    $sql .= " GROUP BY MSC.AMPHUR_CODE) WhatIFTrain ";
+  }
+  if ($_REQUEST['type'] == 'tambon') {
+    $sql .= " FROM VIEW_STAT_MOE_CITIZEN@L_STMOL MSC ";
+    $sql .= " WHERE MSC.ACADEMIC_YEAR = (SELECT MAX(ACADEMIC_YEAR) FROM VIEW_STAT_MOE_CITIZEN@L_STMOL";
+    $sql .= "  where AMPHUR_CODE=".$amphoe_code." and PROVINCE_CODE = ".$province_code.") and AMPHUR_CODE=".$amphoe_code. " and PROVINCE_CODE = ".$province_code;
+    $sql .= " AND MSC.AGE BETWEEN 15 AND 60 ";
+    $sql .= " GROUP BY MSC.TUMBON_CODE) WhatIFTrain ";
+  }  
 
   // $sql = "SELECT GP.PROVINCE_CODE, ";
   // $sql .= ",ROUND((((PEOPLE / TOTAL)* ".$_REQUEST['num'].") / ((GRADUATE / ATTEND) * 100)) * 100) AS CNT ";
@@ -94,16 +147,22 @@
     if (intval($row["CNT"]) < $minVal) {
       $minVal = intval($row["CNT"]);
     }
+
     $res[] =  array(
-      "code" => $row["PROVINCE_CODE"],
+      "code" => $_REQUEST['code'].$row["CODE"],
       "cnt" => $row["CNT"]
     );
   }
 
-  echo json_encode(array(
-    'data' => $res,
-    'intervals' => IntervalInt($minVal, $maxVal, 5)
-  ));
+  if (count($res) == 0) {
+    echo "[]";
+  } else {
+    echo json_encode(array(
+      'data' => $res,
+      'intervals' => IntervalInt($minVal, $maxVal, 5)
+    ));
+  }
+
   oci_free_statement($result);
   oci_close($conn);                        
 ?>

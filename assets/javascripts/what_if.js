@@ -1,5 +1,6 @@
 var whatIf = (function () {
   var colors = [ "#e60000", "#ff950a", "#fcfc00", "#9fd900", "#38a800" ];
+  colors = colors.reverse();
   var init = function () {
     $("#whatIfCategory").change(function () {
       categoryChange();
@@ -29,72 +30,7 @@ var whatIf = (function () {
     })
 
     $("#whatIfconfirm").click(function () {
-      clearWhatIf();
-      $("#panelResult").hide();
-      var branch = $("#whatIfBranchOccupation").val();
-      var occupation = $("#whatIfOccupation").val();
-      var year = $("#whatIfYear").val();
-      var num = Number($("#whatIfPredictNum").val());
-      var category = $("#whatIfCategory").val();
-
-      if ( branch == null || branch == '' ||
-           occupation == null || occupation == '' ||
-           year == null || year == '' ||
-           num <= 0 || isNaN(num) ) {
-        alert('กรุณาเลือกข้อมูลได้ถูกต้อง');
-        return false;
-      }
-      $.ajax({
-        url: 'controllers/what_if/province.php',
-        type: 'GET',
-        dataType: 'JSON',
-        data: {
-          branch: branch,
-          occupation: occupation,
-          year: year,
-          num: num,
-          category: category
-        },
-        success: $.proxy(function (res) {
-
-          var div = $("#collapseResult div");
-          div.empty();
-          if (res.length == 0) {
-            alert("ไม่พบข้อมูล")
-            return false;
-          }
-
-          var sld = this.generate_xml(res);
-          var provinceLayer = new ol.layer.Tile({
-            source : new ol.source.TileWMS({
-              url : config.geoserverUrl + "/mol/wms",
-              params : {
-                LAYERS : 'mol:provinces',
-                STYLES : '',
-                SLD_BODY : sld,
-                TILED : true
-              },
-              serverType : 'geoserver',
-              tileLoadFunction : tileLoadFunction
-            }),
-            name: 'what-if',
-            type: 'province'
-          });
-          map.addLayer(provinceLayer);
-
-          $("#panelResult").show();
-          div.load('templates/what_if/legend_train_province.php', {
-            intervals: res.intervals,
-            colors: whatIf.colors,
-            occupation: $("#whatIfOccupation option:selected").text(),
-            year: $("#whatIfYear option:selected").text()
-          });
-          if (!$("#collapseResult").is(":visible")) {
-            $("#headingResult a").click();
-          } 
-
-        },{generate_xml: generate_xml})
-      })
+      generateMap('province');
     }) 
   }
   
@@ -146,12 +82,10 @@ var whatIf = (function () {
     categoryChange();
   }
 
-  var generate_xml = function (res) {
+  var generateXML = function (res, title, layer_name, id_name) {
     
     var sld_body = '';
-    var title = 'Provinces';
-    var layer_name = 'mol:provinces';
-    var id_name = 'prov_code';
+
     sld_body = '<?xml version="1.0" encoding="UTF-8"?><StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
     sld_body += '<NamedLayer><Name>' + layer_name + '</Name><UserStyle><Title>'
         + title + '</Title><Abstract>' + title
@@ -178,9 +112,97 @@ var whatIf = (function () {
                   + item.cnt
                   + '</Label><Font><CssParameter name="font-family">Tahoma</CssParameter><CssParameter name="font-size">13.0</CssParameter><CssParameter name="font-style">normal</CssParameter><CssParameter name="font-weight">bold</CssParameter></Font><LabelPlacement><PointPlacement><AnchorPoint><AnchorPointX>0.5</AnchorPointX><AnchorPointY>0.5</AnchorPointY></AnchorPoint><Displacement><DisplacementX>0.0</DisplacementX><DisplacementY>0.0</DisplacementY></Displacement></PointPlacement></LabelPlacement><Fill><CssParameter name="fill">#3D3D3D</CssParameter></Fill><Halo><CssParameter name="fill">#FFFFFF</CssParameter></Halo></TextSymbolizer></Rule>';
             });
-    sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
+    // sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
+    sld_body += '</FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
 
     return sld_body;
+  }
+
+  var generateMap = function (type, params) {
+    clearWhatIf();
+    $("#panelResult").hide();
+    var branch = $("#whatIfBranchOccupation").val();
+    var occupation = $("#whatIfOccupation").val();
+    var year = $("#whatIfYear").val();
+    var num = Number($("#whatIfPredictNum").val());
+    var category = $("#whatIfCategory").val();
+
+    if ( branch == null || branch == '' ||
+         occupation == null || occupation == '' ||
+         year == null || year == '' ||
+         num <= 0 || isNaN(num) ) {
+      alert('กรุณาเลือกข้อมูลได้ถูกต้อง');
+      return false;
+    }
+    var data = {
+      branch: branch,
+      occupation: occupation,
+      year: year,
+      num: num,
+      category: category
+    };
+    if (params) {
+      data = _.merge(data, params)
+    }
+    data.type = type
+    $.ajax({
+      url: 'controllers/what_if/train.php',
+      type: 'GET',
+      dataType: 'JSON',
+      data: data,
+      success: $.proxy(function (res) {
+
+        var div = $("#collapseResult div");
+        div.empty();
+        if (res.length == 0) {
+          alert("ไม่พบข้อมูล")
+          return false;
+        }
+        var title = 'Provinces';
+        var layer_name = 'mol:provinces'
+        var id_name = 'prov_code';
+        if (type == 'amphoe') {
+          title = 'Amphurs';
+          layer_name = 'mol:amphoes'
+          id_name = 'ap_idn';
+        }
+        if (type == 'tambon') {
+          title = 'Tambons';
+          layer_name = 'mol:tambons'
+          id_name = 'tb_idn';          
+        }
+
+        var sld = this.generateXML(res, title, layer_name, id_name);
+        var layer = new ol.layer.Tile({
+          source : new ol.source.TileWMS({
+            url : config.geoserverUrl + "/mol/wms",
+            params : {
+              LAYERS : layer_name,
+              STYLES : '',
+              SLD_BODY : sld,
+              TILED : true
+            },
+            serverType : 'geoserver',
+            tileLoadFunction : tileLoadFunction
+          }),
+          name: 'what-if',
+          type: this.type
+        });
+        map.addLayer(layer);
+
+        $("#panelResult").show();
+        div.load('templates/what_if/legend_train_province.php', {
+          intervals: res.intervals,
+          colors: whatIf.colors,
+          occupation: $("#whatIfOccupation option:selected").text(),
+          year: $("#whatIfYear option:selected").text()
+        });
+        if (!$("#collapseResult").is(":visible")) {
+          $("#headingResult a").click();
+        } 
+
+      },{generateXML: generateXML, type: type})
+    })    
   }
 
   var clearWhatIf = function () {
@@ -207,7 +229,9 @@ var whatIf = (function () {
 
   var getProvincePoint = function (evt) {
     var layer = getLayer();
-
+    if (layer.get('type') == 'tambon') {
+      return;
+    }
     
     var getUrlInfo = function(layer){
       var view = map.getView();
@@ -235,9 +259,22 @@ var whatIf = (function () {
         dataType : 'json',
         type : 'POST',
         data : params,
-        success: function (res) {
-          // debugger
-        }
+        success: $.proxy(function (res) {
+          if (this.layer.get('type') == 'province' ) {
+            if (res.features[0]) {
+              generateMap('amphoe', {
+                code: res.features[0].properties.prov_code
+              })
+            }
+          }
+          if (this.layer.get('type') == 'amphoe' ) {
+            if (res.features[0]) {
+              generateMap('tambon', {
+                code: res.features[0].properties.ap_idn
+              })
+            }
+          }          
+        },{layer: layer})
       });
     }
   }
