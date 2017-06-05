@@ -146,7 +146,7 @@ var whatIf = (function () {
     }
     data.type = type
     $.ajax({
-      url: 'controllers/what_if/train.php',
+      url: 'controllers/what_if/what_if.php',
       type: 'GET',
       dataType: 'JSON',
       data: data,
