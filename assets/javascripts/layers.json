@@ -223,5 +223,307 @@
     "state": {
       "selected": false
     }
-  }    
+  },
+  {
+    "id": "12",
+    "text": "นิคมอุตสาหกรรม",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "2"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "13",
+    "text": "นิคมอุตสาหกรรมลาดกระบัง",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Ladkrabung/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "14",
+    "text": "นิคมอุตสาหกรรมบางปู",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Bangpoo/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "15",
+    "text": "นิคมอุตสาหกรรมแหลมฉบัง",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Lamchabung/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "16",
+    "text": "นิคมอุตสาหกรรมแปลงยาว",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Plangyaw/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "17",
+    "text": "นิคมอุตสาหกรรมมาบตาพุด",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Maptaput/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "18",
+    "text": "นิคมอุตสาหกรรมบ่อวิน",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Bowin/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "19",
+    "text": "นิคมอุตสาหกรรมอมตะนคร",
+    "parent": "12",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/New_Industrail_Estate/Ammata_Nakorn/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "20",
+    "text": "พื้นที่น้ำท่วม",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "2"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "21",
+    "text": "พื้นที่น้ำท่วม 2551",
+    "parent": "20",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2008/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "22",
+    "text": "พื้นที่น้ำท่วม 2552",
+    "parent": "20",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2009/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "23",
+    "text": "พื้นที่น้ำท่วม 2553",
+    "parent": "20",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2010/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "24",
+    "text": "พื้นที่น้ำท่วม 2554",
+    "parent": "20",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2011/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "25",
+    "text": "พื้นที่น้ำท่วม 2555",
+    "parent": "20",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2012/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "26",
+    "text": "ติดตามสถานการณ์ภัยแล้ง",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "2"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "27",
+    "text": "ประเทศไทย",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/RISK_DROUGHT/Risk_drought_Province1_g_m/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "28",
+    "text": "ภาคเหนือ",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_north13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "29",
+    "text": "ภาคตะวันออกเฉียงเหนือ",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_2northeast13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "30",
+    "text": "ภาคกลาง",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_center13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "31",
+    "text": "ภาคตะวันออก",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_EAST13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "32",
+    "text": "ภาคตะวันตก",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_west13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "33",
+    "text": "ภาคใต้",
+    "parent": "26",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_south13062556/MapServer",
+      "id": "3"
+    },
+    "state": {
+      "selected": false
+    }
+  }
 ]
