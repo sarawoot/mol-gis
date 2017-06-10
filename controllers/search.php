@@ -28,7 +28,8 @@ if ($sql != ""){
   $result_max = oci_parse($conn, $sql_max);
   oci_execute($result_max);
   $row = oci_fetch_array($result_max, OCI_BOTH);
-  $num_max = isset($row["MAX_CNT"])?$row["MAX_CNT"] : 0;;
+  $num_max = isset($row["MAX_CNT"]) ? $row["MAX_CNT"] : 0;
+  ;
   
   oci_free_statement($result_min);
   oci_free_statement($result_max);
@@ -42,8 +43,21 @@ $data = array(
 );
 
 while(($row = oci_fetch_array($result, OCI_BOTH)) != false){
+  $idcode = $row["CWT_CODE"];
+  //echo "<pre>"; print_r($row);
+  if (isset($_GET['province'])){
+    if (! empty($row['AMP_CODE'])){
+      $idcode = $row["CWT_CODE"] . $row["AMP_CODE"];
+    }
+    if (isset($_GET['amphur'])){
+      
+      if (! empty($row['TMB_CODE'])){
+        $idcode = $row["CWT_CODE"] . $row["AMP_CODE"] . $row['TMB_CODE'];
+      }
+    }
+  }
   $data["data"][] = array(
-      "id_code" => $row["CWT_CODE"],"cnt" => $row["CNT"]
+      "id_code" => $idcode,"cnt" => $row["CNT"]
   );
 }
 

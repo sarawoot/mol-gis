@@ -1,7 +1,7 @@
 <!-- คนพิการมีงานทำ VIEW_GIS_DOE_DISABILITY-->
 <?php
 require_once ("../../config/database.php");
-$conn = connectionOracleDBUTF();
+$conn = connectionOracleDB();
 
 $DISABILTIY_TYPE = [];
 $GRAD_EDU = [];
