@@ -8,11 +8,11 @@ var searchdata = {
     mapMode = 'search';
   },
 
-  setup : function() {
+  setup : function(formData) {
 
     if (mapMode == 'search') {
       map.on('dblclick', function(evt) {
-        if ($('#formSearch').val() == 9) {
+        if ($('#formSearch').val() == 7) {
           var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857',
               'EPSG:4326');
           var getUrlInfo = function(layerInfo) {
@@ -44,10 +44,22 @@ var searchdata = {
             async : false,
             success : function(res) {
               if (res.features.length > 0) {
-                var prov_code = res.features[0].properties.prov_code;
-                $('#province').val(prov_code);
+                if ($('#province').val() == '') {
+                  var prov_code = res.features[0].properties.prov_code;
+                  $('#province').val(prov_code);
+                } else {
+                  var ap_idn = res.features[0].properties.ap_idn
+                      .substring(2, 4);
+                  if (ap_idn[0] == '0') {
+                    ap_idn = ap_idn[1];
+                  }
+                  $('#amphur').val(ap_idn);
+                }
+                // alert(prov_code);
                 centermap = true
-                
+                var formData = $('#searchForm').serialize();
+                var data = searchdata.getData(formData);
+                searchdata.addLayer(data);
                 CenterMap(lonlat[0], lonlat[1], centermap)
               }
             }
@@ -72,11 +84,20 @@ var searchdata = {
     map.removeLayer(provinceLayer);
     sld_body = this.generate_xml(res);
 
+    if ($('#province').val() != "") {
+      if ($('#amphur').val() != "") {
+        layer_name = 'mol:tambons';
+      } else {
+        layer_name = 'mol:amphoes';
+      }
+    } else {
+      layer_name = 'mol:provinces';
+    }
     provinceLayer = new ol.layer.Tile({
       source : new ol.source.TileWMS({
         url : config.geoserverUrl + "/mol/wms",
         params : {
-          LAYERS : 'mol:provinces',
+          LAYERS : layer_name,
           STYLES : '',
           SLD_BODY : sld_body,
           TILED : true
@@ -117,9 +138,26 @@ var searchdata = {
 
   generate_xml : function(res) {
     var sld_body = '';
-    var title = 'Provinces';
-    var layer_name = 'mol:provinces';
-    var id_name = 'prov_code';
+    var title = '';
+    var layer_name = '';
+    var id_name = '';
+
+    if ($('#province').val() != "") {
+      if ($('#amphur').val() != "") {
+        title = 'Tambons';
+        layer_name = 'mol:tambons';
+        id_name = 'tb_idn';
+
+      } else {
+        title = 'Amphurs';
+        layer_name = 'mol:amphoes';
+        id_name = 'ap_idn';
+      }
+    } else {
+      title = 'Provinces';
+      layer_name = 'mol:provinces';
+      id_name = 'prov_code';
+    }
     sld_body = '<?xml version="1.0" encoding="UTF-8"?><StyledLayerDescriptor version="1.0.0" xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
     sld_body += '<NamedLayer><Name>' + layer_name + '</Name><UserStyle><Title>'
         + title + '</Title><Abstract>' + title
@@ -218,7 +256,7 @@ map.on('singleclick', function(evt) {
   if (mapMode == 'search') {
     var coordinate = evt.coordinate;
     var xy = String(coordinate).split(',');
-    //content.innerHTML = '';
+    // content.innerHTML = '';
     var getUrlInfo = function(layerInfo) {
       var view = map.getView();
       var viewResolution = view.getResolution();
@@ -251,7 +289,15 @@ map.on('singleclick', function(evt) {
         var ap_idn = '';
         var tb_idn = '';
         if (res.features.length > 0) {
-          prov_code = res.features[0].properties.prov_code;
+          if ($('#province').val() == '') {
+            prov_code = res.features[0].properties.prov_code;
+          } else if ($('#amphur').val() == '') {
+            ap_idn = res.features[0].properties.ap_idn;
+          } else {
+            tb_idn = res.features[0].properties.tb_idn;
+            if (!tb_idn)
+              tb_idn = '';
+          }
           var param = 'prov_code=' + prov_code + '&ap_idn=' + ap_idn
               + '&tb_idn=' + tb_idn + '&' + $('#searchForm').serialize();
 
@@ -282,6 +328,8 @@ function hideResultPanel(obj) {
 
 function clearSearchResult() {
   map.removeLayer(provinceLayer);
+  map.getView().setZoom(6);
+  map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
   $('#collapseResult div').html('');
 }
 

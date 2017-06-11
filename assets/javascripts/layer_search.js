@@ -1,24 +1,24 @@
 var searchtool = (function() {
   var init = function() {
-//    var dataTmp = getData();
-//    var data = [];
-//
-//    $('#layerSearchSelectForm').append($('<option>', {
-//      value : '-1',
-//      text : 'กรุณาเลือก'
-//    }));
-//    $.each(dataTmp, function(i, item) {
-//
-//      $('#layerSearchSelectForm').append($('<option>', {
-//        value : item.id,
-//        text : item.text
-//      }));
-//    });
+    // var dataTmp = getData();
+    // var data = [];
+    //
+    // $('#layerSearchSelectForm').append($('<option>', {
+    // value : '-1',
+    // text : 'กรุณาเลือก'
+    // }));
+    // $.each(dataTmp, function(i, item) {
+    //
+    // $('#layerSearchSelectForm').append($('<option>', {
+    // value : item.id,
+    // text : item.text
+    // }));
+    // });
 
   };
 
   $('#layerSearchSelectForm').on('change', function() {
-    map.removeLayer(provinceLayer);
+    clearSearchResult();
     $('#layerSearchForm').load("templates/filter/" + this.value + ".php");
   });
   var showPanel = function() {
@@ -80,6 +80,7 @@ function ClickSearchLayer() {
   // var quarterValue = getDataDropdown("quarterFilter");
 
   var data = searchdata.getData(formData);
+  searchdata.setup(data);
   searchdata.addLayer(data);
 };
 

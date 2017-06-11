@@ -139,7 +139,28 @@ switch($_GET['formSearch']){
     }
     break;
   case 7 :
-    $title = '';
+    $title = 'ของ';
+    
+    if (isset($_GET["amphur"])){
+      if (! empty($_GET["amphur"])){
+        $where = ' WHERE  ROWNUM <2 ';
+        $where .= " AND PROVINCE_CODE = '" . $_GET['province'] . "'  AND AMPHUR_CODE = '" . $_GET['amphur'] . "' ";
+        $sql = "SELECT PROVINCE_NAME,AMPHUR_NAME FROM DB_MOL.STD_LOCATION  $where ";
+        $result = oci_parse($conn, $sql);
+        oci_execute($result);
+        $row = oci_fetch_array($result, OCI_BOTH);
+        // print_r($row);
+        $title .= 'อำเภอ ' . $row['AMPHUR_NAME'] . ' จังหวัด' . $row['PROVINCE_NAME'];
+      }elseif (isset($_GET['province'])){
+        if (! empty($_GET['province'])){
+          require_once ('../../config/static.php');
+          $title .= 'จังหวัด' . $procince_conf[$_GET['province']];
+        }else{
+          $title .= 'ทุกจังหวัด';
+        }
+      }
+    }
+    
     $name = 'ผู้สูงอายุ';
     break;
   case 8 :
