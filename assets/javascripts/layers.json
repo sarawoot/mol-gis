@@ -230,7 +230,7 @@
     "parent": "#",
     "data": {
       "category": "folder",
-      "id": "2"
+      "id": "12"
     },
     "state": {
       "selected": false
@@ -244,7 +244,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Ladkrabung/MapServer",
-      "id": "3"
+      "id": "13"
     },
     "state": {
       "selected": false
@@ -258,7 +258,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Bangpoo/MapServer",
-      "id": "3"
+      "id": "14"
     },
     "state": {
       "selected": false
@@ -272,7 +272,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Lamchabung/MapServer",
-      "id": "3"
+      "id": "15"
     },
     "state": {
       "selected": false
@@ -286,7 +286,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Plangyaw/MapServer",
-      "id": "3"
+      "id": "16"
     },
     "state": {
       "selected": false
@@ -300,7 +300,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Maptaput/MapServer",
-      "id": "3"
+      "id": "17"
     },
     "state": {
       "selected": false
@@ -314,7 +314,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Industry/BD_Indus_Latlong_Bowin/MapServer",
-      "id": "3"
+      "id": "18"
     },
     "state": {
       "selected": false
@@ -328,7 +328,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/New_Industrail_Estate/Ammata_Nakorn/MapServer",
-      "id": "3"
+      "id": "19"
     },
     "state": {
       "selected": false
@@ -340,7 +340,7 @@
     "parent": "#",
     "data": {
       "category": "folder",
-      "id": "2"
+      "id": "20"
     },
     "state": {
       "selected": false
@@ -354,7 +354,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2008/MapServer",
-      "id": "3"
+      "id": "21"
     },
     "state": {
       "selected": false
@@ -368,7 +368,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2009/MapServer",
-      "id": "3"
+      "id": "22"
     },
     "state": {
       "selected": false
@@ -382,7 +382,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2010/MapServer",
-      "id": "3"
+      "id": "23"
     },
     "state": {
       "selected": false
@@ -396,7 +396,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2011/MapServer",
-      "id": "3"
+      "id": "24"
     },
     "state": {
       "selected": false
@@ -410,7 +410,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NewFlood/New_flood2012/MapServer",
-      "id": "3"
+      "id": "25"
     },
     "state": {
       "selected": false
@@ -422,7 +422,7 @@
     "parent": "#",
     "data": {
       "category": "folder",
-      "id": "2"
+      "id": "26"
     },
     "state": {
       "selected": false
@@ -436,7 +436,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/RISK_DROUGHT/Risk_drought_Province1_g_m/MapServer",
-      "id": "3"
+      "id": "27"
     },
     "state": {
       "selected": false
@@ -450,7 +450,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_north13062556/MapServer",
-      "id": "3"
+      "id": "28"
     },
     "state": {
       "selected": false
@@ -464,7 +464,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_2northeast13062556/MapServer",
-      "id": "3"
+      "id": "29"
     },
     "state": {
       "selected": false
@@ -478,7 +478,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_center13062556/MapServer",
-      "id": "3"
+      "id": "30"
     },
     "state": {
       "selected": false
@@ -492,7 +492,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_EAST13062556/MapServer",
-      "id": "3"
+      "id": "31"
     },
     "state": {
       "selected": false
@@ -506,7 +506,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_west13062556/MapServer",
-      "id": "3"
+      "id": "32"
     },
     "state": {
       "selected": false
@@ -520,7 +520,7 @@
       "layer": true,
       "category": "arcgis",
       "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/NEW_RISK_DROUGTH/RISK_drought_south13062556/MapServer",
-      "id": "3"
+      "id": "33"
     },
     "state": {
       "selected": false
