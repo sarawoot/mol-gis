@@ -26,7 +26,7 @@
 				<option value="5">ผู้ประกันตน ม.33</option>
 				<option value="6">ผู้ประกันตน ม.40</option>
 				<option value="7">ผู้สูงอายุ</option>
-				<option value="8">สถิติผู้พิการ (รายปี)</option>
+				<option value="8">สถิติผู้พิการ (ราย 5 ปี)</option>
 				<option value="9">สถิติผู้สูงอายุ (รายปี)</option>
 				<option value="10">สถิติการสำรวจประชากร (รายเดือน)</option>
 				<option value="11">สถิติการสำรวจประชากร (รายไตรมาส)</option>
