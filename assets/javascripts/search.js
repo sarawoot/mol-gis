@@ -1,4 +1,4 @@
-var colors = [ "#d7006d", "#ed1c24", "#fdb913", "#00a651", "#034ea2" ];
+var colors = ["#38a800", "#9fd900", "#fcfc00", "#ff950a", "#e60000"];
 
 var searchdata = {
   init : function() {

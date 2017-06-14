@@ -1,6 +1,5 @@
 var whatIf = (function () {
-  var colors = [ "#e60000", "#ff950a", "#fcfc00", "#9fd900", "#38a800" ];
-  colors = colors.reverse();
+  var colors = ["#38a800", "#9fd900", "#fcfc00", "#ff950a", "#e60000"];  
   var init = function () {
     $("#whatIfCategory").change(function () {
       categoryChange();
