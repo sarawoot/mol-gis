@@ -315,7 +315,7 @@ map.on('singleclick', function(evt) {
             if (!tb_idn)
               tb_idn = '';
           }
-          var param = 'prov_code=' + prov_code + '&ap_idn=' + ap_idn
+          var param = 'pop=1&prov_code=' + prov_code + '&ap_idn=' + ap_idn
               + '&tb_idn=' + tb_idn + '&' + $('#searchForm').serialize();
 
           $.ajax({
@@ -348,6 +348,8 @@ function clearSearchResult() {
   map.getView().setZoom(6);
   map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
   $('#collapseResult div').html('');
+  $('#province').val('');
+  $('#amphur').val('');
 }
 
 function number_format(str) {

@@ -80,6 +80,7 @@ function genSql($param){
       if (! empty($param["province"])){
         $pcode = $param["province"];
       }
+      
       if ($pcode != ''){
         $select = 'SL.PROVINCE_CODE ,SL.PROVINCE_NAME,SL.AMPHUR_CODE ,SL.AMPHUR_NAME ,COUNT(TDR.PERSONAL_ID) AS cnt';
         $group_by = 'SL.PROVINCE_CODE ,SL.PROVINCE_NAME,SL.AMPHUR_CODE ,SL.AMPHUR_NAME ';
@@ -97,6 +98,18 @@ function genSql($param){
       if (! empty($param["PROVINCE_GROUP_CODE"])){
         require_once ("../config/static.php");
         $where .= " AND SL.PROVINCE_CODE IN (" . implode(',', $province_id_array[$param["PROVINCE_GROUP_CODE"]]) . ") ";
+      }
+    }
+    
+    if (isset($_GET['pop'])){
+      if ($_GET['pop'] == 1){
+        if (isset($_GET['prov_code'])){
+          if (! empty($_GET['prov_code'])){
+            $select = 'SL.PROVINCE_CODE AS CWT_CODE,SL.PROVINCE_NAME AS CWT_DESC
+            ,COUNT(TDR.PERSONAL_ID) AS cnt';
+            $group_by = ' SL.PROVINCE_CODE,SL.PROVINCE_NAME';
+          }
+        }
       }
     }
     
@@ -234,8 +247,8 @@ function genSql($param){
         break;
     }
   }
-//   echo $sql;
-//   exit();
+  // echo $sql;
+  // exit();
   return $sql;
 }
 function get_year_list($formSearch = 1){
