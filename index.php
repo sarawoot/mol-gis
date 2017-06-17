@@ -54,6 +54,7 @@
   <div class="mouse-position" id="mapPosition"></div>
 
   <!-- script -->
+  <script src="assets/javascripts/numeral.js"></script>
   <script src="vendor/assets/javascripts/lodash.min.js"></script>
   <script src="vendor/assets/javascripts/pace.min.js"></script>
   <script src="vendor/assets/javascripts/ol-4.1.0/ol.js"></script>
@@ -73,5 +74,6 @@
   <script src="assets/javascripts/config.js"></script>
   <script src="assets/javascripts/layer_search.js"></script>
   <script src="assets/javascripts/search.js"></script>
+  
 </body>
 </html>

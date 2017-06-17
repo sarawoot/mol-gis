@@ -1,5 +1,66 @@
-var colors = ["#38a800", "#9fd900", "#fcfc00", "#ff950a", "#e60000"];
+var colors = [ "#38a800", "#9fd900", "#fcfc00", "#ff950a", "#e60000" ];
+var center_region = [ '', [ 11089400.34029035, 1942472.3409269839 ],
+    [ 11502771.789256584, 1829957.0352912042 ],
+    [ 11162779.88744412, 1565790.6655376353 ],
+    [ 11331552.845897788, 1450829.3749967301 ],
+    [ 11079616.400669849, 907820.7260588383 ] ];
+var callback = function(evt) {
+  searchdataDbl(evt);
+};
 
+function searchdataDbl(evt) {
+  var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+  var getUrlInfo = function(layerInfo) {
+    var view = map.getView();
+    var viewResolution = view.getResolution();
+    var source = layerInfo.getSource();
+    var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution, view
+        .getProjection(), {
+      'INFO_FORMAT' : 'application/json',
+      'FEATURE_COUNT' : 1
+    });
+    return url;
+  };
+  var url = getUrlInfo(provinceLayer);
+  var dataEntries = url.split("&");
+  var params = "";
+  for (var i = 0; i < dataEntries.length; i++) {
+    if (i === 0) {
+      url = dataEntries[i];
+    } else if (!/SLD_BODY/.test(dataEntries[i])) {
+      params = params + "&" + dataEntries[i];
+    }
+  }
+  $.ajax({
+    url : url,
+    dataType : 'json',
+    type : 'POST',
+    data : params,
+    async : false,
+    success : function(res) {
+      if (res.features.length > 0) {
+        if ($('#province').val() == '') {
+          var prov_code = res.features[0].properties.prov_code;
+
+          $('#province').val(prov_code);
+        } else {
+          var ap_idn = res.features[0].properties.ap_idn.substring(2, 4);
+          if (ap_idn[0] == '0') {
+            ap_idn = ap_idn[1];
+          }
+          $('#amphur').val(ap_idn);
+        }
+        // alert(prov_code);
+        centermap = true
+        var formData = $('#searchForm').serialize();
+        var data = searchdata.getData(formData);
+        searchdata.addLayer(data);
+        CenterMap(lonlat[0], lonlat[1], centermap)
+      }
+    }
+  });
+
+}
 var searchdata = {
   init : function() {
     data = this.getData();
@@ -11,62 +72,9 @@ var searchdata = {
   setup : function(formData) {
 
     if (mapMode == 'search') {
-      map.on('dblclick', function(evt) {
-        if ($('#formSearch').val() == 7) {
-          var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857',
-              'EPSG:4326');
-          var getUrlInfo = function(layerInfo) {
-            var view = map.getView();
-            var viewResolution = view.getResolution();
-            var source = layerInfo.getSource();
-            var url = source.getGetFeatureInfoUrl(evt.coordinate,
-                viewResolution, view.getProjection(), {
-                  'INFO_FORMAT' : 'application/json',
-                  'FEATURE_COUNT' : 1
-                });
-            return url;
-          };
-          var url = getUrlInfo(provinceLayer);
-          var dataEntries = url.split("&");
-          var params = "";
-          for (var i = 0; i < dataEntries.length; i++) {
-            if (i === 0) {
-              url = dataEntries[i];
-            } else if (!/SLD_BODY/.test(dataEntries[i])) {
-              params = params + "&" + dataEntries[i];
-            }
-          }
-          $.ajax({
-            url : url,
-            dataType : 'json',
-            type : 'POST',
-            data : params,
-            async : false,
-            success : function(res) {
-              if (res.features.length > 0) {
-                if ($('#province').val() == '') {
-                  var prov_code = res.features[0].properties.prov_code;
-                  $('#province').val(prov_code);
-                } else {
-                  var ap_idn = res.features[0].properties.ap_idn
-                      .substring(2, 4);
-                  if (ap_idn[0] == '0') {
-                    ap_idn = ap_idn[1];
-                  }
-                  $('#amphur').val(ap_idn);
-                }
-                // alert(prov_code);
-                centermap = true
-                var formData = $('#searchForm').serialize();
-                var data = searchdata.getData(formData);
-                searchdata.addLayer(data);
-                CenterMap(lonlat[0], lonlat[1], centermap)
-              }
-            }
-          });
-        }
+      map.un('dblclick', searchdataDbl);
+      map.on('dblclick', searchdataDbl);
 
-      });
     }
 
   },
@@ -85,7 +93,7 @@ var searchdata = {
     sld_body = this.generate_xml(res);
 
     if ($('#province').val() != "") {
-      if ($('#amphur').val() != "") {
+      if ($('#amphur').val() != "" && $('#formSearch').val() != 14) {
         layer_name = 'mol:tambons';
       } else {
         layer_name = 'mol:amphoes';
@@ -111,6 +119,13 @@ var searchdata = {
 
     // layer.set("id", 'prov_code');
     map.addLayer(provinceLayer);
+    if ($('#formSearch').val() == 14) {
+      if ($('#PROVINCE_GROUP_CODE').val() != '') {
+
+        map.getView().setCenter(center_region[$('#PROVINCE_GROUP_CODE').val()]);
+        map.getView().setZoom(7);
+      }
+    }
   },
 
   getData : function(param) {
@@ -143,7 +158,7 @@ var searchdata = {
     var id_name = '';
 
     if ($('#province').val() != "") {
-      if ($('#amphur').val() != "") {
+      if ($('#amphur').val() != "" && $('#formSearch').val() != 14) {
         title = 'Tambons';
         layer_name = 'mol:tambons';
         id_name = 'tb_idn';
@@ -177,7 +192,7 @@ var searchdata = {
                         if (item.cnt >= interval[0] && item.cnt <= interval[1]) {
                           sld_body += '<CssParameter name="fill">'
                               + colors[idx] + '</CssParameter>';
-                          sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
+                          sld_body += '<CssParameter name="fill-opacity">0.9</CssParameter>';
 
                         } else if (item.cnt == 0) {
 
@@ -186,7 +201,7 @@ var searchdata = {
                         }
                       })
               sld_body += '</Fill><Stroke><CssParameter name="stroke">#FFFFFF</CssParameter><CssParameter name="stroke-width">2</CssParameter></Stroke></PolygonSymbolizer><TextSymbolizer><Label>'
-                  + item.cnt
+                  + number_format(item.cnt)
                   + '</Label><Font><CssParameter name="font-family">Tahoma</CssParameter><CssParameter name="font-size">13.0</CssParameter><CssParameter name="font-style">normal</CssParameter><CssParameter name="font-weight">bold</CssParameter></Font><LabelPlacement><PointPlacement><AnchorPoint><AnchorPointX>0.5</AnchorPointX><AnchorPointY>0.5</AnchorPointY></AnchorPoint><Displacement><DisplacementX>0.0</DisplacementX><DisplacementY>0.0</DisplacementY></Displacement></PointPlacement></LabelPlacement><Fill><CssParameter name="fill">#3D3D3D</CssParameter></Fill><Halo><CssParameter name="fill">#FFFFFF</CssParameter></Halo></TextSymbolizer></Rule>';
             });
     sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
@@ -252,9 +267,11 @@ function CenterMap(long, lat, amphur) {
   map.getView().setZoom((amphur ? 7 : 11));
 
 }
+
 map.on('singleclick', function(evt) {
   if (mapMode == 'search') {
     var coordinate = evt.coordinate;
+
     var xy = String(coordinate).split(',');
     // content.innerHTML = '';
     var getUrlInfo = function(layerInfo) {
@@ -331,6 +348,17 @@ function clearSearchResult() {
   map.getView().setZoom(6);
   map.getView().setCenter([ 11302896.246585583, 1477374.8826958865 ]);
   $('#collapseResult div').html('');
+}
+
+function number_format(str) {
+  str = String(str);
+  var idex = str.indexOf('.');
+  if (idex == -1) {
+    return numeral(str).format('0,0')
+  } else {
+    return numeral(str).format('0,0.00')
+  }
+
 }
 
 // searchdata.init();

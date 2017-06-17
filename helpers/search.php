@@ -58,6 +58,54 @@ function genSql($param){
             AND STD_LOCATION.province_code NOT IN (00,99)
             GROUP BY $group_by";
     // echo $sql;
+  }elseif ($param['formSearch'] == 14){
+    $select = 'SL.PROVINCE_CODE AS CWT_CODE,SL.PROVINCE_NAME AS CWT_DESC
+            ,COUNT(TDR.PERSONAL_ID) AS cnt';
+    $where = '';
+    $group_by = ' SL.province_code,SL.province_name';
+    
+    if (isset($param["YEARS"])){
+      if (! empty($param["YEARS"])){
+        $where .= " AND (EXTRACT(YEAR FROM TDR.PROCESS_DATE) + 543 ) = " . ( int ) $param["YEARS"];
+        ;
+      }
+    }
+    
+    $pcode = '';
+    if (isset($param["CWT_CODE"]) || isset($param['province'])){
+      if (! empty($param["CWT_CODE"])){
+        $pcode = $param["CWT_CODE"];
+      }
+      
+      if (! empty($param["province"])){
+        $pcode = $param["province"];
+      }
+      if ($pcode != ''){
+        $select = 'SL.PROVINCE_CODE ,SL.PROVINCE_NAME,SL.AMPHUR_CODE ,SL.AMPHUR_NAME ,COUNT(TDR.PERSONAL_ID) AS cnt';
+        $group_by = 'SL.PROVINCE_CODE ,SL.PROVINCE_NAME,SL.AMPHUR_CODE ,SL.AMPHUR_NAME ';
+        require_once ("../config/static.php");
+        $where .= " AND SL.PROVINCE_CODE = " . ( int ) $pcode;
+        if (isset($param['ap_idn'])){
+          if (! empty($param['ap_idn'])){
+            $where .= " AND SL.AMPHUR_CODE = '" . substr($param['ap_idn'], 2, 2) . "'";
+          }
+        }
+      }
+    }
+    
+    if (isset($param["PROVINCE_GROUP_CODE"]) && $pcode == ''){
+      if (! empty($param["PROVINCE_GROUP_CODE"])){
+        require_once ("../config/static.php");
+        $where .= " AND SL.PROVINCE_CODE IN (" . implode(',', $province_id_array[$param["PROVINCE_GROUP_CODE"]]) . ") ";
+      }
+    }
+    
+    $sql = "SELECT $select FROM DB_MOL.TRT_DOAE_REGISTER TDR 
+            INNER JOIN DB_MOL.CMN_PERSONAL_ADDRESS CPA ON TDR.PERSONAL_ID = CPA.PERSONAL_ID 
+            INNER JOIN DB_MOL.STD_LOCATION SL ON CPA.ADDR_REGISTER_LOCATION = SL.LOCATION_CODE 
+            WHERE  1=1 $where
+            GROUP BY $group_by ";
+    // echo $sql;
   }else{
     switch($param['formSearch']){
       case 1 :
@@ -83,6 +131,7 @@ function genSql($param){
       case 6 :
         $tbl = 'VIEW_GIS_SSO_INSURED_M40';
         $sum_field = 'M40_AMT';
+        break;
       case 8 :
         $tbl = 'VIEW_GIS_STAT_NSO_DISABILITY';
         $sum_field = 'WEIGHT_AMT';
@@ -185,7 +234,8 @@ function genSql($param){
         break;
     }
   }
-//   echo $sql; exit();
+//   echo $sql;
+//   exit();
   return $sql;
 }
 function get_year_list($formSearch = 1){
@@ -202,6 +252,7 @@ function get_year_list($formSearch = 1){
       8 => 'VIEW_GIS_STAT_NSO_DISABILITY',9 => 'VIEW_GIS_STAT_NSO_ELDER'
   ];
   $f = 'YEARS';
+  $fs = 'YEARS';
   $tbl = '';
   if (array_key_exists($formSearch, $YEARS)){
     $tbl = $YEARS[$formSearch];
@@ -209,14 +260,20 @@ function get_year_list($formSearch = 1){
   if (array_key_exists($formSearch, $YEAR_TH)){
     $tbl = $YEAR_TH[$formSearch];
     $f = 'YEAR_TH';
+    $fs = 'YEAR_TH';
   }
   
-  $sql = " SELECT  DISTINCT $f FROM $tbl ORDER BY $f DESC";
+  if ($formSearch == 14){
+    $tbl = "DB_MOL.TRT_DOAE_REGISTER";
+    $f = '(EXTRACT(YEAR FROM PROCESS_DATE) + 543 ) AS YEARS';
+  }
+  
+  $sql = " SELECT  DISTINCT $f FROM $tbl ORDER BY $fs DESC";
   $result = oci_parse($conn, $sql);
   oci_execute($result);
   $y = [];
   while(($row = oci_fetch_array($result, OCI_BOTH)) != false){
-    $y[] = $row[$f];
+    $y[] = $row[$fs];
   }
   return $y;
 }

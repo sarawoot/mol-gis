@@ -1,13 +1,16 @@
 <!-- สถิติการสำรวจประชากร (รายเดือน) VIEW_GIS_STAT_NSO_MONTHLY-->
 <?php
 require_once ("../../helpers/search.php");
+
 $year = get_year_list(10);
 $m = 1;
 ?>
+
 <div class="row">
 	<div class="form-group col-md-12">
 		<div class="col-md-12">
-			ปี<br> <select class="form-control " id="YEARS" name="YEARS">
+			ปี<br> <select class="form-control " id="YEARS" name="YEARS"
+				onchange="$('#MONTH_CODE').load('controllers/month10.php?YEARS=' + this.value);">
 				<option value="">เลือกข้อมูล</option>
 				<?php
     if (count($year) > 0){

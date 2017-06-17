@@ -80,8 +80,13 @@ function ClickSearchLayer() {
   // var quarterValue = getDataDropdown("quarterFilter");
 
   var data = searchdata.getData(formData);
-  searchdata.setup(data);
-  searchdata.addLayer(data);
+  if ($('#formSearch').val() == 7 || $('#formSearch').val() == 14) {
+    searchdata.setup(data);
+    searchdata.addLayer(data);
+  } else {
+    map.un('dblclick', searchdataDbl);
+    searchdata.addLayer(data);
+  }
 };
 
 // function getDataDropdown(input) {
