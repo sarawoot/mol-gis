@@ -7,6 +7,7 @@ $intervals = explode(',', $_GET['intervals']);
 // ประจำปีงบประมาณ 2559 เป็นการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ ทุกประเภทของผู้สมัครทดสอบในสาขาภาคบริการ และทุกสาขาอาชีพ
 $title = '';
 $name = '';
+$unit = 'คน';
 switch($_GET['formSearch']){
   case 1 :
     
@@ -22,6 +23,12 @@ switch($_GET['formSearch']){
     $name = 'คนพิการมีงานทำ';
     break;
   case 10 :
+    $title = '';
+    if (isset($_GET["YEARS"])){
+      if (! empty($_GET["YEARS"])){
+        $title .= "<br>ประจำปี " . $_GET['YEARS'] . '&nbsp;';
+      }
+    }
     if (isset($_GET["MONTH_CODE"])){
       if (! empty($_GET["MONTH_CODE"])){
         if (strlen($_GET['MONTH_CODE']) == 1){
@@ -30,6 +37,7 @@ switch($_GET['formSearch']){
         $title .= "ประจำเดือน" . $month_conf[$_GET['MONTH_CODE']] . '&nbsp;';
       }
     }
+    $name = 'สถิติการสำรวจประชากร (รายเดือน)';
     break;
   case 2 :
   case 3 :
@@ -40,16 +48,17 @@ switch($_GET['formSearch']){
   
   case 11 :
   case 12 :
+  
   case 13 :
     $title = '';
     if (isset($_GET["YEARS"])){
       if (! empty($_GET["YEARS"])){
-        $title .= "ประจำปีงบประมาณ " . $_GET['YEARS'] . '&nbsp;';
+        $title .= "ประจำปี " . $_GET['YEARS'] . '&nbsp;';
       }
     }
     if (isset($_GET["YEAR_TH"])){
       if (! empty($_GET["YEAR_TH"])){
-        $title .= "ประจำปีงบประมาณ " . $_GET['YEAR_TH'] . '&nbsp;';
+        $title .= "ประจำปี " . $_GET['YEAR_TH'] . '&nbsp;';
       }
     }
     if (isset($_GET["MONTH_CODE"])){
@@ -97,6 +106,7 @@ switch($_GET['formSearch']){
         break;
       case 4 :
         $name = 'ตำแหน่งงานว่าง';
+        $unit = 'อัตรา';
         break;
       case 5 :
         $name = 'ผู้ประกันตน ม.33';
@@ -105,10 +115,7 @@ switch($_GET['formSearch']){
         $name = 'ผู้ประกันตน ม.40';
         break;
       case 9 :
-        $name = 'สถิติผู้สูงอายุ (รายปี)';
-        break;
-      case 10 :
-        $name = 'สถิติการสำรวจประชากร (รายเดือน)';
+        $name = 'สถิติแรงงานผู้สูงอายุ (รายปี)';
         break;
       case 11 :
         $name = 'สถิติการสำรวจประชากร (รายไตรมาส)';
@@ -139,7 +146,7 @@ switch($_GET['formSearch']){
     }
     break;
   case 7 :
-    $title = 'ของ';
+    $title = '';
     
     if (isset($_GET["amphur"])){
       if (! empty($_GET["amphur"])){
@@ -161,18 +168,18 @@ switch($_GET['formSearch']){
       }
     }
     
-    $name = 'ผู้สูงอายุ';
+    $name = 'สถิติแรงงานผู้สูงอายุ (ราย 3 ปี)';
     break;
   case 8 :
     $title = '';
     if (isset($_GET["YEAR_TH"])){
       if (! empty($_GET["YEAR_TH"])){
-        $title .= "ประจำปีงบประมาณ " . $_GET['YEAR_TH'] . '&nbsp;';
+        $title .= "ประจำปี " . $_GET['YEAR_TH'] . '&nbsp;';
       }
     }
     if (isset($_GET["YEARS"])){
       if (! empty($_GET["YEARS"])){
-        $title .= "ประจำปีงบประมาณ " . $_GET['YEARS'] . '&nbsp;';
+        $title .= "ประจำปี " . $_GET['YEARS'] . '&nbsp;';
       }
     }
     if (isset($_GET["DISABILITY_GROUP_CODE"])){
@@ -204,7 +211,26 @@ switch($_GET['formSearch']){
       }
     }
     
-    $name = 'สถิติผู้พิการ (รายปี)';
+    $name = 'สถิติผู้พิการ (ราย 5 ปี)';
+    break;
+  case 14 :
+    $title = 'สถิติผู้ประสบภัยแล้ง';
+    if (isset($_GET["YEARS"])){
+      if (! empty($_GET["YEARS"])){
+        $title .= "ประจำปี " . $_GET['YEARS'] . '&nbsp;';
+      }
+    }
+    
+    if (isset($_GET["PROVINCE_GROUP_CODE"])){
+      if (! empty($_GET["PROVINCE_GROUP_CODE"])){
+        $title .= $region_name[$_GET['PROVINCE_GROUP_CODE']] . '&nbsp;';
+      }
+    }
+    if (isset($_GET["PROVINCE"])){
+      if (! empty($_GET["PROVINCE"])){
+        $title .= "จังหวัด " . $_GET['PROVINCE'] . '&nbsp;';
+      }
+    }
     break;
   
   default :
@@ -249,7 +275,7 @@ if (isset($_GET['intervals'])){
       $n2 = explode('.', $intervals[$kk2[$k]]);
       $num1 = number_format((( int ) $n1[0])) . (isset($n1[1]) ? (( int ) '.' . $n1[1]) : '');
       $num2 = number_format((( int ) $n2[0])) . (isset($n2[1]) ? (( int ) '.' . $n2[1]) : '');
-      echo $num1, ' - ', $num2?>
+      echo $num1, ' - ', $num2, ' ', $unit?>
       				</td>
 					<td></td>
 				</tr>

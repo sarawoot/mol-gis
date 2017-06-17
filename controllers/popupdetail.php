@@ -33,6 +33,8 @@ if (isset($_GET['province'])){
 $ampur = '';
 if (isset($row['AMP_DESC'])){
   $ampur = 'อำเภอ' . $row['AMP_DESC'] . ' ';
+}elseif(isset($row['AMPHUR_NAME'])){
+  $ampur = 'อำเภอ' . $row['AMPHUR_NAME'] . ' ';
 }
 
 $tumbol = '';

@@ -44,20 +44,30 @@ $data = array(
 
 while(($row = oci_fetch_array($result, OCI_BOTH)) != false){
   $idcode = $row["CWT_CODE"];
-  //echo "<pre>"; print_r($row);
-  if (isset($_GET['province'])){
-    if (! empty($row['AMP_CODE'])){
-      $idcode = $row["CWT_CODE"] . $row["AMP_CODE"];
+  // echo "<pre>"; print_r($row);
+  if ($_GET['formSearch'] == 14){
+    $idcode = $row["CWT_CODE"];
+    if (isset($_GET['province'])){
+      if (! empty($_GET['province'])){
+        
+        $idcode = $row["PROVINCE_CODE"].$row["AMPHUR_CODE"];
+      }
     }
-    if (isset($_GET['amphur'])){
-      
-      if (! empty($row['TMB_CODE'])){
-        $idcode = $row["CWT_CODE"] . $row["AMP_CODE"] . $row['TMB_CODE'];
+  }else{
+    if (isset($_GET['province'])){
+      if (! empty($row['AMP_CODE'])){
+        $idcode = $row["CWT_CODE"] . $row["AMP_CODE"];
+      }
+      if (isset($_GET['amphur'])){
+        
+        if (! empty($row['TMB_CODE'])){
+          $idcode = $row["CWT_CODE"] . $row["AMP_CODE"] . $row['TMB_CODE'];
+        }
       }
     }
   }
   $data["data"][] = array(
-      "id_code" => $idcode,"cnt" => $row["CNT"]
+      "id_code" => $idcode,"cnt" => ( int ) $row["CNT"]
   );
 }
 

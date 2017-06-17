@@ -25,13 +25,13 @@
 				<option value="4">ตำแหน่งงานว่าง</option>
 				<option value="5">ผู้ประกันตน ม.33</option>
 				<option value="6">ผู้ประกันตน ม.40</option>
-				<option value="7">ผู้สูงอายุ</option>
+				<option value="7">แรงงานผู้สูงอายุ</option>
 				<option value="8">สถิติผู้พิการ (ราย 5 ปี)</option>
-				<option value="9">สถิติผู้สูงอายุ (รายปี)</option>
-				<option value="10">สถิติการสำรวจประชากร (รายเดือน)</option>
+				<option value="9">สถิติผู้สูงอายุ (ราย 3 ปี)</option>
 				<option value="11">สถิติการสำรวจประชากร (รายไตรมาส)</option>
-				<option value="12">สถิตแรงงานนอกระบบ</option>
-				<option value="13">สถิตแรงงานต่างด้าว</option>
+				<option value="12">สถิติแรงงานนอกระบบ</option>
+				<option value="13">สถิติแรงงานต่างด้าว</option>
+				<option value="14">ภัยแล้ง</option>
 			</select> <br />
 			<form name="searchForm" id="searchForm">
 				<div id="layerSearchForm"></div>
