@@ -19,7 +19,7 @@
                     <select id="whatIfCategory" class="form-control">
                       <option value="train">การฝึกอบรมฝีมือแรงงาน</option>
                       <option value="test">การทดสอบมาตรฐานฝีมือแรงงาน</option>
-                      <option value="test_economy_east">การทดสอบมาตรฐานฝีมือแรงงาน(ตะวันออก)</option>
+                      <option value="test_economy_east">การทดสอบมาตรฐานฝีมือแรงงาน(เศรษฐกิจภาคตะวันออก)</option>
                     </select>
                   </div>
                   <div class="form-group">
