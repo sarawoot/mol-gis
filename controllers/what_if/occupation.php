@@ -10,7 +10,7 @@
     $sql .= " ORDER BY TRAIN_OCCUPATION_GROUP_CODE";
   }
 
-  if ($_REQUEST["category"] == 'test') {
+  if ($_REQUEST["category"] == 'test' || $_REQUEST["category"] == 'test_economy_east') {
     $sql = "SELECT TEST_COURSE_CODE as CODE,TEST_COURSE_NAME as NAME FROM DB_MOL.STD_TEST_COURSE WHERE TEST_COURSE_CODE != 'NULL'";
     $sql .= " AND TEST_COURSE_NAME != 'NULL'";
     $sql .= " AND LAW_OCCUPATION_CODE = '".$_REQUEST['branch']."'";

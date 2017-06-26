@@ -144,8 +144,12 @@ var whatIf = (function () {
       data = _.merge(data, params)
     }
     data.type = type
+    var url = 'controllers/what_if/what_if.php'
+    if (category == 'test_economy_east') {
+      url = 'controllers/what_if/what_if_test_economy_east.php'
+    }
     $.ajax({
-      url: 'controllers/what_if/what_if.php',
+      url: url,
       type: 'GET',
       dataType: 'JSON',
       data: data,
@@ -185,7 +189,8 @@ var whatIf = (function () {
             tileLoadFunction : tileLoadFunction
           }),
           name: 'what-if',
-          type: this.type
+          type: this.type,
+          category: 'result'
         });
         map.addLayer(layer);
 

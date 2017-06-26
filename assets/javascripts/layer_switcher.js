@@ -56,7 +56,8 @@
       remove_layers = [];
       _.each(map.getLayers().getArray(), function(item) {
         if( _.indexOf( selected_id, item.get("id") ) == -1  && 
-            item.get("mapType") != "baseLayer" ) {
+            item.get("mapType") != "baseLayer"  && 
+            item.get('category') != 'result' ) {
           remove_layers.push(item);
         }
       });

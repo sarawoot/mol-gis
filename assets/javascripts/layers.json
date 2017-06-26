@@ -54,6 +54,48 @@
     }
   },
   {
+    "id": "34",
+    "text": "เขตเศรษฐกิจพิเศษ",
+    "parent": "#",
+    "data": {
+      "category": "folder",
+      "id": "34"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "35",
+    "text": "เขตเศรษฐกิจพิเศษชายแดน",
+    "parent": "34",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/%E0%B9%80%E0%B8%82%E0%B8%95%E0%B9%80%E0%B8%A8%E0%B8%A3%E0%B8%A9%E0%B8%90%E0%B8%81%E0%B8%B4%E0%B8%88%E0%B8%9E%E0%B8%B4%E0%B9%80%E0%B8%A8%E0%B8%A9/MapServer",
+      "prov_ids" :"23,27,48,49,57,63,71,90,96",
+      "id" : "35"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
+    "id": "36",
+    "text": "ระเบียงเศรษฐกิจภาคตะวันออก",
+    "parent": "34",
+    "data": {
+      "layer": true,
+      "category": "arcgis",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/EEC/MapServer",
+      "prov_ids" :"21,20,24",
+      "id" : "36"
+    },
+    "state": {
+      "selected": false
+    }
+  },
+  {
     "id": "6",
     "text": "ข้อมูลหน่วยงานภายนอกกระทรวงแรงงาน",
     "parent": "#",
