@@ -34,7 +34,7 @@ body {
 
 .mini-submenu-left {
     position: absolute;
-    top: 89px;
+    top: 65px;
     left: .5em;
     z-index: 40;
 }
