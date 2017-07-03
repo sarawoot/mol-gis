@@ -108,7 +108,7 @@ var whatIf = (function () {
                         }
                       })
               sld_body += '</Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter><CssParameter name="stroke-width">2</CssParameter></Stroke></PolygonSymbolizer><TextSymbolizer><Label>'
-                  + item.cnt
+                  + delimitNumbers(item.cnt)
                   + '</Label><Font><CssParameter name="font-family">Tahoma</CssParameter><CssParameter name="font-size">13.0</CssParameter><CssParameter name="font-style">normal</CssParameter><CssParameter name="font-weight">bold</CssParameter></Font><LabelPlacement><PointPlacement><AnchorPoint><AnchorPointX>0.5</AnchorPointX><AnchorPointY>0.5</AnchorPointY></AnchorPoint><Displacement><DisplacementX>0.0</DisplacementX><DisplacementY>0.0</DisplacementY></Displacement></PointPlacement></LabelPlacement><Fill><CssParameter name="fill">#3D3D3D</CssParameter></Fill><Halo><CssParameter name="fill">#FFFFFF</CssParameter></Halo></TextSymbolizer></Rule>';
             });
     // sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
@@ -199,7 +199,8 @@ var whatIf = (function () {
           intervals: res.intervals,
           colors: whatIf.colors,
           occupation: $("#whatIfOccupation option:selected").text(),
-          year: $("#whatIfYear option:selected").text()
+          year: $("#whatIfYear option:selected").text(),
+          category: $("#whatIfCategory").val()
         });
         if (!$("#collapseResult").is(":visible")) {
           $("#headingResult a").click();
