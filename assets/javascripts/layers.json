@@ -32,7 +32,7 @@
     "data": {
       "layer": true,
       "category": "arcgis",
-      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/basemap/ProvinceBasemap2/MapServer",
+      "url": "http://gis.nlic.mol.go.th:6080/arcgis/rest/services/Province_Thailand_MOL/Province/MapServer",
       "id": "4"
     },
     "state": {
