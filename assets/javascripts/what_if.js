@@ -104,16 +104,19 @@ var whatIf = (function () {
                         if (item.cnt >= interval[0] && item.cnt <= interval[1]) {
                           sld_body += '<CssParameter name="fill">'
                               + whatIf.colors[idx] + '</CssParameter>';
+                          sld_body += '<CssParameter name="fill-opacity">0.9</CssParameter>';
+                        } else if (item.cnt == 0) {
+
+                          sld_body += '<CssParameter name="fill">#333333</CssParameter>';
                           sld_body += '<CssParameter name="fill-opacity">0.5</CssParameter>';
                         }
                       })
-              sld_body += '</Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter><CssParameter name="stroke-width">2</CssParameter></Stroke></PolygonSymbolizer><TextSymbolizer><Label>'
+              sld_body += '</Fill><Stroke><CssParameter name="stroke">#FFFFFF</CssParameter><CssParameter name="stroke-width">2</CssParameter></Stroke></PolygonSymbolizer><TextSymbolizer><Label>'
                   + delimitNumbers(item.cnt)
                   + '</Label><Font><CssParameter name="font-family">Tahoma</CssParameter><CssParameter name="font-size">13.0</CssParameter><CssParameter name="font-style">normal</CssParameter><CssParameter name="font-weight">bold</CssParameter></Font><LabelPlacement><PointPlacement><AnchorPoint><AnchorPointX>0.5</AnchorPointX><AnchorPointY>0.5</AnchorPointY></AnchorPoint><Displacement><DisplacementX>0.0</DisplacementX><DisplacementY>0.0</DisplacementY></Displacement></PointPlacement></LabelPlacement><Fill><CssParameter name="fill">#3D3D3D</CssParameter></Fill><Halo><CssParameter name="fill">#FFFFFF</CssParameter></Halo></TextSymbolizer></Rule>';
             });
-    // sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
-    sld_body += '</FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
-
+    sld_body += '<Rule><Name>rule1</Name><Title>Rule 1</Title><Abstract>Rule 1</Abstract><PolygonSymbolizer><Fill><CssParameter name="fill-opacity">0</CssParameter></Fill><Stroke><CssParameter name="stroke">#3D3D3D</CssParameter></Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
+    
     return sld_body;
   }
 
