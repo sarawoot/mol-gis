@@ -1,3 +1,4 @@
+var whatIfData = [];
 var whatIf = (function () {
   var colors = ["#38a800", "#9fd900", "#fcfc00", "#ff950a", "#e60000"];  
   var init = function () {
@@ -126,8 +127,11 @@ var whatIf = (function () {
     var branch = $("#whatIfBranchOccupation").val();
     var occupation = $("#whatIfOccupation").val();
     var year = $("#whatIfYear").val();
-    var num = Number($("#whatIfPredictNum").val());
     var category = $("#whatIfCategory").val();
+    var num = Number($("#whatIfPredictNum").val());
+    if (params) {
+      num = Number(_.filter(whatIfData, function(items) { return items.code == params.code })[0].cnt);
+    }
 
     if ( branch == null || branch == '' ||
          occupation == null || occupation == '' ||
@@ -157,7 +161,7 @@ var whatIf = (function () {
       dataType: 'JSON',
       data: data,
       success: $.proxy(function (res) {
-
+        whatIfData = res.data;
         var div = $("#collapseResult div");
         div.empty();
         if (res.length == 0) {
